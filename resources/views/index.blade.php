@@ -1,3 +1,10 @@
+<?php
+
+/**
+ * @var \App\Models\Shop[] $shops
+*/
+
+?>
 @extends('layouts.app')
 
 @section('title', 'Лучшие секс-шопы Москвы – онлайн магазины для взрослых')
@@ -23,7 +30,9 @@
            <div>
                CompShowcase | CompReviewLast | CompCompareTable | CompProductCategoryContent
            </div>
+            <div>
 
+            </div>
         </div>
     </main>
 @endsection
