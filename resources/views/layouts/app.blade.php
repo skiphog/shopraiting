@@ -46,30 +46,7 @@
             </label>
         </div>
     </div>
-    <nav class="nav">
-        <div class="nav__wrapper">
-            <button type="button" class="nav__item nav__item-rating">Сексшопы
-                <svg class="icon" width="8px" height="8px">
-                    <use xlink:href="/img/sprite.svg#arrdwn"></use>
-                </svg>
-            </button>
-            {{-- Получить 5 магазинов отсортированных по позиции --}}
-            <div class="nav__sub">
-                <a href="/bestsexshop" class="nav__sub-link">Лучший секс шоп</a>
-                <a href="/intimshop" class="nav__sub-link">IntimShop</a>
-                <a href="/rozovii-krolik" class="nav__sub-link">Розовый кролик</a>
-                <a href="/uslada" class="nav__sub-link">Услада</a>
-                <a href="/tigramur" class="nav__sub-link">Tigramur</a>
-                <a href="/ratings" class="nav__sub-link">Все магазины</a>
-            </div>
-        </div>
-        <div class="nav__box">
-            <a class="nav__link" href="/reviews">Отзывы</a>
-            <a class="nav__link" href="/articles">Статьи</a>
-        </div>
-        <a href="/#showcase" class="nav__link-btn">Лучшие сексшопы</a>
-        <a href="mailto:{{ config('mail.from.address') }}" class="nav__link-btn nav__link-btn--mail" target="_blank" rel="noopener noreferrer">{{ config('mail.from.address') }}</a>
-    </nav>
+    @include('layouts.partials.menu')
 </header>
 @yield('content')
 <footer class="footer">
