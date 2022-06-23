@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * App\Models\Shop
@@ -22,6 +23,9 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string      $content
  * @property float       $rating
  * @property float       $hack_rating
+ * @property float       $rating_value
+ * @property int         $rating_reverse
+ * @property string      $rating_value_format
  * @property int         $position
  * @property int|null    $cities_cnt
  * @property int|null    $brands_cnt
@@ -38,8 +42,19 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Shop extends Model
 {
+    /**
+     * Сколько магазинов показывать на главной странице
+     */
+    public const MAX_SHOW = 5;
+
+    /**
+     * @var string
+     */
     protected $table = 'shops';
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'contents' => 'array'
     ];
@@ -63,5 +78,42 @@ class Shop extends Model
     public function scopePositioned(Builder $query): Builder
     {
         return $query->orderBy('position');
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function ratingValue(): Attribute
+    {
+        return Attribute::make(
+            get: static function ($value, $attributes) {
+                return !empty($attributes['hack_rating']) && $attributes['hack_rating'] > 0
+                    ? $attributes['hack_rating']
+                    : $attributes['rating'];
+            }
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function ratingValueFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => number_format($this->rating_value, 1, ',', ' ')
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function ratingReverse(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => (int)(100 - $this->rating_value * 10)
+        );
     }
 }
