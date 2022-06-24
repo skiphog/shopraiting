@@ -18,9 +18,9 @@ use App\Models\Shop;
             </button>
             <div class="nav__sub">
                 @foreach($shops as $shop)
-                    <a href="#{{ $shop->slug }}" class="nav__sub-link">{{ $shop->name }}</a>
+                    <a href="{{ route('shops.show', $shop) }}" class="nav__sub-link">{{ $shop->name }}</a>
                 @endforeach
-                    <a href="#" class="nav__sub-link">Все магазины</a>
+                    <a href="{{ route('shops.index') }}" class="nav__sub-link">Все магазины</a>
             </div>
         </div>
     @endif

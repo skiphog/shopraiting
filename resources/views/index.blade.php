@@ -36,7 +36,7 @@
                     @foreach($shops as $key => $shop)
                         <div class="cart {{ ++$key > \App\Models\Shop::MAX_SHOW ? 'hide' : '' }}">
                             <div class="cart__header">
-                                <a href="#" class="cart__header-img">
+                                <a href="{{ route('shops.show', $shop) }}" class="cart__header-img">
                                     <picture>
                                         <img src="{{ $shop->img }}" alt="{{ $shop->name }}">
                                     </picture>
@@ -62,13 +62,13 @@
                                         <div class="progress" style="width: {{ $shop->rating_reverse }}%"></div>
                                     </div>
                                     <div itemprop="ratingValue" class="rating">{{ $shop->rating_value_format }}</div>
-                                    <meta itemprop="ratingCount" content="15">
+                                    <meta itemprop="ratingCount" content="333">
                                 </div>
                             </div>
 
                             <div class="cart__main">
                                 <div class="cart__main-wrap">
-                                    <a href="#" class="cart__main-title">{{ $shop->name }}</a>
+                                    <a href="{{ route('shops.show', $shop) }}" class="cart__main-title">{{ $shop->name }}</a>
                                     <div class="cart__main-capture">
                                         {{ $shop->advantage }}
                                     </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="cart__footer">
                                 <div class="cart__footer-line">{{ $shop->advantage }}</div>
-                                <a href="#" target="_blank" data-goal="click-{{ $shop->slug }}" class="cart__footer-link">Перейти на сайт</a>
+                                <a href="{{ url($shop->pixel) }}" target="_blank" data-goal="click-{{ $shop->slug }}" class="cart__footer-link">Перейти на сайт</a>
                             </div>
                         </div>
                     @endforeach
@@ -93,7 +93,7 @@
             </div>
 
             <div>
-                CompShowcase | CompReviewLast | CompCompareTable | CompProductCategoryContent
+                CompReviewLast | CompCompareTable | CompProductCategoryContent
             </div>
         </div>
     </main>
