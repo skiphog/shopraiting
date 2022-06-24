@@ -9,8 +9,9 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $shops = Shop::select('*')->positioned()->get();
-
+        $shops = Shop::select(['slug', 'pixel', 'img', 'name', 'rating', 'hack_rating', 'advantage', 'description'])
+            ->positioned()
+            ->get();
 
         return view('index', compact('shops'));
     }

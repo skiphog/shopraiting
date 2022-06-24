@@ -9,7 +9,11 @@ class ShopController extends Controller
 {
     public function index()
     {
-        return view('shops.index');
+        $shops = Shop::select(['slug', 'name'])
+            ->positioned()
+            ->get();
+
+        return view('shops.index', compact('shops'));
     }
 
     public function show(Shop $shop)

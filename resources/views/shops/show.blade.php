@@ -22,11 +22,7 @@
     <main class="main">
         <div class="inner-back">
             <div class="wrap">
-                <div class="breads">
-                    <div class="breads__box"><a href="/" class="breads__link">Главная</a></div>
-                    <div class="breads__box"><a href="{{ route('shops.index') }}" class="breads__link">Магазины</a></div>
-                    <div class="breads__box"><a class="breads__link">{{ $shop->name }}</a></div>
-                </div>
+                @include('partials.breadcrumbs', ['data' => [['link' => route('shops.index'), 'title' => 'Магазины'], ['link' => '', 'title' => $shop->name]]])
                 <h1>Секс шоп «{{ $shop->name }}» отзывы</h1>
                 <div class="content">
                     <aside class="sidebar">

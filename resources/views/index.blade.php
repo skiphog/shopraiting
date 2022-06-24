@@ -38,7 +38,7 @@
                             <div class="cart__header">
                                 <a href="{{ route('shops.show', $shop) }}" class="cart__header-img">
                                     <picture>
-                                        <img src="{{ $shop->img }}" alt="{{ $shop->name }}">
+                                        <img src="{{ asset($shop->img) }}" alt="{{ $shop->name }}">
                                     </picture>
                                 </a>
                                 <div class="cart__header-progress" itemscope itemtype="https://schema.org/AggregateRating">
