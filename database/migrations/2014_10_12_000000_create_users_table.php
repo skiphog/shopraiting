@@ -12,14 +12,24 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', static function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('email');
             $table->string('password');
+            $table->string('name');
+            $table->string('avatar', 300)->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedTinyInteger('status')->default(1);
+            $table->unsignedTinyInteger('role')->default(1);
+
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
+
+            //Indexes
+            $table->unique('email');
+            $table->index('status');
+            $table->index('role');
         });
     }
 
@@ -30,6 +40,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('users');
     }
 };
