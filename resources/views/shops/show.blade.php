@@ -13,7 +13,6 @@
 @push('styles')
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/plus.css">
-    <link rel="stylesheet" href="/css/keep.css">
     <link rel="stylesheet" href="/css/banner.css">
     <link rel="stylesheet" href="/css/text.css">
 @endpush
@@ -139,20 +138,7 @@
                                 @endif
                             </div>
                         </div>
-                        @if (!empty($shop->contents))
-                            <div id="keep-one" class="keep">
-                                <a href="#" class="keep__link">Содержание
-                                    <svg class="icon icon-keep" width="8" height="8">
-                                        <use xlink:href="/img/sprite.svg#down-arrow"></use>
-                                    </svg>
-                                </a>
-                                <ul id="menu">
-                                    @foreach($shop->contents as $item)
-                                        <li><a href="#{{ key($item) }}">{{ array_shift($item) }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        @include('partials.contents', ['contents' => $shop->contents])
                         <div class="page-article text">
                             {!! $shop->content !!}
                         </div>
