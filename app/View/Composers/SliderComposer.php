@@ -6,7 +6,7 @@ use App\Models\Shop;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Cache;
 
-class MenuComposer
+class SliderComposer
 {
     /**
      * @param View $view
@@ -15,10 +15,10 @@ class MenuComposer
      */
     public function compose(View $view): void
     {
-        $shops = Cache::rememberForever('menu', static function () {
-            return Shop::select(['slug', 'name'])
+        $shops = Cache::rememberForever('slider', static function () {
+            return Shop::select(['slug', 'name', 'img', 'pixel', 'rating', 'hack_rating',])
                 ->positioned()
-                ->take(Shop::MAX_MAIN_SHOW)
+                ->take(Shop::MAX_SLIDER_SHOW)
                 ->get();
         });
 

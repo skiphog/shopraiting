@@ -45,7 +45,12 @@ class Shop extends Model
     /**
      * Сколько магазинов показывать на главной странице
      */
-    public const MAX_SHOW = 5;
+    public const MAX_MAIN_SHOW = 5;
+
+    /**
+     * Сколько магазинов показывать в мини-слайдере
+     */
+    public const MAX_SLIDER_SHOW = 3;
 
     /**
      * @var string

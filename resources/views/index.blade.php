@@ -34,7 +34,7 @@
             <div id="showcase" class="showcase">
                 <div class="showcase__carts">
                     @foreach($shops as $key => $shop)
-                        <div class="cart {{ ++$key > \App\Models\Shop::MAX_SHOW ? 'hide' : '' }}">
+                        <div class="cart {{ ++$key > \App\Models\Shop::MAX_MAIN_SHOW ? 'hide' : '' }}">
                             <div class="cart__header">
                                 <a href="{{ route('shops.show', $shop) }}" class="cart__header-img">
                                     <picture>
@@ -85,7 +85,7 @@
                     @endforeach
                 </div>
 
-                @if($shops->count() > \App\Models\Shop::MAX_SHOW)
+                @if($shops->count() > \App\Models\Shop::MAX_MAIN_SHOW)
                     <div class="showcase__more">
                         <button type="button" class="showcase__more-link">Показать другие магазины</button>
                     </div>

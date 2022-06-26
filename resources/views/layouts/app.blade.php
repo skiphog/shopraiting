@@ -14,7 +14,9 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:url" content="{{ request()->url() }}">
-    <meta property="og:image" content="{{ asset('img/sexshoprating.png') }}">
+    @section('og_image')
+        <meta property="og:image" content="{{ asset('img/sexshoprating.png') }}">
+    @show
     <meta name="yandex-verification" content="5e4b7507460c3529">
     <meta name="verify-admitad" content="1cb707051c">
     <meta name="verify-advertiseru" content="b0e06fc117">
