@@ -53,6 +53,11 @@ class Shop extends Model
     protected $table = 'shops';
 
     /**
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * @var string[]
      */
     protected $casts = [
