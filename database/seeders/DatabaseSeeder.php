@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
         $this->call([
-            ShopSeeder::class
+            UserSeeder::class,
+            ShopSeeder::class,
+            ArticleSeeder::class,
         ]);
 
         //Storage::deleteDirectory('upload');
