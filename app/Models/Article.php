@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\Article
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Carbon|null $updated_at
  * @property int         $activity
  * @mixin Eloquent
+ * @property-read User   $user
  */
 class Article extends Model
 {
@@ -47,6 +49,14 @@ class Article extends Model
     protected $casts = [
         'contents' => 'array'
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
     /**
      * @return void

@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,20 +13,22 @@ use Illuminate\Notifications\Notifiable;
 /**
  * App\Models\User
  *
- * @property int         $id
- * @property string      $email
- * @property string      $password
- * @property string      $name
- * @property string      $avatar
- * @property string|null $description
- * @property int         $status
- * @property int         $role
- * @property string      $role_name
- * @property string|null $remember_token
- * @property Carbon|null $email_verified_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property int            $id
+ * @property string         $email
+ * @property string         $password
+ * @property string         $name
+ * @property string         $avatar
+ * @property string|null    $description
+ * @property int            $status
+ * @property int            $role
+ * @property string         $role_name
+ * @property string|null    $remember_token
+ * @property Carbon|null    $email_verified_at
+ * @property Carbon|null    $created_at
+ * @property Carbon|null    $updated_at
  * @mixin Eloquent
+ * @property-read Article[] $articles
+ * @property-read int|null  $articles_count
  */
 class User extends Authenticatable
 {
@@ -104,6 +107,14 @@ class User extends Authenticatable
     public function isAuthor(): bool
     {
         return $this->role > 1;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'user_id', 'id');
     }
 
     /**
