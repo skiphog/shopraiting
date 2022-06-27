@@ -51,6 +51,20 @@ class Article extends Model
     ];
 
     /**
+     * Увеличить счётчик просмотров
+     */
+    public function updateView()
+    {
+        //return DB::table('articles')->where('id', $this->id)->increment('view');
+        $this->timestamps = false;
+
+        //return tap($this->update(['view' => $this->view + 1]), fn() => $this->timestamps = true);
+        return tap($this->increment('view'), function () {
+            $this->timestamps = true;
+        });
+    }
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo

@@ -24,12 +24,7 @@
     <main class="main">
         <div class="inner">
             <div class="wrap">
-                @include('partials.breadcrumbs', [
-                    'data' => [
-                        ['link' => route('articles.index'), 'title' => 'Статьи'],
-                        ['link' => '', 'title' => $article->name]
-                    ]
-                ])
+                @include('partials.breadcrumbs', ['data' => [['link' => route('articles.index'), 'title' => 'Статьи'],['link' => '', 'title' => $article->name]]])
                 <h1>{{ $article->seo_h1 }}</h1>
                 <div class="article__header">
                     <img class="article__header-person" src="{{ asset($article->user->avatar) }}" width="40" height="40" alt="{{ $article->user->name }}">
