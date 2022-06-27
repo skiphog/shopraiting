@@ -9,6 +9,9 @@
     @if(request()->getQueryString())
         @section('canonical', $paginator->path())
     @endif
+    @push('styles')
+        <link rel="stylesheet" href="/css/pagination.css">
+    @endpush
     <div class="pagination">
         @foreach ($elements as $element)
             {{-- Array Of Links --}}

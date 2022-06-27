@@ -22,8 +22,6 @@
     <meta name="verify-advertiseru" content="b0e06fc117">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/breads.css">
-    <link rel="stylesheet" href="/css/pagination.css">
     @stack('styles')
     @includeWhen(app()->isProduction(), 'layouts.metrics.google_tag_manager')
 </head>
