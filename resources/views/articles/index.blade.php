@@ -46,7 +46,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        {{-- Пагинацию сюда --}}
+                        {{ $articles->onEachSide(5)->links('partials.paginate') }}
                     </div>
                 </div>
             </div>
