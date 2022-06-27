@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ArticleController;
 
@@ -19,3 +20,4 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], static function () {
 });
 
 Route::get('/authors', [UserController::class, 'authors'])->name('authors');
+Route::get('/about', [PageController::class, 'about'])->name('about');
