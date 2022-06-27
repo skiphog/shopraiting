@@ -43,7 +43,6 @@
                             </picture>
                             <div class="article__discription">{!! $article->before_content !!}</div>
                             @include('partials.contents', ['contents' => $article->contents])
-
                             <div class="page-article text">
                                 {!! $article->content !!}
                             </div>
@@ -61,7 +60,7 @@
                             <div class="author__main">
                                 {{ $article->user->description }}
                             </div>
-                            <a href="#" class="author__link">Читать все статьи</a>
+                            <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="author__link">Читать все статьи</a>
                         </div>
                     </div>
                 </div>
