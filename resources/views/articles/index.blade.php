@@ -36,7 +36,7 @@
                                             <a href="#" class="list__box-item list__box-person">{{ $article->user->name }}</a>
                                             <div class="list__box-item">{{ $article->created_at->format('d.m.Y') }}</div>
                                             <div class="list__box-item">{{ $article->view }} {{ trans_choice('dic.view', $article->view) }}</div>
-                                            <div class="list__box-item">{{ $article->time_to_read }} {{ trans_choice('dic.minutes',$article->time_to_read) }}</div>
+                                            <div class="list__box-item">{{ $article->time_to_read }} {{ trans_choice('dic.minutes', $article->time_to_read) }}</div>
                                         </div>
                                         <a href="{{ route('articles.show', $article) }}" class="list__box-title">{{ $article->name }}</a>
                                         <div class="list__box-discription">

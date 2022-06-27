@@ -2,7 +2,7 @@
     @push('styles')
         <link rel="stylesheet" href="/css/keep.css">
     @endpush
-    <div id="keep-one" class="keep">
+    <div class="keep">
         <a href="#" class="keep__link">Содержание
             <svg class="icon icon-keep" width="8" height="8">
                 <use xlink:href="/img/sprite.svg#down-arrow"></use>
