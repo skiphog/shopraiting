@@ -51,7 +51,7 @@ use App\Models\Shop;
                                 <div class="progress" style="width: {{ $shop->rating_reverse }}%"></div>
                             </div>
                             <div itemprop="ratingValue" class="rating">{{ $shop->rating_value_format }}</div>
-                            <meta itemprop="ratingCount" content="333">
+                            <meta itemprop="ratingCount" content="{{ $shop->reviews_count }}">
                         </div>
                         <a href="{{ url($shop->pixel) }}" class="sidebar__slider-action" target="_blank">Перейти на сайт</a>
                     </div>

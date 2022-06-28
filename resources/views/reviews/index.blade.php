@@ -44,7 +44,7 @@
                                         @endforeach
                                     </select>
                                     <div class="recall__header-box">
-                                        @foreach (App\Models\Shop::getTopWithCache() as $shop)
+                                        @foreach (\App\Models\Shop::getTopWithCache() as $shop)
                                             <a href="#/reviews" class="recall__header-link">{{ $shop->name }}</a>
                                         @endforeach
                                     </div>

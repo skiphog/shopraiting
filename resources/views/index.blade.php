@@ -62,7 +62,7 @@
                                         <div class="progress" style="width: {{ $shop->rating_reverse }}%"></div>
                                     </div>
                                     <div itemprop="ratingValue" class="rating">{{ $shop->rating_value_format }}</div>
-                                    <meta itemprop="ratingCount" content="333">
+                                    <meta itemprop="ratingCount" content="{{ $shop->reviews_count }}">
                                 </div>
                             </div>
 

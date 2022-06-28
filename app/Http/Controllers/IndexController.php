@@ -10,6 +10,7 @@ class IndexController extends Controller
     {
         $shops = Shop::select(['slug', 'pixel', 'img', 'name', 'rating', 'hack_rating', 'advantage', 'description'])
             ->positioned()
+            ->withCount('reviews')
             ->get();
 
         return view('index', compact('shops'));

@@ -15,6 +15,8 @@ class ShopController extends Controller
 
     public function show(Shop $shop)
     {
+        $shop->loadCount('reviews');
+
         return view('shops.show', compact('shop'));
     }
 }

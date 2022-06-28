@@ -4,6 +4,7 @@ namespace App\View\Composers;
 
 use App\Models\Shop;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class SliderComposer
 {
@@ -14,6 +15,14 @@ class SliderComposer
      */
     public function compose(View $view): void
     {
-        $view->with(['shops' => Shop::getTopWithCache()]);
+        $shops = Cache::rememberForever('slider', static function () {
+            return Shop::select(['slug', 'name', 'img', 'pixel', 'rating', 'hack_rating',])
+                ->positioned()
+                ->withCount('reviews')
+                ->take(Shop::MAX_SLIDER_SHOW)
+                ->get();
+        });
+
+        $view->with(compact('shops'));
     }
 }

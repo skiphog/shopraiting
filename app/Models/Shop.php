@@ -97,7 +97,7 @@ class Shop extends Model
     public static function getTopWithCache()
     {
         return Cache::rememberForever('top_shops', static function () {
-            return Shop::select(['slug', 'name', 'img', 'pixel', 'rating', 'hack_rating',])
+            return Shop::select(['slug', 'name'])
                 ->positioned()
                 ->take(Shop::MAX_SLIDER_SHOW)
                 ->get();

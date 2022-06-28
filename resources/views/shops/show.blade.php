@@ -54,7 +54,7 @@
                                         <div class="progress" style="width: {{ $shop->rating_reverse }}%"></div>
                                     </div>
                                     <div itemprop="ratingValue" class="rating">{{ $shop->rating_value_format }}</div>
-                                    <meta itemprop="ratingCount" content="333">
+                                    <meta itemprop="ratingCount" content="{{ $shop->reviews_count }}">
                                 </div>
                                 <a href="{{ url($shop->pixel) }}" data-goal="click-{{ $shop->slug }}" class="sidebar__slider-action" target="_blank">Перейти на сайт</a>
                             </div>
@@ -76,7 +76,9 @@
                                 </div>
                                 <div class="plus__header-item">
                                     <div class="plus__header-line">Отзывов</div>
-                                    <a href="#/reviews" class="plus__header-link">333 {{ trans_choice('dic.review', 333) }}</a>
+                                    <a href="#/reviews" class="plus__header-link">
+                                        {{ $shop->reviews_count }} {{ trans_choice('dic.review', $shop->reviews_count) }}
+                                    </a>
                                 </div>
                             </div>
                             <div class="plus__main">
