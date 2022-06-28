@@ -37,14 +37,14 @@
                                     <!--suppress HtmlFormInputWithoutLabel -->
                                     <select class="recall__header-select js-product-select">
                                         <option value="0">Все сексшопы</option>
-                                        @foreach (App\Models\Shop::getAllWithCache() as $shop)
+                                        @foreach ($shops = \App\Models\Shop::getAllWithCache() as $shop)
                                             <option value="{{ $shop->slug }}" {{ $current_slug === $shop->slug ? 'selected': '' }}>
                                                 {{ $shop->name }}
                                             </option>
                                         @endforeach
                                     </select>
                                     <div class="recall__header-box">
-                                        @foreach (\App\Models\Shop::getTopWithCache() as $shop)
+                                        @foreach ($shops->slice(0, \App\Models\Shop::MAX_SLIDER_SHOW) as $shop)
                                             <a href="#/reviews" class="recall__header-link">{{ $shop->name }}</a>
                                         @endforeach
                                     </div>

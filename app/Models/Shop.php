@@ -89,22 +89,6 @@ class Shop extends Model
     }
 
     /**
-     * @return static[]
-     *
-     * @noinspection PhpMissingReturnTypeInspection
-     * @noinspection ReturnTypeCanBeDeclaredInspection
-     */
-    public static function getTopWithCache()
-    {
-        return Cache::rememberForever('top_shops', static function () {
-            return Shop::select(['slug', 'name'])
-                ->positioned()
-                ->take(Shop::MAX_SLIDER_SHOW)
-                ->get();
-        });
-    }
-
-    /**
      * @return void
      */
     protected static function booted(): void
