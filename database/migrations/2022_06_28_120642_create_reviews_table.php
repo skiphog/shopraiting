@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('shop_id');
             $table->unsignedFloat('rating', 4)->default(0.00);
+			$table->unsignedInteger('likes');
             $table->string('author_name');
             $table->string('author_email');
             $table->text('content');

@@ -20,9 +20,9 @@
     <meta name="yandex-verification" content="5e4b7507460c3529">
     <meta name="verify-admitad" content="1cb707051c">
     <meta name="verify-advertiseru" content="b0e06fc117">
+    @stack('styles')
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
-    @stack('styles')
     @includeWhen(app()->isProduction(), 'layouts.metrics.google_tag_manager')
 </head>
 <body>

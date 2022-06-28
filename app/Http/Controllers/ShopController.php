@@ -8,9 +8,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $shops = Shop::select(['slug', 'name'])
-            ->positioned()
-            ->get();
+        $shops = Shop::getAllWithCache();
 
         return view('shops.index', compact('shops'));
     }
