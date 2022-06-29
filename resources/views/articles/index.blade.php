@@ -12,6 +12,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/pagination.css">
 @endpush
 
 @section('content')
@@ -46,7 +47,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        {{ $articles->onEachSide(5)->links('partials.paginate') }}
+                        {{ $articles->onEachSide(1)->links('partials.paginate') }}
                     </div>
                 </div>
             </div>
