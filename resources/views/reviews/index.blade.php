@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/recall.css">
     <link rel="stylesheet" href="/css/case.css">
     <link rel="stylesheet" href="/css/pagination.css">
+    <link rel="stylesheet" href="/css/feedback.css">
 @endpush
 
 @section('content')
@@ -30,8 +31,9 @@
                 </div>
                 <div class="content">
                     @include('partials.slider')
-                    <div class="main-content" id="content">
-                        @include('reviews.recall', compact('reviews', 'current_slug'))
+                    <div class="main-content">
+                        <div id="content">@include('reviews.recall', compact('reviews', 'current_slug'))</div>
+                        @include('partials.review_form', ['shop' => new \App\Models\Shop()])
                     </div>
                 </div>
             </div>

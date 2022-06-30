@@ -12,6 +12,7 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
 Route::get('/reviews/{shop:slug}', [ReviewController::class, 'shop'])->name('reviews.shop');
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::group(['prefix' => 'shops', 'as' => 'shops.'], static function () {
     Route::get('/', [ShopController::class, 'index'])->name('index');

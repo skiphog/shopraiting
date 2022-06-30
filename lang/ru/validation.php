@@ -132,6 +132,8 @@ return [
         'address'               => 'Адрес',
         'age'                   => 'Возраст',
         'available'             => 'Доступно',
+        'author_name'           => 'Имя',
+        'author_email'          => 'Email',
         'city'                  => 'Город',
         'content'               => 'Контент',
         'country'               => 'Страна',

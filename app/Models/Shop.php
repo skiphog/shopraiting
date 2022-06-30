@@ -82,7 +82,7 @@ class Shop extends Model
     public static function getAllWithCache()
     {
         return Cache::rememberForever('shops', static function () {
-            return static::select(['slug', 'name'])
+            return static::select(['id', 'slug', 'name'])
                 ->positioned()
                 ->get();
         });

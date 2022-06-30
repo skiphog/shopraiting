@@ -6,6 +6,7 @@ use App\Models\Shop;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -45,5 +46,12 @@ class ReviewController extends Controller
         }
 
         return view('reviews.index', $data);
+    }
+
+    public function store(ReviewRequest $request)
+    {
+        Review::create($request->safe()->toArray());
+
+        return response()->json(['response' => 'Ваш отзыв отправлен на модерацию!']);
     }
 }
