@@ -25,6 +25,7 @@ return new class extends Migration {
 
             //Indexes
             $table->index('activity');
+            $table->index('rating');
             $table->foreign('shop_id')
                 ->references('id')
                 ->on('shops');

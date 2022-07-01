@@ -13,6 +13,12 @@ class ShopController extends Controller
         return view('shops.index', compact('shops'));
     }
 
+    public function reviews(Shop $shop)
+    {
+        $shop->loadCount('reviews');
+        return view('shops.reviews', compact('shop'));
+    }
+
     public function show(Shop $shop)
     {
         $shop

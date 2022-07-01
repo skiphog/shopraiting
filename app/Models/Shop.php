@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -104,6 +105,33 @@ class Shop extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'shop_id', 'id');
+    }
+
+    /**
+     * @return array
+     */
+    public function getCounts(): array
+    {
+        $result = (array)DB::table('reviews')
+            ->selectRaw('count(*) cnt, 
+                sum(rating < 3) cnt_1, 
+                sum(rating >= 3 and rating < 5) cnt_2, 
+                sum(rating >= 5 and rating < 7) cnt_3, 
+                sum(rating >= 7 and rating < 9) cnt_4, 
+                sum(rating >= 9) cnt_5')
+            ->where('shop_id', $this->id)
+            ->where('activity', 1)
+            ->first(1);
+
+        $counts = [];
+        for ($i = 5; $i > 0; $i--) {
+            $counts[$i] = [
+                'count'   => (int)$result["cnt_{$i}"],
+                'percent' => ((int)$result["cnt_{$i}"] / (int)$result['cnt']) * 100
+            ];
+        }
+
+        return $counts;
     }
 
     /**

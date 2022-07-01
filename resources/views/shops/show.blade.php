@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="plus__header-item">
                                     <div class="plus__header-line">Отзывов</div>
-                                    <a href="#/reviews" class="plus__header-link">
+                                    <a href="{{ route('shops.reviews', $shop) }}" class="plus__header-link">
                                         {{ $shop->reviews_count }} {{ trans_choice('dic.review', $shop->reviews_count) }}
                                     </a>
                                 </div>
@@ -172,8 +172,8 @@
                                 @include('reviews.partials.reviews', ['reviews' => $shop->reviews])
                             </div>
                             <div class="recall__wrap">
-                                <a href="{{ $shop->slug }}/reviews#form_review" class="recall__wrap-link">Оставить отзыв</a>
-                                <a href="{{ $shop->slug }}/reviews" class="recall__wrap-action">Читать все отзывы</a>
+                                <a href="{{ route('shops.reviews', $shop) }}#form_review" class="recall__wrap-link">Оставить отзыв</a>
+                                <a href="{{ route('shops.reviews', $shop) }}" class="recall__wrap-action">Читать все отзывы</a>
                             </div>
                         </div>
                     </div>

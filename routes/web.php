@@ -20,6 +20,7 @@ Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], static function () {
 Route::group(['prefix' => 'shops', 'as' => 'shops.'], static function () {
     Route::get('/', [ShopController::class, 'index'])->name('index');
     Route::get('/{shop:slug}', [ShopController::class, 'show'])->name('show');
+    Route::get('/{shop:slug}/reviews', [ShopController::class, 'reviews'])->name('reviews');
 });
 
 Route::group(['prefix' => 'articles', 'as' => 'articles.'], static function () {
