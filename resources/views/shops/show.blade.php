@@ -158,7 +158,7 @@
                         </div>
                         <div class="page-reviews text">
                             <h2>Отзывы о сексшопе "{{ $shop->name }}"</h2>
-                            <div class="product__choose">
+                            <div class="product__choose" id="product-choose">
                                 <div class="product__choose-box">
                                     <button type="button" class="product__choose-link js-review-type _color__blue active"
                                             data-link="{{ route('reviews.last', $shop) }}">Все отзывы</button>

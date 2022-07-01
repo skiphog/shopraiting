@@ -48,9 +48,20 @@ class ReviewController extends Controller
         return view('reviews.index', $data);
     }
 
+    /**
+     * @noinspection PhpUndefinedMethodInspection
+     * @noinspection ReturnTypeCanBeDeclaredInspection
+     */
     public function last(Shop $shop, ReviewFilter $filter)
     {
+        $reviews = $shop->reviews()
+            ->latest('id')
+            ->filter($filter)
+            ->with('shop')
+            ->take(2)
+            ->get();
 
+        return view('reviews.partials.reviews', compact('reviews'))->render();
     }
 
     /**
