@@ -109,6 +109,7 @@ class Shop extends Model
 
     /**
      * @return array
+     * @noinspection PhpUnused
      */
     public function getCounts(): array
     {
