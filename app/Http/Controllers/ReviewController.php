@@ -48,6 +48,9 @@ class ReviewController extends Controller
         return view('reviews.index', $data);
     }
 
+    /**
+     * @noinspection ReturnTypeCanBeDeclaredInspection
+     */
     public function store(ReviewRequest $request)
     {
         Review::create($request->safe()->toArray());
