@@ -48,6 +48,11 @@ class ReviewController extends Controller
         return view('reviews.index', $data);
     }
 
+    public function last(Shop $shop, ReviewFilter $filter)
+    {
+
+    }
+
     /**
      * @noinspection ReturnTypeCanBeDeclaredInspection
      */

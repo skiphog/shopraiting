@@ -160,55 +160,16 @@
                             <h2>Отзывы о сексшопе "{{ $shop->name }}"</h2>
                             <div class="product__choose">
                                 <div class="product__choose-box">
-                                    <button type="button" class="product__choose-link js-review-type _color__blue active" data-type="all">Все отзывы</button>
-                                    <button type="button" class="product__choose-link js-review-type _color__black" data-type="positive">Положительные отзывы</button>
-                                    <button type="button" class="product__choose-link js-review-type _color__red" data-type="negative">Отрицательные отзывы</button>
+                                    <button type="button" class="product__choose-link js-review-type _color__blue active"
+                                            data-link="{{ route('reviews.last', $shop) }}">Все отзывы</button>
+                                    <button type="button" class="product__choose-link js-review-type _color__black"
+                                            data-link="{{ route('reviews.last', ['shop' => $shop, 'rating' => 'positive']) }}">Положительные отзывы</button>
+                                    <button type="button" class="product__choose-link js-review-type _color__red"
+                                            data-link="{{ route('reviews.last', ['shop' => $shop, 'rating' => 'negative']) }}">Отрицательные отзывы</button>
                                 </div>
                             </div>
                             <div class="recall inner__recall">
-                                @foreach ($shop->reviews as $review)
-                                    <div class="review {{ $review->isNegative() ? '_border-color': '' }}" itemscope itemtype="http://schema.org/Review">
-                                        <meta itemprop="itemReviewed" content="{{ $shop->name }}">
-                                        <div class="review__header">
-                                            <a href="{{ route('shops.show', $shop) }}" class="review__title">{{ $shop->name }}</a>
-                                            <div class="review__autor" itemprop="author" itemscope itemtype="https://schema.org/Person">
-                                                <span itemprop="name">{{ $review->author_name }}</span>, {{ $review->created_at->format('d.m.Y') }}
-                                            </div>
-                                            <meta itemprop="datePublished" content="{{ $review->created_at->format('d.m.Y') }}">
-                                        </div>
-                                        <div class="review__text" itemprop="description">— {{ $review->content }}</div>
-                                        <div class="review__footer">
-                                            <div class="review__progress" itemscope itemtype="http://schema.org/AggregateRating">
-                                                <meta itemprop="itemReviewed" content="{{ $shop->name }}">
-                                                <div class="stars">
-                                                    <svg class="icon" width="20px" height="20px">
-                                                        <use xlink:href="/img/sprite.svg#heart"></use>
-                                                    </svg>
-                                                    <svg class="icon" width="20px" height="20px">
-                                                        <use xlink:href="/img/sprite.svg#heart"></use>
-                                                    </svg>
-                                                    <svg class="icon" width="20px" height="20px">
-                                                        <use xlink:href="/img/sprite.svg#heart"></use>
-                                                    </svg>
-                                                    <svg class="icon" width="20px" height="20px">
-                                                        <use xlink:href="/img/sprite.svg#heart"></use>
-                                                    </svg>
-                                                    <svg class="icon" width="20px" height="20px">
-                                                        <use xlink:href="/img/sprite.svg#heart"></use>
-                                                    </svg>
-                                                    <div class="progress" style="width: {{ $review->rating_reverse }}%"></div>
-                                                </div>
-                                                <div itemprop="ratingValue" class="rating">{{ $review->rating_format }}</div>
-                                                <meta itemprop="ratingCount" content="{{ $review->likes }}">
-                                            </div>
-                                            <div class="review__likes">
-                                                <button type="button" class="review__likes-yes js-review-like" data-type="like"
-                                                        data-review="{{ $review->id }}"
-                                                        data-count="{{ $review->likes }}"></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                @include('reviews.partials.reviews', ['reviews' => $shop->reviews])
                             </div>
                             <div class="recall__wrap">
                                 <a href="{{ $shop->slug }}/reviews#form_review" class="recall__wrap-link">Оставить отзыв</a>
