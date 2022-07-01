@@ -22,7 +22,6 @@
                 @include('partials.breadcrumbs', ['data' => [['link' => '', 'title' => 'Статьи']]])
                 <h1>Статьи о сексшопах</h1>
                 <div class="content">
-                    @include('partials.slider')
                     <div class="main-content">
                         <div class="list">
                             @foreach($articles as $article)
@@ -49,6 +48,7 @@
                         </div>
                         {{ $articles->onEachSide(1)->links('partials.paginate') }}
                     </div>
+                    @include('partials.slider')
                 </div>
             </div>
         </div>

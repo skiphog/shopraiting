@@ -30,11 +30,11 @@
                         так и женщинами. Вы можете оставить свой отзыв о любом секс-шопе через форму внизу страницы.</p>
                 </div>
                 <div class="content">
-                    @include('partials.slider')
                     <div class="main-content">
                         <div id="content">@include('reviews.recall', compact('reviews', 'current_slug'))</div>
                         @include('reviews.review_form', ['shop' => new \App\Models\Shop()])
                     </div>
+                    @include('partials.slider')
                 </div>
             </div>
         </div>

@@ -35,7 +35,6 @@
                 </div>
 
                 <div class="content">
-                    @include('partials.slider')
                     <div class="main-content">
                         <div class="article">
                             <picture>
@@ -63,6 +62,7 @@
                             <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="author__link">Читать все статьи</a>
                         </div>
                     </div>
+                    @include('partials.slider')
                 </div>
             </div>
         </div>
