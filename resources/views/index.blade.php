@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @var \App\Models\Shop[] $shops
+ * @var \App\Models\Shop[]   $shops
+ * @var \App\Models\Review[] $reviews
  */
 
 ?>
@@ -11,7 +12,11 @@
 @section('description', 'Не знаете какой секс шоп выбрать и где купить секс игрушки? Мы создали список лучших интернет-магазинов для вас!')
 
 @push('styles')
+    <link rel="stylesheet" href="/css/select2.css">
     <link rel="stylesheet" href="/css/showcase.css">
+    <link rel="stylesheet" href="/css/text.css">
+    <link rel="stylesheet" href="/css/recall.css">
+    <link rel="stylesheet" href="/css/case.css">
 @endpush
 
 @section('content')
@@ -92,8 +97,19 @@
                 @endif
             </div>
 
+            <div class="text">
+                <h2>Отзывы о сексшопах</h2>
+                <p>Мы собрали для вас отзывы реальных покупателей товаров в секс шопах. Пожалуйста, ознакомьтесь с
+                    отзывами от мужчин и женщин, прежде чем сделать выбор.
+                </p>
+            </div>
+
+            <div class="recall" id="recall">
+                @include('main.recall', ['shops' => $shops, 'current_slug' => '', 'reviews' => $reviews])
+            </div>
+
             <div>
-                CompReviewLast | CompCompareTable | CompProductCategoryContent
+                CompCompareTable | CompProductCategoryContent
             </div>
         </div>
     </main>
@@ -101,4 +117,5 @@
 
 @push('scripts')
     <script src="/js/showcase.js"></script>
+    <script src="/js/reviews_main.js"></script>
 @endpush

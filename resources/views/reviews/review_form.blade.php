@@ -6,7 +6,7 @@
 
 ?>
 <div class="form {{ $shop->id ? 'product-form' : '' }}">
-    <h2>{{ 'Оставить отзыв о сексшопе' }}</h2>
+    <h2>{{ 'Оставить отзыв о сексшопе ' . $shop->name  }}</h2>
     <form class="feedback js-add-review" id="form_review" action="{{ route('reviews.store') }}">
 
         @if (!$shop->id)
