@@ -20,7 +20,7 @@
             </select>
             <div class="recall__header-box">
                 @foreach ($shops->slice(0, \App\Models\Shop::MAX_SLIDER_SHOW) as $shop)
-                    <a href="#/reviews" class="recall__header-link">{{ $shop->name }}</a>
+                    <a href="{{ route('shops.reviews', $shop) }}" class="recall__header-link">{{ $shop->name }}</a>
                 @endforeach
             </div>
         </div>
