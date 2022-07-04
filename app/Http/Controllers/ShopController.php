@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\Review;
+use Illuminate\Http\Request;
+use App\Filters\ReviewFilter;
 
 class ShopController extends Controller
 {
@@ -13,10 +16,23 @@ class ShopController extends Controller
         return view('shops.index', compact('shops'));
     }
 
-    public function reviews(Shop $shop)
+    public function reviews(Shop $shop, Request $request, ReviewFilter $filter)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $reviews = Review::where('shop_id', $shop->id)
+            ->with('shop')
+            ->latest('id')
+            ->filter($filter)
+            ->paginate(20)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('shops.recall', compact('reviews'))->render();
+        }
+
         $shop->loadCount('reviews');
-        return view('shops.reviews', compact('shop'));
+
+        return view('shops.reviews', compact('shop', 'reviews'));
     }
 
     public function show(Shop $shop)

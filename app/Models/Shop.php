@@ -124,11 +124,13 @@ class Shop extends Model
             ->where('activity', 1)
             ->first(1);
 
+        $result['cnt'] = (int)$result['cnt'];
         $counts = [];
         for ($i = 5; $i > 0; $i--) {
+
             $counts[$i] = [
                 'count'   => (int)$result["cnt_{$i}"],
-                'percent' => ((int)$result["cnt_{$i}"] / (int)$result['cnt']) * 100
+                'percent' => $result['cnt'] ? ((int)$result["cnt_{$i}"] / $result['cnt']) * 100 : $result['cnt']
             ];
         }
 

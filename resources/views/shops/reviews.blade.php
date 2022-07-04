@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @var \App\Models\Shop $shop
+ * @var \App\Models\Shop     $shop
+ * @var \App\Models\Review[] $reviews
 */
 
 ?>
@@ -17,6 +18,12 @@
 @push('styles')
     <link rel="stylesheet" href="/css/offer.css">
     <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/banner.css">
+    <link rel="stylesheet" href="/css/recall.css">
+    <link rel="stylesheet" href="/css/case.css">
+    <link rel="stylesheet" href="/css/pagination.css">
+    <link rel="stylesheet" href="/css/feedback.css">
 @endpush
 
 @section('content')
@@ -97,6 +104,17 @@
                                 @endforeach
                             </div>
                         </div>
+                        <div id="recall">@include('shops.recall', compact('reviews'))</div>
+                        @include('reviews.review_form', ['shop' => $shop])
+                        <div class="banner js-banner">
+                            <picture>
+                                <img src="{{ asset($shop->img) }}" alt="{{ $shop->name }}">
+                            </picture>
+                            <div class="banner__header">
+                                <div class="banner__title">{{ $shop->name }}</div>
+                            </div>
+                            <a href="{{ url($shop->pixel) }}" target="_blank" class="banner__link">Перейти на сайт</a>
+                        </div>
                     </div>
                     <aside class="sidebar">
                         <div class="sidebar__item overview__sidebar-item sticky-sidebar__item">
@@ -142,4 +160,5 @@
 
 @push('scripts')
     <script src="/js/sidebar.js"></script>
+    <script src="/js/recalls.js"></script>
 @endpush

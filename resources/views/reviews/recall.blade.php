@@ -28,17 +28,17 @@
             <div class="recall__main _mini-style">
                 <button type="button"
                         class="recall__main-link js-type-review _color__blue {{ !request('rating') ? 'active' : '' }}"
-                        data-type="{{ request()->url() }}">
+                        data-link="{{ request()->url() }}">
                     Все отзывы
                 </button>
                 <button type="button"
                         class="recall__main-link js-type-review _color__black {{ request('rating') === 'positive' ? 'active' : '' }}"
-                        data-type="{{ request()->url() . '?rating=positive' }}">
+                        data-link="{{ request()->url() . '?rating=positive' }}">
                     Положительные отзывы
                 </button>
                 <button type="button"
                         class="recall__main-link js-type-review _color__red {{ request('rating') === 'negative' ? 'active' : '' }}"
-                        data-type="{{ request()->url() . '?rating=negative' }}">
+                        data-link="{{ request()->url() . '?rating=negative' }}">
                     Отрицательные отзывы
                 </button>
             </div>
