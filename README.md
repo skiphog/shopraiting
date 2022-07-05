@@ -1,3 +1,3 @@
 ## ShopRating 
 
-Training app
+SexShopRating
