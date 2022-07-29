@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 /**
  * App\Models\User
  *
@@ -135,7 +134,7 @@ class User extends Authenticatable
     protected function roleName(): Attribute
     {
         return Attribute::make(
-            get: static fn() => static::$roles[$this->role] ?? null,
+            get: fn() => static::$roles[$this->role] ?? null,
         );
     }
 }

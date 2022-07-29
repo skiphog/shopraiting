@@ -161,4 +161,19 @@
 @push('scripts')
     <script src="/js/sidebar.js"></script>
     <script src="/js/recalls.js"></script>
+    <!--suppress ES6ConvertVarToLetConst -->
+    <script>
+      $('#recall').on('click', '.js-review-like', function () {
+        var _this = $(this);
+        var review_id = +_this.data('review');
+        var likes = JSON.parse(window.localStorage.getItem('reviews_likes') || '[]');
+
+        if (!likes.length || !~likes.indexOf(review_id)) {
+          likes.push(review_id);
+          window.localStorage.setItem('reviews_likes', JSON.stringify(likes));
+          _this.attr('data-count', +_this.data('count') + 1);
+          $.post('/reviews/' + review_id + '/like');
+        }
+      });
+    </script>
 @endpush

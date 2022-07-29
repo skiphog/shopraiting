@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -25,14 +26,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string      $seo_description
  * @property int         $view
  * @property int         $time_to_read
+ * @property int         $star_count
+ * @property int         $star_sum
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int         $activity
  * @mixin Eloquent
  * @property-read User   $user
+ * @property-read string $status_text
+ * @property-read int    $rating
+ * @property-read string $rating_format
  */
 class Article extends Model
 {
+    /**
+     * Статус статьи
+     */
+    public const STATUS = [
+        'INACTIVE' => 0,
+        'ACTIVE'   => 1
+    ];
+
     /**
      * @var string
      */
@@ -51,6 +65,19 @@ class Article extends Model
     ];
 
     /**
+     * Статусы статей
+     *
+     * @return string[]
+     */
+    public static function statusList(): array
+    {
+        return [
+            static::STATUS['INACTIVE'] => 'Неактивный',
+            static::STATUS['ACTIVE']   => 'Активный'
+        ];
+    }
+
+    /**
      * Увеличить счётчик просмотров
      */
     public function updateView()
@@ -64,12 +91,57 @@ class Article extends Model
         });
     }
 
+    public function setVote(int $value)
+    {
+        $this->timestamps = false;
+
+        return tap(
+            $this->update(['star_count' => $this->star_count + 1, 'star_sum' => $this->star_sum + $value]),
+            function () {
+                $this->timestamps = true;
+            }
+        );
+    }
+
     /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function statusText(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value, $attributes) => static::statusList()[$attributes['activity']] ?? ''
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function rating(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value, $attributes) => $attributes['star_sum'] / $attributes['star_count']
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function ratingFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => number_format($this->rating, 1, ',', ' ')
+        );
     }
 
     /**

@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int|null      $cities_cnt
  * @property int|null      $brands_cnt
  * @property int|null      $products_cnt
+ * @property string        $products_cnt_format
  * @property string|null   $delivery_cost
  * @property string|null   $delivery_time
  * @property string|null   $discounts
@@ -47,6 +48,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Shop extends Model
 {
+    /**
+     * Статус магазина
+     */
+    public const STATUS = [
+        'INACTIVE' => 0,
+        'ACTIVE'   => 1
+    ];
+
     /**
      * Сколько магазинов показывать на главной странице
      */
@@ -73,6 +82,31 @@ class Shop extends Model
     protected $casts = [
         'contents' => 'array'
     ];
+
+    /**
+     * Статусы магазина
+     *
+     * @return string[]
+     */
+    public static function statusList(): array
+    {
+        return [
+            static::STATUS['INACTIVE'] => 'Неактивный',
+            static::STATUS['ACTIVE']   => 'Активный'
+        ];
+    }
+
+    /**
+     * Удалить весь кеш, связанный с магазинами
+     *
+     * @return void
+     */
+    public static function flushAllCache(): void
+    {
+        foreach (['menu', 'shops', 'slider'] as $item) {
+            Cache::forget($item);
+        }
+    }
 
     /**
      * @return static[]
@@ -114,12 +148,14 @@ class Shop extends Model
     public function getCounts(): array
     {
         $result = (array)DB::table('reviews')
-            ->selectRaw('count(*) cnt, 
+            ->selectRaw(
+                'count(*) cnt, 
                 sum(rating < 3) cnt_1, 
                 sum(rating >= 3 and rating < 5) cnt_2, 
                 sum(rating >= 5 and rating < 7) cnt_3, 
                 sum(rating >= 7 and rating < 9) cnt_4, 
-                sum(rating >= 9) cnt_5')
+                sum(rating >= 9) cnt_5'
+            )
             ->where('shop_id', $this->id)
             ->where('activity', 1)
             ->first(1);
@@ -127,7 +163,6 @@ class Shop extends Model
         $result['cnt'] = (int)$result['cnt'];
         $counts = [];
         for ($i = 5; $i > 0; $i--) {
-
             $counts[$i] = [
                 'count'   => (int)$result["cnt_{$i}"],
                 'percent' => $result['cnt'] ? ((int)$result["cnt_{$i}"] / $result['cnt']) * 100 : $result['cnt']
@@ -171,6 +206,17 @@ class Shop extends Model
     {
         return Attribute::make(
             get: fn() => number_format($this->rating_value, 1, ',', ' ')
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function ProductsCntFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => number_format((float)$this->products_cnt, 0, '', ' ')
         );
     }
 

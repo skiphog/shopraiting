@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="/css/article.css">
     <link rel="stylesheet" href="/css/text.css">
     <link rel="stylesheet" href="/css/author.css">
+    <link rel="stylesheet" href="/css/repost.css">
+    <link rel="stylesheet" href="/css/comment.css">
+    <link rel="stylesheet" href="/css/feedback.css">
 @endpush
 
 @section('content')
@@ -60,6 +63,66 @@
                                 {{ $article->user->description }}
                             </div>
                             <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="author__link">Читать все статьи</a>
+                        </div>
+                        <div class="repost"
+                             data-article="{{ $article->id }}"
+                             data-sum="{{ $article->star_sum }}"
+                             data-cnt="{{ $article->star_count }}"
+                        >
+                            <div class="repost__header">
+                                <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir"></div>
+                            </div>
+                            <div class="repost__voting">
+                                <div class="repost__voting-line">Оцените статью:</div>
+                                <div class="stardom">
+                                    @for($i = 1; $i<= 5; $i++)
+                                        @if($i <= $article->rating)
+                                            <div class="stardom__item full" data-val="{{ $i }}"></div>
+                                        @else
+                                            <div class="stardom__item" data-val="{{ $i }}"></div>
+                                        @endif
+                                    @endfor
+                                </div>
+                                <span class="repost__voting-resalt" id="rating-format">{{ $article->rating_format }}</span>
+                            </div>
+                        </div>
+                        <div class="page-comment">
+                            <h2 class="page-comment__title">Комментарии</h2>
+                            <form name="form_comment" class="feedback js-add-comment" onsubmit="return false">
+                                <div class="feedback__box">
+                                    <input type="text" name="name" class="feedback__field" placeholder="Ваше имя">
+                                </div>
+                                <div class="feedback__box">
+                                    <input type="email" name="email" class="feedback__field" placeholder="Ваш E-mail">
+                                </div>
+                                <div class="feedback__message">
+                                    <textarea name="comment" class="feedback__message-field" placeholder="Ваш отзыв"></textarea>
+                                </div>
+                                <div class="feedback__color">
+                                    <span class="feedback__color-line">Цвет вашего аватара:</span>
+                                    <label class="feedback__color-box">
+                                        <input type="radio" name="avatar_color" class="radio" checked value="ava-green">
+                                        <div class="feedback__color-custom ava-green"></div>
+                                    </label>
+                                    <label class="feedback__color-box">
+                                        <input type="radio" name="avatar_color" class="radio" value="ava-blue">
+                                        <div class="feedback__color-custom ava-blue"></div>
+                                    </label>
+                                    <label class="feedback__color-box">
+                                        <input type="radio" name="avatar_color" class="radio" value="ava-red">
+                                        <div class="feedback__color-custom ava-red"></div>
+                                    </label>
+                                </div>
+                                <label class="feedback__agree">
+                                    <input type="checkbox" name="agree" class="checkbox" checked>
+                                    <span class="custom-checkbox"></span>
+                                    <span class="feedback__agree-text">Я принимаю условия
+                                        <a href="/policy"
+                                           class="feedback__agree-link" target="_blank">пользовательского соглашения</a>
+                                    </span>
+                                </label>
+                                <button class="feedback__action" type="submit">Оставить отзыв</button>
+                            </form>
                         </div>
                     </div>
                     @include('partials.slider')

@@ -10,9 +10,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $shops = Shop::select(['slug', 'pixel', 'img', 'name', 'rating', 'hack_rating', 'advantage', 'description'])
+        $shops = Shop::withCount('reviews')
             ->positioned()
-            ->withCount('reviews')
             ->get();
 
         $reviews = Review::latest('id')
@@ -45,7 +44,6 @@ class IndexController extends Controller
     public function shopRecalls(Shop $shop, ReviewFilter $filter)
     {
         $shops = Shop::getAllWithCache();
-        /** @noinspection PhpUndefinedMethodInspection */
         $reviews = $shop->reviews()
             ->filter($filter)
             ->latest('id')

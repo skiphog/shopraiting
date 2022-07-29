@@ -129,7 +129,7 @@
                                             <use xlink:href="/img/sprite.svg#sound-bars"></use>
                                         </svg>
                                         <div class="plus__main-line">Количество товаров</div>
-                                        <div class="plus__main-info"><span class="bold-small">{{ $shop->products_cnt }}</span></div>
+                                        <div class="plus__main-info"><span class="bold-small">{{ $shop->products_cnt_format }}</span></div>
                                     </div>
                                 @endif
                                 @if (!empty($shop->discounts))

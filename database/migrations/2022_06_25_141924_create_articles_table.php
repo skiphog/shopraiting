@@ -31,6 +31,9 @@ return new class extends Migration {
             $table->unsignedInteger('view')->default(0);
             $table->unsignedSmallInteger('time_to_read')->default(0);
 
+            $table->unsignedInteger('star_count')->default(0);
+            $table->unsignedInteger('star_sum')->default(0);
+
             $table->timestamps();
             $table->boolean('activity')->default(true);
 

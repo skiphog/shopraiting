@@ -6,6 +6,7 @@ use App\Models\Shop;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
@@ -30,7 +31,6 @@ class ReviewController extends Controller
 
     public function shop(Shop $shop, Request $request, ReviewFilter $filter)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         $data = [
             'reviews'      => $shop->reviews()
                 ->latest('id')
@@ -49,7 +49,6 @@ class ReviewController extends Controller
     }
 
     /**
-     * @noinspection PhpUndefinedMethodInspection
      * @noinspection ReturnTypeCanBeDeclaredInspection
      */
     public function last(Shop $shop, ReviewFilter $filter)
@@ -65,12 +64,26 @@ class ReviewController extends Controller
     }
 
     /**
-     * @noinspection ReturnTypeCanBeDeclaredInspection
+     * @param ReviewRequest $request
+     *
+     * @return JsonResponse
      */
-    public function store(ReviewRequest $request)
+    public function store(ReviewRequest $request): JsonResponse
     {
-        Review::create($request->safe()->toArray());
+        Review::create($request->safe()->all());
 
         return response()->json(['response' => 'Ваш отзыв отправлен на модерацию!']);
+    }
+
+    /**
+     * @param Review $review
+     *
+     * @return JsonResponse
+     */
+    public function like(Review $review): JsonResponse
+    {
+        $review->like();
+
+        return response()->json(['response' => 'OK']);
     }
 }

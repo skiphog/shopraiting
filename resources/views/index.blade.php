@@ -108,8 +108,10 @@
                 @include('main.recall', ['shops' => $shops, 'current_slug' => '', 'reviews' => $reviews])
             </div>
 
+            @include('main.table', compact('shops'))
+
             <div>
-                CompCompareTable | CompProductCategoryContent
+                 CompProductCategoryContent
             </div>
         </div>
     </main>

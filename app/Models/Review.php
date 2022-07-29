@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use App\Filters\ReviewFilter;
+use App\Events\ReviewUpdated;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,6 +33,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Review extends Model
 {
     /**
+     * Статус отзыва
+     */
+    public const STATUS = [
+        'INACTIVE' => 0,
+        'ACTIVE'   => 1
+    ];
+
+    /**
      * Рейтинг, который считается негативным.
      * Всё, что выше - позитивный
      */
@@ -47,6 +56,11 @@ class Review extends Model
      */
     protected $guarded = [];
 
+    protected $dispatchesEvents = [
+        'updated' => ReviewUpdated::class,
+        'deleted' => ReviewUpdated::class
+    ];
+
     /**
      * @return bool
      */
@@ -56,12 +70,37 @@ class Review extends Model
     }
 
     /**
+     * Добавить лайк к отзыву
+     */
+    public function like()
+    {
+        $this->timestamps = false;
+
+        return tap($this->increment('likes'), function () {
+            $this->timestamps = true;
+        });
+    }
+
+    /**
+     * Статусы отзыва
+     *
+     * @return string[]
+     */
+    public static function statusList(): array
+    {
+        return [
+            static::STATUS['INACTIVE'] => 'Неактивный',
+            static::STATUS['ACTIVE']   => 'Активный'
+        ];
+    }
+
+    /**
      * @return void
      */
     protected static function booted(): void
     {
         static::addGlobalScope('activity', static function (Builder $builder) {
-            $builder->where('activity', 1);
+            $builder->where('activity', static::STATUS['ACTIVE']);
         });
     }
 

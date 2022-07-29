@@ -18,7 +18,6 @@ class ShopController extends Controller
 
     public function reviews(Shop $shop, Request $request, ReviewFilter $filter)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         $reviews = Review::where('shop_id', $shop->id)
             ->with('shop')
             ->latest('id')
