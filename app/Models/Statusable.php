@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-trait Status
+/**
+ * @property-read string $status_text
+ */
+trait Statusable
 {
     /**
      * Возможный статус модели
@@ -20,7 +23,7 @@ trait Status
     /**
      * @noinspection PhpUnused
      */
-    protected static function bootStatus(): void
+    protected static function bootStatusable(): void
     {
         static::addGlobalScope('activity', static function (Builder $builder) {
             $builder->where('activity', static::$status['active']);

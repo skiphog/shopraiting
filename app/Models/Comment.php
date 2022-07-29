@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
@@ -23,11 +24,23 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property Carbon|null         $updated_at
  * @property int                 $activity
  * @property-read Model|Eloquent $post
+ * @property-read string         $first_letter_name
  * @mixin Eloquent
  */
 class Comment extends Model
 {
-    use Status;
+    use Statusable;
+
+    /**
+     * Допустимые цвета аватарок
+     *
+     * @var string[]
+     */
+    public static array $avatars = [
+        'ava-green' => 'Зелёный',
+        'ava-blue'  => 'Синий',
+        'ava-red'   => 'Красный'
+    ];
 
     /**
      * @var string
@@ -49,5 +62,16 @@ class Comment extends Model
     public function post(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function firstLetterName(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value, $attributes) => mb_strtoupper(mb_substr($attributes['name'], 0, 1))
+        );
     }
 }

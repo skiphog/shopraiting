@@ -88,30 +88,30 @@
                         </div>
                         <div class="page-comment">
                             <h2 class="page-comment__title">Комментарии</h2>
-                            <form name="form_comment" class="feedback js-add-comment" onsubmit="return false">
+                            <form class="feedback js-add-comment" action="{{ route('articles.comment.store', $article) }}">
                                 <div class="feedback__box">
-                                    <input type="text" name="name" class="feedback__field" placeholder="Ваше имя">
+                                    <!--suppress HtmlFormInputWithoutLabel -->
+                                    <input class="feedback__field" type="text" name="name" placeholder="Ваше имя" required>
                                 </div>
                                 <div class="feedback__box">
-                                    <input type="email" name="email" class="feedback__field" placeholder="Ваш E-mail">
+                                    <!--suppress HtmlFormInputWithoutLabel -->
+                                    <input class="feedback__field" type="email" name="email" placeholder="Ваш E-mail" required>
                                 </div>
                                 <div class="feedback__message">
-                                    <textarea name="comment" class="feedback__message-field" placeholder="Ваш отзыв"></textarea>
+                                    <!--suppress HtmlFormInputWithoutLabel -->
+                                    <textarea class="feedback__message-field" name="message" placeholder="Ваш отзыв" required></textarea>
                                 </div>
+
                                 <div class="feedback__color">
                                     <span class="feedback__color-line">Цвет вашего аватара:</span>
-                                    <label class="feedback__color-box">
-                                        <input type="radio" name="avatar_color" class="radio" checked value="ava-green">
-                                        <div class="feedback__color-custom ava-green"></div>
-                                    </label>
-                                    <label class="feedback__color-box">
-                                        <input type="radio" name="avatar_color" class="radio" value="ava-blue">
-                                        <div class="feedback__color-custom ava-blue"></div>
-                                    </label>
-                                    <label class="feedback__color-box">
-                                        <input type="radio" name="avatar_color" class="radio" value="ava-red">
-                                        <div class="feedback__color-custom ava-red"></div>
-                                    </label>
+                                    @foreach(\App\Models\Comment::$avatars as $key => $avatar)
+                                        <label class="feedback__color-box">
+                                            <input type="radio" name="avatar_color"
+                                                    class="radio" value="{{ $key }}"
+                                                    @checked($loop->first)>
+                                            <div class="feedback__color-custom {{ $key }}"></div>
+                                        </label>
+                                    @endforeach
                                 </div>
                                 <label class="feedback__agree">
                                     <input type="checkbox" name="agree" class="checkbox" checked>
@@ -123,6 +123,41 @@
                                 </label>
                                 <button class="feedback__action" type="submit">Оставить отзыв</button>
                             </form>
+                            @if($article->comments->isNotEmpty())
+                                <div class="comment">
+                                    @foreach($article->comments as $comment)
+                                        <div class="comment__item">
+                                            <div class="comment__item-header">
+                                                <div class="comment__item-avatar {{ $comment->avatar_color }}">
+                                                    {{ $comment->first_letter_name }}
+                                                </div>
+                                                <div class="comment__item-box">
+                                                    <div class="comment__item-date">
+                                                        {{ $comment->created_at->format('d.m.Y') }}
+                                                    </div>
+                                                    <div class="comment__item-name">{{ $comment->name }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="comment__item-text">– {{ $comment->message }}</div>
+                                        </div>
+
+                                        @if(!empty($comment->answer))
+                                            <div class="comment__answer">
+                                                <div class="comment__answer-header">
+                                                    <img class="comment__answer-avatar" src="/img/circle.svg" alt="Специалист {{ config('app.name') }}">
+                                                    <!--width 40px height 40px-->
+                                                    <div class="comment__answer-box">
+                                                        <div class="comment__answer-date">{{ $comment->answered_at->format('d.m.Y') }}</div>
+                                                        <div class="comment__answer-name">Специалист {{ config('app.name') }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="comment__answer-text">– {{ $comment->answer }}</div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
+                            @include('partials.modal')
                         </div>
                     </div>
                     @include('partials.slider')
@@ -134,5 +169,6 @@
 
 @push('scripts')
     <script src="/js/article.js"></script>
+    <script src="/js/comment_form.js"></script>
 @endpush
 

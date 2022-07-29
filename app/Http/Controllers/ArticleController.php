@@ -19,6 +19,7 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
+        $article->load(['comments' => static fn($q) => $q->latest('id')->take(10)]);
         $article->updateView();
 
         return view('articles.show', compact('article'));

@@ -19,7 +19,7 @@ return new class extends Migration {
 
             $table->string('name');
             $table->string('email');
-            $table->enum('avatar_color', ['ava-blue', 'ava-red']);
+            $table->enum('avatar_color', ['ava-green', 'ava-blue', 'ava-red']);
 
             $table->text('message');
             $table->text('answer')->nullable();

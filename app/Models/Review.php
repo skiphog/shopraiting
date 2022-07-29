@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Review extends Model
 {
-    use Status;
+    use Statusable;
 
     /**
      * Рейтинг, который считается негативным.

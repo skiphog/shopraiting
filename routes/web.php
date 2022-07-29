@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'recalls', 'as' => 'index.', 'middleware' => 'ajax'], static function () {
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], static function () {
     Route::get('/', [ArticleController::class, 'index'])->name('index');
     Route::get('/{article:slug}', [ArticleController::class, 'show'])->name('show');
     Route::post('/{article}/vote', [ArticleController::class, 'vote'])->name('vote');
+    Route::post('/{article}/comment/store', [CommentController::class, 'article'])->name('comment.store');
 });
 Route::get('/authors', [UserController::class, 'authors'])->name('authors');
 

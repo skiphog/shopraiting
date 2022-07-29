@@ -32,13 +32,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int         $activity
  * @mixin Eloquent
  * @property-read User   $user
- * @property-read string $status_text
  * @property-read int    $rating
  * @property-read string $rating_format
  */
 class Article extends Model
 {
-    use Status;
+    use Statusable, Commentable;
 
     /**
      * @var string

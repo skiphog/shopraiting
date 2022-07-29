@@ -48,7 +48,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Shop extends Model
 {
-    use Status;
+    use Statusable;
 
     /**
      * Сколько магазинов показывать на главной странице
