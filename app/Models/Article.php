@@ -5,7 +5,6 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -39,13 +38,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Article extends Model
 {
-    /**
-     * Статус статьи
-     */
-    public const STATUS = [
-        'INACTIVE' => 0,
-        'ACTIVE'   => 1
-    ];
+    use Status;
 
     /**
      * @var string
@@ -65,19 +58,6 @@ class Article extends Model
     ];
 
     /**
-     * Статусы статей
-     *
-     * @return string[]
-     */
-    public static function statusList(): array
-    {
-        return [
-            static::STATUS['INACTIVE'] => 'Неактивный',
-            static::STATUS['ACTIVE']   => 'Активный'
-        ];
-    }
-
-    /**
      * Увеличить счётчик просмотров
      */
     public function updateView()
@@ -91,6 +71,9 @@ class Article extends Model
         });
     }
 
+    /**
+     * Добавить оценку
+     */
     public function setVote(int $value)
     {
         $this->timestamps = false;
@@ -115,17 +98,6 @@ class Article extends Model
      * @return Attribute
      * @noinspection PhpUnused
      */
-    protected function statusText(): Attribute
-    {
-        return Attribute::make(
-            get: static fn($value, $attributes) => static::statusList()[$attributes['activity']] ?? ''
-        );
-    }
-
-    /**
-     * @return Attribute
-     * @noinspection PhpUnused
-     */
     protected function rating(): Attribute
     {
         return Attribute::make(
@@ -142,15 +114,5 @@ class Article extends Model
         return Attribute::make(
             get: fn() => number_format($this->rating, 1, ',', ' ')
         );
-    }
-
-    /**
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope('activity', static function (Builder $builder) {
-            $builder->where('activity', 1);
-        });
     }
 }

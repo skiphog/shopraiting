@@ -48,13 +48,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Shop extends Model
 {
-    /**
-     * Статус магазина
-     */
-    public const STATUS = [
-        'INACTIVE' => 0,
-        'ACTIVE'   => 1
-    ];
+    use Status;
 
     /**
      * Сколько магазинов показывать на главной странице
@@ -84,19 +78,6 @@ class Shop extends Model
     ];
 
     /**
-     * Статусы магазина
-     *
-     * @return string[]
-     */
-    public static function statusList(): array
-    {
-        return [
-            static::STATUS['INACTIVE'] => 'Неактивный',
-            static::STATUS['ACTIVE']   => 'Активный'
-        ];
-    }
-
-    /**
      * Удалить весь кеш, связанный с магазинами
      *
      * @return void
@@ -120,16 +101,6 @@ class Shop extends Model
             return static::select(['id', 'slug', 'name'])
                 ->positioned()
                 ->get();
-        });
-    }
-
-    /**
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope('activity', static function (Builder $builder) {
-            $builder->where('activity', 1);
         });
     }
 

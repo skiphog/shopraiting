@@ -51,7 +51,7 @@ class ArticleRequest extends FormRequest
             'seo_title'       => ['required', 'string', 'max:250'],
             'seo_description' => ['required', 'string', 'max:250'],
             'time_to_read'    => ['integer'],
-            'activity'        => ['required', 'integer', Rule::in(Article::STATUS)],
+            'activity'        => ['required', 'integer', Rule::in(Article::$status)],
         ];
     }
 }

@@ -38,7 +38,7 @@ class ReviewController extends Controller
     public function update(int $review_id, Request $request): JsonResponse
     {
         $this->validate($request, [
-            'activity' => ['required', 'integer', Rule::in(Review::STATUS)]
+            'activity' => ['required', 'integer', Rule::in(Review::$status)]
         ]);
 
         $review = Review::withoutGlobalScope('activity')

@@ -32,13 +32,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Review extends Model
 {
-    /**
-     * Статус отзыва
-     */
-    public const STATUS = [
-        'INACTIVE' => 0,
-        'ACTIVE'   => 1
-    ];
+    use Status;
 
     /**
      * Рейтинг, который считается негативным.
@@ -78,29 +72,6 @@ class Review extends Model
 
         return tap($this->increment('likes'), function () {
             $this->timestamps = true;
-        });
-    }
-
-    /**
-     * Статусы отзыва
-     *
-     * @return string[]
-     */
-    public static function statusList(): array
-    {
-        return [
-            static::STATUS['INACTIVE'] => 'Неактивный',
-            static::STATUS['ACTIVE']   => 'Активный'
-        ];
-    }
-
-    /**
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope('activity', static function (Builder $builder) {
-            $builder->where('activity', static::STATUS['ACTIVE']);
         });
     }
 

@@ -66,7 +66,7 @@ class ShopRequest extends FormRequest
             'delivery_time' => ['nullable', 'string', 'max:250'],
             'discounts'     => ['nullable', 'string', 'max:250'],
             'founding_year' => ['nullable', 'string', 'date_format:Y'],
-            'activity'      => ['required', 'integer', Rule::in(Shop::STATUS)],
+            'activity'      => ['required', 'integer', Rule::in(Shop::$status)],
         ];
     }
 }
