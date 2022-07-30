@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class ReviewController extends Controller
 {
@@ -64,7 +65,19 @@ class ReviewController extends Controller
         return response()->json(['redirect' => route('admin.reviews.index')]);
     }
 
-    public function search()
+    public function search(Request $request): string
     {
+        $reviews = Review::withoutGlobalScope('activity')
+            ->where('author_name', 'like', "%{$request['token']}%")
+            ->orWhere('content', 'like', "%{$request['token']}%")
+            ->orWhereHas('shop', static fn($q) => $q->where('name', 'like', "%{$request['token']}%"))
+            ->take(30)
+            ->get();
+
+        if ($reviews->isEmpty()) {
+            return 'Ничего не найдено';
+        }
+
+        return View::make('admin.reviews.table', compact('reviews'))->render();
     }
 }
