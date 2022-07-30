@@ -71,6 +71,12 @@
                         </a>
                     </li>
                     <li class="nk-menu-item">
+                        <a href="{{ route('admin.questions.index') }}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-question"></em></span>
+                            <span class="nk-menu-text">Вопросы</span>
+                        </a>
+                    </li>
+                    <li class="nk-menu-item">
                         <a href="{{ route('admin.users.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-alt"></em></span>
                             <span class="nk-menu-text">Пользователи</span>
