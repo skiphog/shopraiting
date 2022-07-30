@@ -1,8 +1,10 @@
 <?php
 
 /**
- * @var App\Models\User     $user
- * @var App\Models\Review[] $reviews
+ * @var App\Models\User       $user
+ * @var App\Models\Review[]   $reviews
+ * @var App\Models\Comment[]  $comments
+ * @var App\Models\Question[] $questions
  */
 
 ?>
@@ -53,15 +55,14 @@
             </div>
         </li>
 
-        @if($reviews->isNotEmpty())
+        @if($reviews->isNotEmpty() || $comments->isNotEmpty() || $questions->isNotEmpty())
             <li class="dropdown notification-dropdown mr-n1">
                 <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
                     <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
                 </a>
-
                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
                     <div class="dropdown-head">
-                        <span class="sub-title nk-dropdown-title">Новые отзывы</span>
+                        <span class="sub-title nk-dropdown-title">Ожидают модерацию</span>
                     </div>
 
                     <div class="dropdown-body">
@@ -69,22 +70,51 @@
                             @foreach($reviews as $review)
                                 <div class="nk-notification-item dropdown-inner">
                                     <div class="nk-notification-icon">
-                                        <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                        <em class="icon icon-circle bg-primary-dim ni ni-files"></em>
                                     </div>
                                     <div class="nk-notification-content">
                                         <div class="nk-notification-text">
                                             <a href="{{ route('admin.reviews.edit', $review) }}">
-                                                {{ $review->shop->name }}
+                                                Отзыв к «{{ $review->shop->name }}»
                                             </a>
                                         </div>
                                         <div class="nk-notification-time">{{ $review->created_at->diffForHumans() }}</div>
                                     </div>
                                 </div>
                             @endforeach
+
+                            @foreach($comments as $comment)
+                                <div class="nk-notification-item dropdown-inner">
+                                    <div class="nk-notification-icon">
+                                        <em class="icon icon-circle bg-success-dim ni ni-comments"></em>
+                                    </div>
+                                    <div class="nk-notification-content">
+                                        <div class="nk-notification-text">
+                                            <a href="{{ route('admin.comments.edit', $comment) }}">
+                                                Комментарий к статье от {{ $comment->name }}
+                                            </a>
+                                        </div>
+                                        <div class="nk-notification-time">{{ $comment->created_at->diffForHumans() }}</div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            @foreach($questions as $question)
+                                <div class="nk-notification-item dropdown-inner">
+                                    <div class="nk-notification-icon">
+                                        <em class="icon icon-circle bg-warning-dim ni ni-question"></em>
+                                    </div>
+                                    <div class="nk-notification-content">
+                                        <div class="nk-notification-text">
+                                            <a href="{{ route('admin.questions.edit', $question) }}">
+                                                Вопрос от {{ $question->name }}
+                                            </a>
+                                        </div>
+                                        <div class="nk-notification-time">{{ $question->created_at->diffForHumans() }}</div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    </div>
-                    <div class="dropdown-foot center">
-                        <a href="{{ route('admin.reviews.index') }}">Посмотреть все</a>
                     </div>
                 </div>
             </li>

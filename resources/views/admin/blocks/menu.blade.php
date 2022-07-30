@@ -60,7 +60,7 @@
                     </li>
                     <li class="nk-menu-item">
                         <a href="{{ route('admin.reviews.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-speed"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
                             <span class="nk-menu-text">Отзывы</span>
                         </a>
                     </li>

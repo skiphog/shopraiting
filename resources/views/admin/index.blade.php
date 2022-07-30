@@ -1,3 +1,12 @@
+<?php
+
+/**
+ * @var int $shops_cnt
+ * @var int $reviews_cnt
+ * @var int $articles_cnt
+*/
+
+?>
 @extends('layouts.admin')
 
 @section('title', config('app.name') . ': Панель управления')
@@ -30,14 +39,22 @@
                                 <div class="fake-class"><h5 class="title">Следующие шаги</h5>
                                     <ul class="link-list is-compact pb-0">
                                         <li>
-                                            <a href="#"><em class="icon ni ni-file-text"></em><span>Добавить статью в блог</span></a>
-                                        </li>
-                                        <li><a href="#"><em
-                                                        class="icon ni ni-property-add"></em><span>Добавить продукт</span></a>
+                                            <a href="{{ route('admin.articles.create') }}">
+                                                <em class="icon ni ni-file-text"></em>
+                                                <span>Добавить статью в блог</span>
+                                            </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('index') }}" target="_blank"><em
-                                                        class="icon ni ni-laptop"></em><span>Посмотреть свой сайт</span></a>
+                                            <a href="{{ route('admin.shops.create') }}">
+                                                <em class="icon ni ni-property-add"></em>
+                                                <span>Добавить магазин</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('index') }}" target="_blank">
+                                                <em class="icon ni ni-laptop"></em>
+                                                <span>Посмотреть свой сайт</span>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -46,15 +63,22 @@
                                 <div class="fake-class"><h5 class="title">Сводка</h5>
                                     <ul class="link-list is-compact pb-0">
                                         <li>
-                                            <a href="#"><em
-                                                        class="icon ni ni-edit-fill"></em><span>333 Статей</span></a>
+                                            <a href="{{ route('admin.shops.index') }}">
+                                                <em class="icon ni ni-dashboard"></em>
+                                                <span>{{ $shops_cnt }} {{ trans_choice('dic.shops', $shops_cnt) }}</span>
+                                            </a>
                                         </li>
                                         <li>
-                                            <a href="#"><em class="icon ni ni-files"></em><span>666 Отзывов</span></a>
+                                            <a href="{{ route('admin.reviews.index') }}">
+                                                <em class="icon ni ni-files"></em>
+                                                <span>{{ $reviews_cnt }} {{ trans_choice('dic.review', $reviews_cnt) }}</span>
+                                            </a>
                                         </li>
                                         <li>
-                                            <a href="#"><em
-                                                        class="icon ni ni-comments"></em><span>444 Комментариев</span></a>
+                                            <a href="{{ route('admin.articles.index') }}">
+                                                <em class="icon ni ni-template"></em>
+                                                <span>{{ $articles_cnt }} {{ trans_choice('dic.articles', $articles_cnt) }}</span>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
