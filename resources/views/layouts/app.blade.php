@@ -63,8 +63,8 @@
         </a>
 
         <nav class="footer__nav">
-            <a class="footer__nav-link" href="/feedback">Контакты</a>
-            <a class="footer__nav-link" href="/questions">Вопросы</a>
+            <a class="footer__nav-link" href="{{ route('questions.create') }}">Контакты</a>
+            <a class="footer__nav-link" href="{{ route('questions.index') }}">Вопросы</a>
             <a class="footer__nav-link" href="{{ route('authors') }}">Авторы</a>
             <a class="footer__nav-link" href="{{ route('about') }}">О нас</a>
             @auth

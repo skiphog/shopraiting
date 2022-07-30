@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ShopSeeder::class,
             ReviewSeeder::class,
             ArticleSeeder::class,
+            QuestionSeeder::class,
         ]);
 
         //Storage::deleteDirectory('upload');

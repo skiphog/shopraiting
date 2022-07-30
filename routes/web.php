@@ -8,6 +8,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\QuestionController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'recalls', 'as' => 'index.', 'middleware' => 'ajax'], static function () {
@@ -31,6 +32,14 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.'], static function () {
     Route::get('/{article:slug}', [ArticleController::class, 'show'])->name('show');
     Route::post('/{article}/vote', [ArticleController::class, 'vote'])->name('vote');
     Route::post('/{article}/comment/store', [CommentController::class, 'article'])->name('comment.store');
+});
+Route::group(['prefix' => 'questions', 'as' => 'questions.'], static function () {
+    Route::get('/', [QuestionController::class, 'index'])->name('index');
+    Route::get('/{question}', [QuestionController::class, 'show'])->name('show');
+});
+Route::group(['prefix' => 'feedback', 'as' => 'questions.'], static function () {
+    Route::get('/', [QuestionController::class, 'create'])->name('create');
+    Route::post('/', [QuestionController::class, 'store'])->name('store');
 });
 Route::get('/authors', [UserController::class, 'authors'])->name('authors');
 
