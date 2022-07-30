@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\CommentController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'shops', 'as' => 'shops.', 'middleware' => []], static function () {
@@ -54,6 +55,19 @@ Route::group(['prefix' => 'articles', 'as' => 'articles.', 'middleware' => []], 
         ->whereNumber('review_id')
         ->name('destroy');
 });
+Route::group(['prefix' => 'comments', 'as' => 'comments.', 'middleware' => []], static function () {
+    Route::get('/', [CommentController::class, 'index'])
+        ->name('index');
+    Route::get('/{comment_id}/edit', [CommentController::class, 'edit'])
+        ->whereNumber('comment_id')
+        ->name('edit');
+    Route::post('/{comment_id}/edit', [CommentController::class, 'update'])
+        ->whereNumber('comment_id')
+        ->name('update');
+    Route::post('/{comment_id}/destroy', [CommentController::class, 'destroy'])
+        ->whereNumber('comment_id')
+        ->name('destroy');
+});
 Route::group(['prefix' => 'users', 'as' => 'users.', 'middleware' => []], static function () {
     Route::get('/', [UserController::class, 'index'])
         ->name('index');
@@ -71,4 +85,6 @@ Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
         ->name('articles');
     Route::get('/users', [UserController::class, 'search'])
         ->name('users');
+    Route::get('/comments', [CommentController::class, 'search'])
+        ->name('comments');
 });

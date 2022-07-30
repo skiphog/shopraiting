@@ -84,7 +84,8 @@
                             </div>
                             <div class="cart__footer">
                                 <div class="cart__footer-line">{{ $shop->advantage }}</div>
-                                <a href="{{ url($shop->pixel) }}" target="_blank" data-goal="click-{{ $shop->slug }}" class="cart__footer-link">Перейти на сайт</a>
+                                <a href="{{ url($shop->pixel) }}" target="_blank" data-goal="click-{{ $shop->slug }}"
+                                        class="cart__footer-link">Перейти на сайт</a>
                             </div>
                         </div>
                     @endforeach
