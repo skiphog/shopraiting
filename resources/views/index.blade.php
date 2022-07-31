@@ -3,13 +3,14 @@
 /**
  * @var \App\Models\Shop[]   $shops
  * @var \App\Models\Review[] $reviews
+ * @var \App\Models\Category $category
  */
 
 ?>
 @extends('layouts.app')
 
-@section('title', 'Лучшие секс-шопы Москвы – онлайн магазины для взрослых')
-@section('description', 'Не знаете какой секс шоп выбрать и где купить секс игрушки? Мы создали список лучших интернет-магазинов для вас!')
+@section('title', $category->seo_title)
+@section('description', $category->seo_description)
 
 @push('styles')
     <link rel="stylesheet" href="/css/select2.css">
@@ -17,25 +18,28 @@
     <link rel="stylesheet" href="/css/text.css">
     <link rel="stylesheet" href="/css/recall.css">
     <link rel="stylesheet" href="/css/case.css">
+    <link rel="stylesheet" href="/css/advantures.css">
 @endpush
 
 @section('content')
     <main class="main">
         <div class="wrap">
+            {{-- Banner => управление баннером тоже бы в админку --}}
             <div class="banner-wrapper">
                 <a href="https://go.acstat.com/2302cd986ee84c90" target="_blank" rel="noopener noreferrer">
                     <img src="/img/banner.jpg" width="875" height="240" alt="">
                 </a>
             </div>
-            <h1>Рейтинг лучших сексшопов 2021</h1>
-            <div class="text">
-                <p>
-                    Секс игрушки – это один из наиболее удачных способов не только разнообразить свою сексуальную жизнь,
-                    но и, порой, даже спасти угасающие отношения. А обеспечивают такими палочками-выручалочками
-                    специализированные магазины интим товаров. Но как понять, что это стоящий сервис, а не очередная
-                    низкосортная «забегаловка»? Разобраться в этом вам поможет наш проект SexShopRating.
-                </p>
-            </div>
+            {{-- // Banner --}}
+
+            <h1>{{ $category->seo_h1 ?: $category->name }}</h1>
+
+            @if(!empty($category->before_content))
+                <div class="text">
+                    <p>{{ $category->before_content }}</p>
+                </div>
+            @endif
+
             <div id="showcase" class="showcase">
                 <div class="showcase__carts">
                     @foreach($shops as $key => $shop)
@@ -106,14 +110,17 @@
             </div>
 
             <div class="recall" id="recall">
-                @include('main.recall', ['shops' => $shops, 'current_slug' => '', 'reviews' => $reviews])
+                @if(request()->routeIs('index'))
+                    @include('main.recall', ['shops' => $shops, 'current_slug' => $category->slug, 'reviews' => $reviews])
+                @else
+                    @include('categories.recall', ['category' => $category, 'shops' => $shops, 'current_slug' => $category->slug, 'reviews' => $reviews])
+                @endif
             </div>
 
             @include('main.table', compact('shops'))
+            @include('main.person', ['user' => $category->user])
 
-            <div>
-                 CompProductCategoryContent
-            </div>
+            {!! $category->content !!}
         </div>
     </main>
 @endsection
