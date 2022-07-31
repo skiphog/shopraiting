@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,7 @@ class CategoryController extends Controller
         $categories = Category::withCount('shops')
             ->paginate(20);
 
-        dump($categories);
+        return view('admin.categories.index', compact('categories'));
     }
 
     public function create()
@@ -36,7 +37,16 @@ class CategoryController extends Controller
     {
     }
 
-    public function search(Request $request)
+    public function search(Request $request): string
     {
+        $categories = Category::where('name', 'like', "%{$request['token']}%")
+            ->take(30)
+            ->get();
+
+        if ($categories->isEmpty()) {
+            return 'Ничего не найдено';
+        }
+
+        return View::make('admin.categories.table', compact('categories'))->render();
     }
 }
