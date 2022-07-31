@@ -12,6 +12,13 @@
 @section('description', 'Отзывы')
 
 @section('content')
+    <nav>
+        <ul class="breadcrumb breadcrumb-arrow">
+            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Панель</a></li>
+            <li class="breadcrumb-item active">Отзывы</li>
+        </ul>
+    </nav>
+
     @if($mod_reviews->isNotEmpty())
         <div class="nk-block-head nk-block-head-sm">
             <div class="nk-block-between">

@@ -25,17 +25,25 @@
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-dashboard"></em></span>
-                            <span class="nk-menu-text">Магазины</span>
+                            <span class="nk-menu-text">Каталог</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
                                 <a href="{{ route('admin.shops.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-text">Все магазины</span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-cart"></em></span>
+                                    <span class="nk-menu-text">Магазины</span>
                                 </a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('admin.shops.create') }}" class="nk-menu-link">
-                                    <span class="nk-menu-text">Добавить магазин</span>
+                                <a href="{{ route('admin.categories.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-list-round"></em></span>
+                                    <span class="nk-menu-text">Категории</span>
+                                </a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ route('admin.reviews.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
+                                    <span class="nk-menu-text">Отзывы</span>
                                 </a>
                             </li>
                         </ul>
@@ -48,33 +56,31 @@
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
                                 <a href="{{ route('admin.articles.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-text">Все статьи</span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
+                                    <span class="nk-menu-text">Статьи</span>
                                 </a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('admin.articles.create') }}" class="nk-menu-link">
-                                    <span class="nk-menu-text">Добавить статью</span>
+                                <a href="{{ route('admin.comments.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-comments"></em></span>
+                                    <span class="nk-menu-text">Комментарии</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.reviews.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
-                            <span class="nk-menu-text">Отзывы</span>
+                    <li class="nk-menu-item has-sub">
+                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                            <span class="nk-menu-icon"><em class="icon ni ni-cmd"></em></span>
+                            <span class="nk-menu-text">Разное</span>
                         </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.comments.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-comments"></em></span>
-                            <span class="nk-menu-text">Комментарии</span>
-                        </a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.questions.index') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-question"></em></span>
-                            <span class="nk-menu-text">Вопросы</span>
-                        </a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{{ route('admin.questions.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-question"></em></span>
+                                    <span class="nk-menu-text">Вопросы</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nk-menu-item">
                         <a href="{{ route('admin.users.index') }}" class="nk-menu-link">

@@ -11,11 +11,19 @@
 @endpush
 
 @section('content')
+    <nav>
+        <ul class="breadcrumb breadcrumb-arrow">
+            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.shops.index') }}">Магазины</a></li>
+            <li class="breadcrumb-item active">{{ $shop->id ? 'Редактирование' : 'Добавление' }}</li>
+        </ul>
+    </nav>
+
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">
-                    {{ $shop->id ? "Редактировать: {$shop->name}" : 'Добавить магазин' }}
+                    {{ $shop->id ? $shop->name : 'Добавить магазин' }}
                 </h3>
             </div>
         </div>

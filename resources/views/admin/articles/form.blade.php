@@ -16,11 +16,19 @@ use App\Models\User;
 @endpush
 
 @section('content')
+    <nav>
+        <ul class="breadcrumb breadcrumb-arrow">
+            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.articles.index') }}">Статьи</a></li>
+            <li class="breadcrumb-item active">{{ $article->id ? 'Редактирование' : 'Добавление' }}</li>
+        </ul>
+    </nav>
+
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">
-                    {{ $article->id ? 'Редактировать: ' . $article->name : 'Добавить статью' }}
+                    {{ $article->id ? $article->name : 'Добавить статью' }}
                 </h3>
             </div>
         </div>

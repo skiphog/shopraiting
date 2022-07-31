@@ -11,6 +11,22 @@
 @section('description', "Профиль {$user->name}")
 
 @section('content')
+    <nav>
+        <ul class="breadcrumb breadcrumb-arrow">
+            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Панель</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Пользователи</a></li>
+            <li class="breadcrumb-item active">Управление</li>
+        </ul>
+    </nav>
+
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">{{ $user->name }}</h3>
+            </div>
+        </div>
+    </div>
+
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">

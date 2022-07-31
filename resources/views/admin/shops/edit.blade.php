@@ -10,4 +10,4 @@
 @section('title', "Редактировать: {$shop->name}")
 @section('description', "Редактировать: {$shop->name}")
 
-@include('admin.shops.form', compact('shop'));
+@include('admin.shops.form', compact('shop'))

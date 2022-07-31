@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'shops', 'as' => 'shops.', 'middleware' => []], static function () {
@@ -24,6 +25,20 @@ Route::group(['prefix' => 'shops', 'as' => 'shops.', 'middleware' => []], static
         ->name('update');
     Route::post('/{shop_id}/destroy', [ShopController::class, 'destroy'])
         ->whereNumber('shop_id')
+        ->name('destroy');
+});
+Route::group(['prefix' => 'categories', 'as' => 'categories.', 'middleware' => []], static function () {
+    Route::get('/', [CategoryController::class, 'index'])
+        ->name('index');
+    Route::get('/create', [CategoryController::class, 'create'])
+        ->name('create');
+    Route::post('/create', [CategoryController::class, 'store'])
+        ->name('store');
+    Route::get('/{category}/edit', [CategoryController::class, 'edit'])
+        ->name('edit');
+    Route::post('/{category}/edit', [CategoryController::class, 'update'])
+        ->name('update');
+    Route::post('/{category}/destroy', [CategoryController::class, 'destroy'])
         ->name('destroy');
 });
 Route::group(['prefix' => 'reviews', 'as' => 'reviews.', 'middleware' => []], static function () {
@@ -91,16 +106,11 @@ Route::group(['prefix' => 'users', 'as' => 'users.', 'middleware' => []], static
         ->name('update');
 });
 Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
-    Route::get('/shops', [ShopController::class, 'search'])
-        ->name('shops');
-    Route::get('/reviews', [ReviewController::class, 'search'])
-        ->name('review');
-    Route::get('/articles', [ArticleController::class, 'search'])
-        ->name('articles');
-    Route::get('/users', [UserController::class, 'search'])
-        ->name('users');
-    Route::get('/comments', [CommentController::class, 'search'])
-        ->name('comments');
-    Route::get('/questions', [QuestionController::class, 'search'])
-        ->name('questions');
+    Route::get('/shops', [ShopController::class, 'search'])->name('shops');
+    Route::get('/reviews', [ReviewController::class, 'search'])->name('review');
+    Route::get('/articles', [ArticleController::class, 'search'])->name('articles');
+    Route::get('/users', [UserController::class, 'search'])->name('users');
+    Route::get('/comments', [CommentController::class, 'search'])->name('comments');
+    Route::get('/questions', [QuestionController::class, 'search'])->name('questions');
+    Route::get('/categories', [CategoryController::class, 'search'])->name('categories');
 });
