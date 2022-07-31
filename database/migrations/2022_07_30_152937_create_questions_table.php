@@ -17,9 +17,9 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email');
             $table->text('message');
-			$table->string('seo_h1');
-			$table->string('seo_title');
-			$table->string('seo_description');
+            $table->string('seo_h1');
+            $table->string('seo_title');
+            $table->string('seo_description');
             $table->text('answer')->nullable();
             $table->timestamp('answered_at')->nullable();
             $table->timestamps();

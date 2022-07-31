@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use JsonException;
-use App\Models\Shop;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
