@@ -89,7 +89,7 @@
                         </a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                        <a href="{{ route('admin.settings.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-setting-alt"></em></span>
                             <span class="nk-menu-text">Настройки</span>
                         </a>

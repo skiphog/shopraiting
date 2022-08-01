@@ -16,10 +16,13 @@ Route::group(['prefix' => 'recalls', 'as' => 'index.', 'middleware' => 'ajax'], 
     Route::get('/', [IndexController::class, 'recalls'])->name('recalls');
     Route::get('/{shop:slug}', [IndexController::class, 'shopRecalls'])->name('shop-recalls');
 });
+
 Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], static function () {
     Route::get('/', [ReviewController::class, 'index'])->name('index');
     Route::get('/{shop:slug}', [ReviewController::class, 'shop'])->name('shop');
-    Route::get('/{shop:slug}/last', [ReviewController::class, 'last'])->name('last');
+    Route::get('/{shop:slug}/last', [ReviewController::class, 'last'])
+        ->middleware('ajax')
+        ->name('last');
     Route::post('/store', [ReviewController::class, 'store'])->name('store');
     Route::post('/{review}/like', [ReviewController::class, 'like'])->name('like');
 });

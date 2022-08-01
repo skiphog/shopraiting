@@ -1,6 +1,7 @@
 /.idea
 /node_modules
 /storage/*.key
+/public/sitemap.xml
 /vendor
 .env
 composer.lock

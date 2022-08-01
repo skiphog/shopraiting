@@ -28,12 +28,12 @@
                                 <div class="feedback__box">
                                     <!--suppress HtmlFormInputWithoutLabel -->
                                     <input class="feedback__field" type="text" name="name"
-                                            placeholder="Ваше имя" value="">
+                                            placeholder="Ваше имя" value="{{ auth()->user()?->name }}">
                                 </div>
                                 <div class="feedback__box">
                                     <!--suppress HtmlFormInputWithoutLabel -->
                                     <input class="feedback__field" type="email" name="email"
-                                            placeholder="Ваш e-mail" value="">
+                                            placeholder="Ваш e-mail" value="{{ auth()->user()?->email }}">
                                 </div>
                                 <div class="feedback__message">
                                     <!--suppress HtmlFormInputWithoutLabel -->

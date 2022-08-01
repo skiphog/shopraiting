@@ -11,6 +11,7 @@
     "php": "^8.0.2",
     "ext-gd": "*",
     "ext-pdo": "*",
+    "ext-dom": "*",
     "ext-fileinfo": "*",
     "guzzlehttp/guzzle": "^7.2",
     "laravel/framework": "^9.11"

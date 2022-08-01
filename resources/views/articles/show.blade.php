@@ -91,11 +91,13 @@
                             <form class="feedback js-add-comment" action="{{ route('articles.comment.store', $article) }}">
                                 <div class="feedback__box">
                                     <!--suppress HtmlFormInputWithoutLabel -->
-                                    <input class="feedback__field" type="text" name="name" placeholder="Ваше имя" required>
+                                    <input class="feedback__field" type="text"
+                                            name="name" value="{{ auth()->user()?->name }}" placeholder="Ваше имя" required>
                                 </div>
                                 <div class="feedback__box">
                                     <!--suppress HtmlFormInputWithoutLabel -->
-                                    <input class="feedback__field" type="email" name="email" placeholder="Ваш E-mail" required>
+                                    <input class="feedback__field" type="email"
+                                            name="email" value="{{ auth()->user()?->email }}" placeholder="Ваш E-mail" required>
                                 </div>
                                 <div class="feedback__message">
                                     <!--suppress HtmlFormInputWithoutLabel -->

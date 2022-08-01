@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\CategoryController;
 
@@ -106,6 +107,10 @@ Route::group(['prefix' => 'users', 'as' => 'users.', 'middleware' => []], static
         ->name('update');
     Route::post('/{user}/password', [UserController::class, 'password'])
         ->name('password');
+});
+Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => []], static function () {
+    Route::get('/', [SettingController::class, 'index'])->name('index');
+    Route::post('/sitemap', [SettingController::class, 'sitemap'])->name('sitemap');
 });
 Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
     Route::get('/shops', [ShopController::class, 'search'])->name('shops');

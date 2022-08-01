@@ -44,11 +44,13 @@
         </div>
         <div class="feedback__box">
             <!--suppress HtmlFormInputWithoutLabel -->
-            <input type="text" class="feedback__field" placeholder="Ваше имя" name="author_name" value="">
+            <input type="text" class="feedback__field" placeholder="Ваше имя"
+                    name="author_name" value="{{ auth()->user()?->name }}">
         </div>
         <div class="feedback__box">
             <!--suppress HtmlFormInputWithoutLabel -->
-            <input type="email" class="feedback__field" placeholder="Ваш e-mail" name="author_email" value="">
+            <input type="email" class="feedback__field" placeholder="Ваш e-mail"
+                    name="author_email" value="{{ auth()->user()?->email }}">
         </div>
         <div class="feedback__message">
             <!--suppress HtmlFormInputWithoutLabel -->
