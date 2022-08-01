@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Skiphog
- * 30-6-2022 18:24
- */
 
 namespace App\Http\Requests;
 

@@ -26,7 +26,7 @@
                                 </a>
                             </div>
                             <div class="nk-tb-col">
-                                <span>/{{ $category->slug }}</span>
+                                <span>{{ $category->slug }}</span>
                             </div>
                             <div class="nk-tb-col"><span>{{ $category->shops_count }}</span></div>
 

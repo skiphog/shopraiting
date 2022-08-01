@@ -8,43 +8,47 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\Shop
  *
- * @property int           $id
- * @property string        $name
- * @property string        $slug
- * @property string|null   $img
- * @property string        $link
- * @property string        $pixel
- * @property string        $advantage
- * @property string        $description
- * @property mixed         $contents
- * @property string        $content
- * @property float         $rating
- * @property float         $hack_rating
- * @property float         $rating_value
- * @property int           $rating_reverse
- * @property string        $rating_value_format
- * @property int           $position
- * @property int|null      $cities_cnt
- * @property int|null      $brands_cnt
- * @property int|null      $products_cnt
- * @property string        $products_cnt_format
- * @property string|null   $delivery_cost
- * @property string|null   $delivery_time
- * @property string|null   $discounts
- * @property string|null   $founding_year
- * @property Carbon|null   $created_at
- * @property Carbon|null   $updated_at
- * @property int           $activity
+ * @property int                        $id
+ * @property string                     $name
+ * @property string                     $slug
+ * @property string|null                $img
+ * @property string                     $link
+ * @property string                     $pixel
+ * @property string                     $advantage
+ * @property string                     $description
+ * @property mixed                      $contents
+ * @property string                     $content
+ * @property float                      $rating
+ * @property float                      $hack_rating
+ * @property float                      $rating_value
+ * @property int                        $rating_reverse
+ * @property string                     $rating_value_format
+ * @property int                        $position
+ * @property int|null                   $cities_cnt
+ * @property int|null                   $brands_cnt
+ * @property int|null                   $products_cnt
+ * @property string                     $products_cnt_format
+ * @property string|null                $delivery_cost
+ * @property string|null                $delivery_time
+ * @property string|null                $discounts
+ * @property string|null                $founding_year
+ * @property Carbon|null                $created_at
+ * @property Carbon|null                $updated_at
+ * @property int                        $activity
  * @mixin Eloquent
  * @method Builder|Shop positioned()
- * @property-read Review[] $reviews
- * @property-read int|null $reviews_count
+ * @property-read Review[]              $reviews
+ * @property-read int|null              $reviews_count
+ * @property-read Collection|Category[] $categories
+ * @property-read int|null              $categories_count
  */
 class Shop extends Model
 {
@@ -110,6 +114,14 @@ class Shop extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'shop_id', 'id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'category_shop', 'shop_id', 'category_id');
     }
 
     /**

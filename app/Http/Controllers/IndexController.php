@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $category = Category::where('slug', '')->first();
+        $category = Category::where('id', 1)->first();
 
         /*$shops = $category
             ->shops()

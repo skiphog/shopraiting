@@ -177,7 +177,7 @@ use App\Models\User;
                     <div class="row g-gs">
                         <div class="col-3">
                             <div class="form-group">
-                                <label class="form-label" for="User_id">Автор статьи</label>
+                                <label class="form-label" for="user_id">Автор статьи</label>
                                 <div class="form-control-wrap">
                                     <!--suppress HtmlFormInputWithoutLabel -->
                                     <select id="user_id" class="form-control form-select select2-hidden-accessible"
@@ -196,7 +196,9 @@ use App\Models\User;
                     <div class="row g-gs">
                         <div class="col-12">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-lg btn-primary">{{ $article->id ? 'Сохранить': 'Добавить'  }}</button>
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    {{ $article->id ? 'Сохранить': 'Добавить' }}
+                                </button>
                             </div>
                         </div>
                     </div>
