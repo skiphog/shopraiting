@@ -23,19 +23,9 @@
                         @yield('content')
 
                         <div class="nk-block nk-auth-footer">
-                            <div class="nk-block-between">
-                                <ul class="nav nav-sm">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" target="_blank">Условия использования</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" target="_blank">Политика конфиденциальности</a>
-                                    </li>
-                                </ul>
-                            </div>
 
                             <div class="mt-3">
-                                <p>&copy; {{ date('Y') }} {{ config('app.name') }}. Все права защищены.</p>
+                                <p>&copy; {{ date('Y') }} {{ config('app.name') }}.</p>
                             </div>
 
                         </div>

@@ -20,6 +20,10 @@ class AbortIfNotModerator
     public function handle(Request $request, Closure $next)
     {
         if (!$request->user() || !$request->user()->isModerator()) {
+            if (!$request->expectsJson()) {
+                return redirect('login');
+            }
+
             abort(403);
         }
 
