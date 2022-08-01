@@ -88,13 +88,79 @@
 
                     <div class="row g-gs">
                         <div class="col-12">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-lg btn-primary">Сохранить</button>
+                            <div class="d-flex justify-content-between">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-lg btn-primary">Сохранить</button>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-dim btn-primary"
+                                            type="button"
+                                            data-toggle="modal" data-target="#edit-profile">
+                                        <em class="icon ni ni-exchange"></em>
+                                        <span>Сменить пароль</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('modal')
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-profile">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="modal-title">Сменить пароль</h5>
+                    <form action="{{ route('admin.users.password', $user) }}" class="mt-4 crutch-validate is-alter">
+                        <div class="row g-gs">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <label class="form-label" for="password">Пароль</label>
+                                    </div>
+                                    <div class="form-control-wrap">
+                                        <a href="#" tabindex="-1"
+                                                class="form-icon form-icon-right passcode-switch lg"
+                                                data-target="password">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+                                        <input type="password" class="form-control form-control-lg"
+                                                id="password" name="password" placeholder="Ваш пароль"
+                                                autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="password_confirmation">Подтверждение пароля</label>
+                                    <div class="form-control-wrap">
+                                        <a href="#" tabindex="-1"
+                                                class="form-icon form-icon-right lg passcode-switch"
+                                                data-target="password_confirmation">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+                                        <input type="password"
+                                                class="form-control form-control-lg"
+                                                id="password_confirmation"
+                                                name="password_confirmation"
+                                                placeholder="Подтверждение пароля" autocomplete="off" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                    <li><button type="submit" class="btn btn-primary">Сохранить</button></li>
+                                    <li><a href="#" class="link link-light" data-dismiss="modal">Отмена</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

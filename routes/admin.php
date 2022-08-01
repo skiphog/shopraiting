@@ -104,6 +104,8 @@ Route::group(['prefix' => 'users', 'as' => 'users.', 'middleware' => []], static
         ->name('edit');
     Route::post('/{user}/edit', [UserController::class, 'update'])
         ->name('update');
+    Route::post('/{user}/password', [UserController::class, 'password'])
+        ->name('password');
 });
 Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
     Route::get('/shops', [ShopController::class, 'search'])->name('shops');

@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -29,6 +30,19 @@ class UserController extends Controller
         $user->update($request->safe()->all());
 
         session()->flash('flash', ['message' => 'Информация о пользователе обновлена']);
+
+        return response()->json(['redirect' => route('admin.users.edit', $user)]);
+    }
+
+    public function password(User $user, Request $request): JsonResponse
+    {
+        $this->validate($request, [
+            'password' => ['required', 'string', 'confirmed', 'min:6']
+        ]);
+
+        $user->update(['password' => Hash::make($request['password'])]);
+
+        session()->flash('flash', ['message' => 'Пароль обновлён']);
 
         return response()->json(['redirect' => route('admin.users.edit', $user)]);
     }

@@ -120,6 +120,7 @@
                                             id="shops"
                                             name="shops[]"
                                             multiple="multiple"
+                                            data-search="on"
                                             data-placeholder="Выберите магазины">
                                         @php
                                             $shop_ids = $category->shops->pluck('id')->toArray();

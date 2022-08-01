@@ -52,5 +52,6 @@ Route::group(['prefix' => 'cities', 'as' => 'categories.'], static function () {
 Route::get('/authors', [UserController::class, 'authors'])->name('authors');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 
 require __DIR__ . '/auth.php';
