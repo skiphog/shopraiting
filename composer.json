@@ -9,11 +9,12 @@
   "license": "MIT",
   "require": {
     "php": "^8.0.2",
-    "ext-gd": "*",
-    "ext-pdo": "*",
     "ext-dom": "*",
     "ext-fileinfo": "*",
+    "ext-gd": "*",
+    "ext-pdo": "*",
     "guzzlehttp/guzzle": "^7.2",
+    "htmlmin/htmlmin": "^9.0",
     "laravel/framework": "^9.11"
   },
   "require-dev": {
