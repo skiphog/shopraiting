@@ -149,7 +149,7 @@
         <label class="feedback__agree">
             <input type="checkbox" class="checkbox" name="agree" checked="checked">
             <span class="custom-checkbox"></span>
-            <span class="feedback__agree-text">Я принимаю условия <a href="/privacy" class="feedback__agree-link" target="_blank">пользовательского соглашения</a></span>
+            <span class="feedback__agree-text">Я принимаю условия <a href="{{ route('privacy') }}" class="feedback__agree-link" target="_blank">пользовательского соглашения</a></span>
         </label>
         @if($shop->id)
             <input type="hidden" name="shop_id" value="{{ $shop->id }}">

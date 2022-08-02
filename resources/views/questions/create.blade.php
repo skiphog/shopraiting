@@ -43,7 +43,7 @@
                                     <input type="checkbox" class="checkbox" name="agree" checked>
                                     <span class="custom-checkbox"></span>
                                     <span class="feedback__agree-text">Я принимаю условия
-                                        <a href="/policy" class="feedback__agree-link" target="_blank">
+                                        <a href="{{ route('privacy') }}" class="feedback__agree-link" target="_blank">
                                             пользовательского соглашения
                                         </a>
                                     </span>
