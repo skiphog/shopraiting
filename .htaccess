@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteRule ^ratings$ https://%{HTTP_HOST}/shops [R=301,L]
     RewriteRule ^(novosibirsk|nizhniy-novgorod|barnaul|rjazan|voronezh)$ https://%{HTTP_HOST}/cities/$1 [R=301,L]
     RewriteRule ^(rozovii-krolik|intimshop|uslada|on-i-ona|condom-shop|vsexshop|bestsexshop|mir-orgazma|dzhagadzhaga|eroshop|playsexshop|pelotkashop|mysextoys|sexshop24|sexcite|lelo|tigramur|nighttoys|seks-fist|kazanova|seksshop-eleni-berkovoi|master-joy|emmanuelle|sexyfucking|vkus-ljubvi|lavka-freida|intimtoys|happy-man-and-woman|seksshop-intim-toys|secret|confidento|seksshop-oxax|deserved|lovemachines|dopinglove|eroticavip)$ https://%{HTTP_HOST}/shops/$1 [R=301,L]
     RewriteRule ^(.*)$ public/$1 [L]
