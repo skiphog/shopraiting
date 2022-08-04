@@ -11,6 +11,6 @@ class TestController extends Controller
     {
         $coupons = Coupon::oldest('id')->get();
 
-        dump(Storage::put('coupons.json', $coupons->toJson(JSON_UNESCAPED_UNICODE)));
+        //dump(Storage::put('coupons.json', $coupons->toJson(JSON_UNESCAPED_UNICODE)));
     }
 }

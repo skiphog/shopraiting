@@ -12,6 +12,7 @@
                     <div class="nk-tb-item nk-tb-head">
                         <div class="nk-tb-col"><span class="sub-text">Название</span></div>
                         <div class="nk-tb-col"><span class="sub-text">Рейтинг</span></div>
+                        <div class="nk-tb-col"><span class="sub-text">Купоны</span></div>
                         <div class="nk-tb-col tb-col-sm"><span class="sub-text">Отзывы</span></div>
 
                         <div class="nk-tb-col nk-tb-col-tools text-right">
@@ -27,6 +28,7 @@
                             <div class="nk-tb-col">
                                 <span class="fw-medium">{{ $shop->rating_value_format }}</span>
                             </div>
+                            <div class="nk-tb-col tb-col-sm"><span>{{ $shop->coupons_count }}</span></div>
                             <div class="nk-tb-col tb-col-sm"><span>{{ $shop->reviews_count }}</span></div>
 
                             <div class="nk-tb-col nk-tb-col-tools">

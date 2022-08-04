@@ -28,7 +28,13 @@
             </div>
         </div>
     </div>
-
+    @if($shop->id)
+        <p class="lead">
+            <span>Купоны и акции: {{ $shop->coupons_count }}</span>
+            <span class="icon ni ni-chevrons-right"></span>
+            <a href="#" data-toggle="modal" data-target="#edit-coupons">Редактировать</a>
+        </p>
+    @endif
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
