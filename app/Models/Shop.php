@@ -47,6 +47,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method Builder|Shop positioned()
  * @property-read Review[]              $reviews
  * @property-read int|null              $reviews_count
+ * @property-read Coupon[]              $coupons
+ * @property-read int|null              $coupons_count
  * @property-read Collection|Category[] $categories
  * @property-read int|null              $categories_count
  */
@@ -114,6 +116,14 @@ class Shop extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class, 'shop_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function coupons(): HasMany
+    {
+        return $this->hasMany(Coupon::class, 'shop_id', 'id');
     }
 
     /**

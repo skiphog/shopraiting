@@ -56,5 +56,6 @@ Route::get('/authors', [UserController::class, 'authors'])->name('authors');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'index'])->name('test');
 
 require __DIR__ . '/auth.php';
