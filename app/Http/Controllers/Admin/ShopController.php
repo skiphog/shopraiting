@@ -45,7 +45,6 @@ class ShopController extends Controller
     {
         $shop = Shop::withoutGlobalScope('activity')
             ->withCount(['coupons' => static fn($q) => $q->withTrashed()])
-            ->with(['coupons' => static fn($q) => $q->withTrashed()->oldest('id')])
             ->where('id', $shop_id)
             ->firstOrFail();
 

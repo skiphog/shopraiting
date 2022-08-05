@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
@@ -27,6 +28,12 @@ Route::group(['prefix' => 'shops', 'as' => 'shops.', 'middleware' => []], static
     Route::post('/{shop_id}/destroy', [ShopController::class, 'destroy'])
         ->whereNumber('shop_id')
         ->name('destroy');
+    Route::get('/{shop_id}/edit/coupons', [CouponController::class, 'edit'])
+        ->whereNumber('shop_id')
+        ->name('coupons.edit');
+    Route::post('/{shop_id}/edit/coupons', [CouponController::class, 'update'])
+        ->whereNumber('shop_id')
+        ->name('coupons.update');
 });
 Route::group(['prefix' => 'categories', 'as' => 'categories.', 'middleware' => []], static function () {
     Route::get('/', [CategoryController::class, 'index'])

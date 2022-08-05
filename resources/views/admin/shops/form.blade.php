@@ -32,7 +32,7 @@
         <p class="lead">
             <span>Купоны и акции: {{ $shop->coupons_count }}</span>
             <span class="icon ni ni-chevrons-right"></span>
-            <a href="#" data-toggle="modal" data-target="#edit-coupons">Редактировать</a>
+            <a href="{{ route('admin.shops.coupons.edit', $shop) }}">Редактировать</a>
         </p>
     @endif
     <div class="nk-block">

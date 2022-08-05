@@ -28,7 +28,11 @@
                             <div class="nk-tb-col">
                                 <span class="fw-medium">{{ $shop->rating_value_format }}</span>
                             </div>
-                            <div class="nk-tb-col tb-col-sm"><span>{{ $shop->coupons_count }}</span></div>
+                            <div class="nk-tb-col tb-col-sm">
+                                <a href="{{ route('admin.shops.coupons.edit', $shop) }}">
+                                    <span class="fw-medium">{{ $shop->coupons_count }}</span>
+                                </a>
+                            </div>
                             <div class="nk-tb-col tb-col-sm"><span>{{ $shop->reviews_count }}</span></div>
 
                             <div class="nk-tb-col nk-tb-col-tools">
