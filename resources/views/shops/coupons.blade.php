@@ -6,7 +6,7 @@
 
 ?>
 
-@if(!empty($coupons))
+@if($coupons->isNotEmpty())
     @push('styles')
         <link rel="stylesheet" href="/css/coupons.css">
     @endpush
