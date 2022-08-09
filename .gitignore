@@ -3,6 +3,7 @@
 /storage/*.key
 /public/sitemap.xml
 /public/mix-manifest.json
+package-lock.json
 /vendor
 .env
 composer.lock

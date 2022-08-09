@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Eloquent;
+use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -154,6 +155,16 @@ class Coupon extends Model
     public function isLink(): bool
     {
         return $this->button_type === static::BUTTON_TYPES['LINK'];
+    }
+
+    /**
+     * @param DateTimeInterface $date
+     *
+     * @return string
+     */
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('Y-m-d\TH:i');
     }
 
     /**

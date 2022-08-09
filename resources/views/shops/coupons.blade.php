@@ -16,13 +16,9 @@
         <ul class="coupons-and-promotions__list">
             @foreach($coupons as $coupon)
                 <li class="coupons-and-promotions__item">
-                    <div class="coupons-and-promotions__info-block">
-                        <p class="coupons-and-promotions__discount-value coupons-and-promotions__discount-value--{{ $coupon->color }}">
-                            {{ $coupon->type_content }}
-                        </p>
-                        <p class="coupons-and-promotions__caption coupons-and-promotions__caption--{{ $coupon->color }}">
-                            {{ $coupon->type_value }}
-                        </p>
+                    <div class="coupons-and-promotions__info-block {{ $coupon->color }}">
+                        <p class="coupons-and-promotions__discount-value">{{ $coupon->type_content }}</p>
+                        <p class="coupons-and-promotions__caption">{{ $coupon->type_value }}</p>
                     </div>
                     <div class="coupons-and-promotions__offer-block">
                         <h4 class="coupons-and-promotions__title">
@@ -34,28 +30,25 @@
                     </div>
                     <div class="coupons-and-promotions__code-block">
                         @if($coupon->isCoupon())
-                            <button id="coupons-and-promotions__button" class="coupons-and-promotions__button">
+                            <button class="coupons-and-promotions__button">
                                 <span class="coupons-and-promotions__code-part">Открыть<br>код</span>
                                 <span class="coupons-and-promotions__code">{{ $coupon->button_content }}</span>
                             </button>
                         @elseif($coupon->isLink())
-                            <a href="{{ url($coupon->button_content) }}">Перейти</a>
+                            <a href="{{ url($coupon->button_content) }}">Открыть ссылку</a>
                         @endif
                     </div>
                 </li>
             @endforeach
         </ul>
-    </div>
-
-    @section('modals')
         <div class="coupons-and-promotions__modal-mask"></div>
         <div class="coupons-and-promotions__modal">
             <button class="coupons-and-promotions__modal-close">X</button>
             <div class="coupons-and-promotions__modal-list">
                 <div class="coupons-and-promotions__modal-item">
-                    <div class="coupons-and-promotions__modal-info-block">
-                        <p class="coupons-and-promotions__modal-discount-value coupons-and-promotions__modal-discount-value--red">5%</p>
-                        <p class="coupons-and-promotions__modal-caption coupons-and-promotions__modal-caption--red">ПРОМОКОД</p>
+                    <div class="coupons-and-promotions__modal-info-block red">
+                        <p class="coupons-and-promotions__modal-discount-value">5%</p>
+                        <p class="coupons-and-promotions__modal-caption">ПРОМОКОД</p>
                     </div>
                     <div class="coupons-and-promotions__modal-offer-block">
                         <h4 class="coupons-and-promotions__modal-title">
@@ -67,12 +60,11 @@
             </div>
             <div class="coupons-and-promotions__modal-copy">
                 <label for="coupons-and-promotions__modal-input"></label>
-                <input id="coupons-and-promotions__modal-input" class="coupons-and-promotions__modal-input" type="text" value="ЛОХОТРОН01" >
-
+                <input id="coupons-and-promotions__modal-input" class="coupons-and-promotions__modal-input" type="text" value="ЛОХОТРОН01">
                 <div class="coupons-and-promotions__modal-tooltip-wrapper">
                     <button class="coupons-and-promotions__modal-copy-button" onclick="getText()" onmouseout="alreadyCopied()">
                         Скопировать
-                        <span id="coupons-and-promotions__modal-tooltip-text" class="coupons-and-promotions__modal-tooltip-text">Скопировать код</span>
+                        <span class="coupons-and-promotions__modal-tooltip-text">Скопировать код</span>
                     </button>
                 </div>
             </div>
@@ -80,7 +72,7 @@
                 <a class="coupons-and-promotions__modal-link-button btn" href="#" target="_blank" rel="noopener noreferrer">Перейти на сайт</a>
             </div>
         </div>
-    @endsection
+    </div>
 
     @push('scripts')
         <script src="/js/coupons.js"></script>
