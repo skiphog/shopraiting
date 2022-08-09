@@ -143,6 +143,7 @@
                                 @endif
                             </div>
                         </div>
+                        @include('shops.coupons', ['coupons' => $shop->coupons])
                         @include('partials.contents', ['contents' => $shop->contents])
                         <div class="page-article text">
                             {!! $shop->content !!}

@@ -37,6 +37,7 @@ class ShopController extends Controller
     public function show(Shop $shop)
     {
         $shop
+            ->load('coupons')
             ->loadCount('reviews')
             ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('shop')]);
 

@@ -31,9 +31,12 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.shops.coupons.update', $shop) }}" class="crutch-validate is-alter">
+    <div id="coupons"></div>
 
-        <div class="nk-block" id="coupons">
+    <form action="{{ route('admin.shops.coupons.update', $shop) }}"
+          class="crutch-validate is-alter">
+
+        <div class="nk-block">
             @foreach($shop->coupons as $index => $coupon)
                 <div class="card card-bordered">
                     <div class="card-inner">

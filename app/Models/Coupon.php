@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int         $shop_id
  * @property string      $color
  * @property string      $type
+ * @property string      $type_value
  * @property string      $type_content
  * @property string      $title
  * @property string      $content
@@ -136,5 +138,32 @@ class Coupon extends Model
     public function shop(): BelongsTo
     {
         return $this->belongsTo(Shop::class, 'shop_id', 'id');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCoupon(): bool
+    {
+        return $this->button_type === static::BUTTON_TYPES['COUPON'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLink(): bool
+    {
+        return $this->button_type === static::BUTTON_TYPES['LINK'];
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function typeValue(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value, $attributes) => static::typesList()[$attributes['type']] ?? ''
+        );
     }
 }

@@ -2,6 +2,7 @@
 /node_modules
 /storage/*.key
 /public/sitemap.xml
+/public/mix-manifest.json
 /vendor
 .env
 composer.lock
