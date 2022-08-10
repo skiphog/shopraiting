@@ -11,8 +11,7 @@ class CouponController extends Controller
     {
         $shop = Shop::withoutGlobalScope('activity')
             ->select(['id', 'name'])
-            //->withCount(['coupons' => static fn($q) => $q->withTrashed()])
-            ->with(['coupons' => static fn($q) => $q->withTrashed()->oldest('id')])
+            ->with(['coupons' => static fn($q) => $q->sorting()])
             ->where('id', $shop_id)
             ->firstOrFail();
 

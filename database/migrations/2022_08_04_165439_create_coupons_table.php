@@ -24,14 +24,15 @@ return new class extends Migration {
             $table->string('button_content');
             $table->timestamp('start_at');
             $table->timestamp('end_at');
-            $table->softDeletes();
+            //$table->softDeletes();
 
             $table->foreign('shop_id')
                 ->references('id')
                 ->on('shops');
 
             $table->index(['start_at', 'end_at']);
-            $table->index('deleted_at');
+            $table->index('end_at');
+            //$table->index('deleted_at');
         });
     }
 

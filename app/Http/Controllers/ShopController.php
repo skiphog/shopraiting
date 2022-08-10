@@ -36,9 +36,8 @@ class ShopController extends Controller
 
     public function show(Shop $shop)
     {
-        // Добавить локал скоуп для дат activity() ченить такое
         $shop
-            ->load(['coupons' => static fn($q) => $q->where('start_at', '<', $date = date('Y-m-d H:i:s'))->where('end_at', '>', $date)])
+            ->load(['coupons' => static fn($q) => $q->activity()->sorting()])
             ->loadCount('reviews')
             ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('shop')]);
 

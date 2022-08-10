@@ -5,9 +5,8 @@ namespace App\Models;
 use Eloquent;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -28,15 +27,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon      $end_at
  * @property Carbon|null $deleted_at
  * @property-read Shop   $shop
- * @method static Builder|Coupon onlyTrashed()
- * @method static Builder|Coupon withTrashed()
- * @method static Builder|Coupon withoutTrashed()
+ * @method static Builder|Coupon activity()
+ * @method static Builder|Coupon sorting()
  * @mixin Eloquent
  */
 class Coupon extends Model
 {
-    use SoftDeletes;
-
     /**
      * Цвет купона
      */
@@ -156,6 +152,33 @@ class Coupon extends Model
     {
         return $this->button_type === static::BUTTON_TYPES['LINK'];
     }
+
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     * @noinspection PhpUnused
+     */
+    public function scopeActivity(Builder $query): Builder
+    {
+        return $query
+            ->where('start_at', '<', $date = date('Y-m-d H:i:s'))
+            ->where('end_at', '>', $date);
+    }
+
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     * @noinspection PhpUnused
+     */
+    public function scopeSorting(Builder $query): Builder
+    {
+        return $query
+            ->orderBy('end_at')
+            ->orderBy('id');
+    }
+
 
     /**
      * @param DateTimeInterface $date

@@ -15,7 +15,7 @@ class ShopController extends Controller
     {
         $shops = Shop::withoutGlobalScope('activity')
             ->withCount('reviews')
-            ->withCount(['coupons' => static fn($q) => $q->withTrashed()])
+            ->withCount('coupons')
             ->positioned()
             ->paginate(20);
 
@@ -44,7 +44,7 @@ class ShopController extends Controller
     public function edit(int $shop_id)
     {
         $shop = Shop::withoutGlobalScope('activity')
-            ->withCount(['coupons' => static fn($q) => $q->withTrashed()])
+            ->withCount('coupons')
             ->where('id', $shop_id)
             ->firstOrFail();
 
@@ -73,6 +73,7 @@ class ShopController extends Controller
         $shops = Shop::where('name', 'like', "%{$request['token']}%")
             ->withoutGlobalScope('activity')
             ->withCount('reviews')
+            ->withCount('coupons')
             ->positioned()
             ->take(10)
             ->get();
