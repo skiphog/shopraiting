@@ -8,7 +8,7 @@
 
 @if($coupons->isNotEmpty())
     @push('styles')
-        <link rel="stylesheet" href="/css/coupons.css">
+        <link rel="stylesheet" href="/css/coupons.css?v=1">
     @endpush
 
     <div class="coupons-and-promotions">
@@ -81,6 +81,6 @@
     </div>
 
     @push('scripts')
-        <script src="/js/coupons.js"></script>
+        <script src="/js/coupons.js?v=1"></script>
     @endpush
 @endif
