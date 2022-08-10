@@ -179,7 +179,6 @@ class Coupon extends Model
             ->orderBy('id');
     }
 
-
     /**
      * @param DateTimeInterface $date
      *
