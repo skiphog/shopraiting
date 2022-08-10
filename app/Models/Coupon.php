@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int         $shop_id
  * @property string      $color
  * @property string      $type
- * @property string      $type_value
  * @property string      $type_content
  * @property string      $title
  * @property string      $content
@@ -29,6 +28,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read Shop   $shop
  * @method static Builder|Coupon activity()
  * @method static Builder|Coupon sorting()
+ * @property-read string $type_value
+ * @property-read string $button_content_trim
  * @mixin Eloquent
  */
 class Coupon extends Model
@@ -197,6 +198,17 @@ class Coupon extends Model
     {
         return Attribute::make(
             get: static fn($value, $attributes) => static::typesList()[$attributes['type']] ?? ''
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function buttonContentTrim(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value, $attributes) => str_repeat('*', 4) . mb_substr($attributes['button_content'], -2, 2)
         );
     }
 }
