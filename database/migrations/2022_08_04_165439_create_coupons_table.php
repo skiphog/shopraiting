@@ -22,8 +22,8 @@ return new class extends Migration {
             $table->text('content');
             $table->enum('button_type', ['coupon', 'link']);
             $table->string('button_content');
-            $table->timestamp('start_at');
-            $table->timestamp('end_at');
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             //$table->softDeletes();
 
             $table->foreign('shop_id')
