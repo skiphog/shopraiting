@@ -66,7 +66,7 @@
             </div>
             <div class="coupons-and-promotions__modal-copy">
                 <label for="coupons-and-promotions__modal-input"></label>
-                <input id="coupons-and-promotions__modal-input" class="coupons-and-promotions__modal-input" type="text" value="">
+                <input id="coupons-and-promotions__modal-input" class="coupons-and-promotions__modal-input" type="text" value="" readonly>
                 <div class="coupons-and-promotions__modal-tooltip-wrapper">
                     <button class="coupons-and-promotions__modal-copy-button" onclick="getText()" onmouseout="alreadyCopied()">
                         Скопировать
