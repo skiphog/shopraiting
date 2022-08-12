@@ -11,7 +11,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $shops = Shop::getAllWithCache();
+        $shops = Shop::positioned()->get();
 
         return view('shops.index', compact('shops'));
     }
