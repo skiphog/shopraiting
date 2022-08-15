@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Comment;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         $mod_comments = Comment::withoutGlobalScope('activity')
+            //->whereMorphedTo('post', Article::class)
             ->with(['post' => static fn($q) => $q->withoutGlobalScope('activity')->select(['id', 'name'])])
             ->where('activity', 0)
             ->latest('id')
@@ -25,6 +27,7 @@ class CommentController extends Controller
                 'name'
             ])
         ])
+            //->whereMorphedTo('post', Article::class)
             ->latest('id')
             ->paginate(20);
 

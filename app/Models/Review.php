@@ -50,6 +50,9 @@ class Review extends Model
      */
     protected $guarded = [];
 
+    /**
+     * @var string[]
+     */
     protected $dispatchesEvents = [
         'updated' => ReviewUpdated::class,
         'deleted' => ReviewUpdated::class
