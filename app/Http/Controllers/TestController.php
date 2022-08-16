@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Storage;
 
@@ -9,8 +10,8 @@ class TestController extends Controller
 {
     public function index()
     {
-        $coupons = Coupon::oldest('id')->get();
+        //$brands = Brand::oldest('id')->get();
 
-        //dump(Storage::put('coupons.json', $coupons->toJson(JSON_UNESCAPED_UNICODE)));
+        //dump(Storage::put('brands.json', $brands->toJson(JSON_UNESCAPED_UNICODE)));
     }
 }
