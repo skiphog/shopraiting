@@ -6,6 +6,7 @@ use Eloquent;
 use App\Filters\ReviewFilter;
 use App\Events\ReviewUpdated;
 use Illuminate\Support\Carbon;
+use App\Models\Traits\Statusable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;

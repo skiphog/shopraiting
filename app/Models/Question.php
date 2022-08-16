@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Support\Carbon;
+use App\Models\Traits\Statusable;
 use Illuminate\Database\Eloquent\Model;
 
 /**

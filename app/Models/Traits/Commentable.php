@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Traits;
 
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**

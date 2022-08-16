@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Support\Carbon;
+use App\Models\Traits\Ratings;
+use App\Models\Traits\Statusable;
+use App\Models\Traits\Positioned;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
@@ -45,6 +48,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int                        $activity
  * @mixin Eloquent
  * @method Builder|Shop positioned()
+ * @property-read string                $status_text
  * @property-read Review[]              $reviews
  * @property-read int|null              $reviews_count
  * @property-read Coupon[]              $coupons
@@ -54,7 +58,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Shop extends Model
 {
-    use Statusable;
+    use Statusable, Positioned, Ratings;
 
     /**
      * Сколько магазинов показывать на главной странице
@@ -166,43 +170,6 @@ class Shop extends Model
     }
 
     /**
-     * @param Builder $query
-     *
-     * @return Builder
-     * @noinspection PhpUnused
-     */
-    public function scopePositioned(Builder $query): Builder
-    {
-        return $query->orderBy('position');
-    }
-
-    /**
-     * @return Attribute
-     * @noinspection PhpUnused
-     */
-    protected function ratingValue(): Attribute
-    {
-        return Attribute::make(
-            get: static function ($value, $attributes) {
-                return !empty($attributes['hack_rating']) && $attributes['hack_rating'] > 0
-                    ? $attributes['hack_rating']
-                    : $attributes['rating'];
-            }
-        );
-    }
-
-    /**
-     * @return Attribute
-     * @noinspection PhpUnused
-     */
-    protected function ratingValueFormat(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => number_format($this->rating_value, 1, ',', ' ')
-        );
-    }
-
-    /**
      * @return Attribute
      * @noinspection PhpUnused
      */
@@ -210,17 +177,6 @@ class Shop extends Model
     {
         return Attribute::make(
             get: fn() => number_format((float)$this->products_cnt, 0, '', ' ')
-        );
-    }
-
-    /**
-     * @return Attribute
-     * @noinspection PhpUnused
-     */
-    protected function ratingReverse(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => (int)(100 - $this->rating_value * 10)
         );
     }
 }
