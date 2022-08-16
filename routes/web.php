@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
@@ -31,6 +33,10 @@ Route::group(['prefix' => 'shops', 'as' => 'shops.'], static function () {
     Route::get('/{shop:slug}', [ShopController::class, 'show'])->name('show');
     Route::get('/{shop:slug}/reviews', [ShopController::class, 'reviews'])->name('reviews');
 });
+Route::group(['prefix' => 'brands', 'as' => 'brands.'], static function () {
+    Route::get('/', [BrandController::class, 'index'])->name('index');
+    Route::get('/{brand:slug}/reviews', [BrandController::class, 'reviews'])->name('reviews');
+});
 Route::group(['prefix' => 'articles', 'as' => 'articles.'], static function () {
     Route::get('/', [ArticleController::class, 'index'])->name('index');
     Route::get('/{article:slug}', [ArticleController::class, 'show'])->name('show');
@@ -56,6 +62,6 @@ Route::get('/authors', [UserController::class, 'authors'])->name('authors');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
-Route::get('/test', [\App\Http\Controllers\TestController::class, 'index'])->name('test');
+Route::get('/test', [TestController::class, 'index'])->name('test');
 
 require __DIR__ . '/auth.php';
