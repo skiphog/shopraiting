@@ -28,12 +28,12 @@
                                     <div class="popularity__box-wrap">
                                         <div class="popularity__item">
                                             @foreach ($chunk as $brand)
-                                                <div><img src="{{ asset($brand->img) }}" alt="{{ $brand->name }}"></div>
-                                                <div>Ссылка: {{ $brand->link }}</div>
-                                                <div>Страна: {{ $brand->country }}</div>
-                                                <div>Рейтинг: {{ $brand->rating_value_format }}</div>
-                                                <div>{{ $brand->description }}</div>
                                                 <div>
+                                                    <div><img src="{{ asset($brand->img) }}" alt="{{ $brand->name }}"></div>
+                                                    <div>Ссылка: {{ $brand->link }}</div>
+                                                    <div>Страна: {{ $brand->country }}</div>
+                                                    <div>Рейтинг: {{ $brand->rating_value_format }}</div>
+                                                    <div>{{ $brand->description }}</div>
                                                     <div><a href="{{ route('brands.reviews', $brand) }}" class="popularity__item-link">{{ $brand->name }}</a></div>
                                                 </div>
                                             @endforeach
