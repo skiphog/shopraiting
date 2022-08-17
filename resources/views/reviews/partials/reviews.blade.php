@@ -9,7 +9,7 @@
     <div class="review {{ $review->isNegative() ? '_border-color': '' }}" itemscope itemtype="https://schema.org/Review">
         <meta itemprop="itemReviewed" content="{{ $review->product->name }}">
         <div class="review__header">
-            <a href="{{ route('shops.show', $review->product) }}" class="review__title">
+            <a href="{{ $review->product->getRoutShow() }}" class="review__title">
                 {{ $review->product->name }}
             </a>
             <div class="review__autor" itemprop="author" itemscope itemtype="https://schema.org/Person">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use Illuminate\Http\Request;
+use App\Filters\ReviewFilter;
 
 class BrandController extends Controller
 {
@@ -13,8 +15,16 @@ class BrandController extends Controller
         return view('brands.index', compact('brands'));
     }
 
-    public function reviews(Brand $brand)
+    public function reviews(Brand $brand, Request $request, ReviewFilter $filter)
     {
-        return view('brands.reviews', compact('brand'));
+        $reviews = $brand
+            ->reviews()
+            ->with('product:id,slug,name')
+            ->latest('id')
+            ->filter($filter)
+            ->paginate(20)
+            ->withQueryString();
+
+        return view('brands.reviews', compact('brand', 'reviews'));
     }
 }

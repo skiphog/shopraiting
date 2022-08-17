@@ -104,6 +104,7 @@ class Shop extends Model
      *
      * @noinspection PhpMissingReturnTypeInspection
      * @noinspection ReturnTypeCanBeDeclaredInspection
+     * @noinspection PhpUnused
      */
     public static function getAllWithCache()
     {
@@ -128,6 +129,15 @@ class Shop extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_shop', 'shop_id', 'category_id');
+    }
+
+    /**
+     * @return string
+     * @noinspection PhpUnused
+     */
+    public function getRoutShow(): string
+    {
+        return route('shops.show', $this);
     }
 
     /**

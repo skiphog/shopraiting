@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
-use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
 
@@ -30,8 +29,8 @@ class ShopController extends Controller
 
     public function reviews(Shop $shop, Request $request, ReviewFilter $filter)
     {
-        $reviews = Review::where('product_id', $shop->id)
-            ->whereMorphedTo('product', Shop::class)
+        $reviews = $shop
+            ->reviews()
             ->with('product:id,slug,name')
             ->latest('id')
             ->filter($filter)

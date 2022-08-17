@@ -76,7 +76,34 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($reviews->isNotEmpty())
+                                <div class="offer__rating">
+                                <div class="offer__rating-title">Оценки пользователей</div>
+                                @foreach ($brand->getCounts() as $key => $value)
+                                    <div class="offer__rating-box">
+                                        <div class="stardom">
+                                            @for($i = 1; $i<= 5; $i++)
+                                                @if($i <= $key)
+                                                    <div class="stardom__item full"></div>
+                                                @else
+                                                    <div class="stardom__item"></div>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <div class="rating__progress">
+                                            <progress class="rating__progress-item" value="{{ $value['percent'] }}" max="100"></progress>
+                                            <!--suppress HtmlUnknownAttribute -->
+                                            <output class="rating__progress-value" value="{{ $value['count'] }}">{{ $value['count'] }}</output>
+                                            <div class="rating__progress-text">{{ trans_choice('dic.mark', $value['count']) }}</div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @endif
                         </div>
+                        @if($reviews->isNotEmpty())
+                            <div id="recall">@include('shops.recall', compact('reviews'))</div>
+                        @endif
                         <div class="banner js-banner">
                             <picture>
                                 <img src="{{ asset($brand->img) }}" alt="{{ $brand->name }}">

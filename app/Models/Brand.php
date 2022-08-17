@@ -52,4 +52,13 @@ class Brand extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * @return string
+     * @noinspection PhpUnused
+     */
+    public function getRoutShow(): string
+    {
+        return route('brands.reviews', $this);
+    }
 }
