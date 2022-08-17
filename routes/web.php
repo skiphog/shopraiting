@@ -24,7 +24,9 @@ Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], static function () {
     Route::get('/{shop:slug}/last', [ReviewController::class, 'last'])
         ->middleware('ajax')
         ->name('last');
+
     Route::post('/store', [ReviewController::class, 'store'])->name('store');
+
     Route::post('/{review}/like', [ReviewController::class, 'like'])->name('like');
 });
 Route::group(['prefix' => 'shops', 'as' => 'shops.'], static function () {
