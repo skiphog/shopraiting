@@ -26,6 +26,7 @@ use App\Models\Shop;
     @endif
 
     <div class="nav__box">
+        <a class="nav__link" href="{{ route('brands.index') }}">Бренды</a>
         <a class="nav__link" href="{{ route('reviews.index') }}">Отзывы</a>
         <a class="nav__link" href="{{ route('articles.index') }}">Статьи</a>
     </div>

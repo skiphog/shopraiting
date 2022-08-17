@@ -7,7 +7,7 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\ReviewRequest;
+use App\Http\Requests\ReviewShopRequest;
 
 class ReviewController extends Controller
 {
@@ -15,8 +15,9 @@ class ReviewController extends Controller
     {
         $data = [
             'reviews'      => Review::latest('id')
+                ->whereMorphedTo('post', Shop::class)
                 ->filter($filter)
-                ->with('shop')
+                ->with('post')
                 ->paginate(20)
                 ->withQueryString(),
             'current_slug' => ''
@@ -35,7 +36,7 @@ class ReviewController extends Controller
             'reviews'      => $shop->reviews()
                 ->latest('id')
                 ->filter($filter)
-                ->with('shop')
+                ->with('post')
                 ->paginate(20)
                 ->withQueryString(),
             'current_slug' => $shop->slug
@@ -56,7 +57,7 @@ class ReviewController extends Controller
         $reviews = $shop->reviews()
             ->latest('id')
             ->filter($filter)
-            ->with('shop')
+            ->with('post')
             ->take(2)
             ->get();
 
@@ -64,11 +65,11 @@ class ReviewController extends Controller
     }
 
     /**
-     * @param ReviewRequest $request
+     * @param ReviewShopRequest $request
      *
      * @return JsonResponse
      */
-    public function store(ReviewRequest $request): JsonResponse
+    public function store(ReviewShopRequest $request): JsonResponse
     {
         Review::create($request->safe()->all());
 

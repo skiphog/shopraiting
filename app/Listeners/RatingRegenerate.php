@@ -26,9 +26,9 @@ class RatingRegenerate
      */
     public function handle(ReviewUpdated $event): void
     {
-        $event->review->shop->update([
+        $event->review->post->update([
             'rating' => $event->review
-                ->shop
+                ->post
                 ->loadAvg('reviews', 'rating')
                 ->reviews_avg_rating ?: 0
         ]);

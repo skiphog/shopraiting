@@ -60,6 +60,9 @@ class Comment extends Model
         'answered_at' => 'datetime'
     ];
 
+    /**
+     * @return MorphTo
+     */
     public function post(): MorphTo
     {
         return $this->morphTo();

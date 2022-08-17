@@ -23,7 +23,8 @@ class IndexController extends Controller
             ->get();
 
         $reviews = Review::latest('id')
-            ->with('shop')
+            ->whereMorphedTo('post', Shop::class)
+            ->with('post')
             ->take(2)
             ->get();
 
@@ -38,8 +39,9 @@ class IndexController extends Controller
         $shops = Shop::getAllWithCache();
 
         $reviews = Review::latest('id')
+            ->whereMorphedTo('post', Shop::class)
             ->filter($filter)
-            ->with('shop')
+            ->with('post')
             ->take(2)
             ->get();
 
@@ -57,7 +59,7 @@ class IndexController extends Controller
         $reviews = $shop->reviews()
             ->filter($filter)
             ->latest('id')
-            ->with('shop')
+            ->with('post')
             ->take(2)
             ->get();
 

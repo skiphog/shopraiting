@@ -10,26 +10,27 @@ use App\Models\Traits\Statusable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * App\Models\Review
  *
- * @property int         $id
- * @property int         $shop_id
- * @property float       $rating
- * @property int         $rating_reverse
- * @property string      $rating_format
- * @property int         $likes
- * @property string      $author_name
- * @property string      $author_email
- * @property string      $content
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property int         $activity
+ * @property int             $id
+ * @property int             $post_id
+ * @property string          $post_type
+ * @property float           $rating
+ * @property int             $rating_reverse
+ * @property string          $rating_format
+ * @property int             $likes
+ * @property string          $author_name
+ * @property string          $author_email
+ * @property string          $content
+ * @property Carbon|null     $created_at
+ * @property Carbon|null     $updated_at
+ * @property int             $activity
  * @mixin Eloquent
  * @method Builder       filter($filter)
- * @property-read Shop   $shop
+ * @property-read Shop|Brand $post
  */
 class Review extends Model
 {
@@ -92,11 +93,11 @@ class Review extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return MorphTo
      */
-    public function shop(): BelongsTo
+    public function post(): MorphTo
     {
-        return $this->belongsTo(Shop::class, 'shop_id', 'id');
+        return $this->morphTo();
     }
 
     /**

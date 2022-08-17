@@ -11,7 +11,7 @@
 
         @if (!$shop->id)
             <!--suppress HtmlFormInputWithoutLabel -->
-            <select class="feedback__select" name="shop_id">
+            <select class="feedback__select" name="post_id">
                 @foreach (\App\Models\Shop::getAllWithCache() as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
@@ -152,7 +152,7 @@
             <span class="feedback__agree-text">Я принимаю условия <a href="{{ route('privacy') }}" class="feedback__agree-link" target="_blank">пользовательского соглашения</a></span>
         </label>
         @if($shop->id)
-            <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+            <input type="hidden" name="post_id" value="{{ $shop->id }}">
         @endif
         <input class="js-review-mark-input" type="hidden" name="rating" value="5">
         <button class="feedback__action" type="submit">Оставить отзыв</button>

@@ -14,7 +14,11 @@ return new class extends Migration {
     {
         Schema::create('reviews', static function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shop_id');
+
+            // Morph relation
+            $table->unsignedBigInteger('post_id');
+            $table->string('post_type', 50);
+
             $table->unsignedFloat('rating', 4)->default(0.00);
 			$table->unsignedInteger('likes')->default(0);
             $table->string('author_name');
@@ -24,11 +28,9 @@ return new class extends Migration {
             $table->boolean('activity')->default(false);
 
             //Indexes
+            $table->index(['post_id', 'post_type']);
             $table->index('activity');
             $table->index('rating');
-            $table->foreign('shop_id')
-                ->references('id')
-                ->on('shops');
         });
     }
 

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Traits\Ratings;
 use App\Models\Traits\Statusable;
 use App\Models\Traits\Positioned;
+use App\Models\Traits\Reviewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -40,7 +41,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Brand extends Model
 {
-    use Statusable, Positioned, Ratings;
+    use Reviewable, Statusable, Positioned, Ratings;
 
     /**
      * @var string

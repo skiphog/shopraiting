@@ -7,9 +7,9 @@
 ?>
 @foreach($reviews as $review)
     <div class="review {{ $review->isNegative() ? '_border-color': '' }}" itemscope itemtype="https://schema.org/Review">
-        <meta itemprop="itemReviewed" content="{{ $review->shop->name }}">
+        <meta itemprop="itemReviewed" content="{{ $review->post->name }}">
         <div class="review__header">
-            <a href="{{ route('shops.show', $review->shop) }}" class="review__title">{{ $review->shop->name }}</a>
+            <a href="{{ route('shops.show', $review->post) }}" class="review__title">{{ $review->post->name }}</a>
             <div class="review__autor" itemprop="author" itemscope itemtype="https://schema.org/Person">
                 <span itemprop="name">{{ $review->author_name }}</span>,
                 {{ $review->created_at->format('d.m.Y') }}
@@ -19,7 +19,7 @@
         <div class="review__text" itemprop="description">— {{ $review->content }}</div>
         <div class="review__footer">
             <div class="review__progress" itemscope itemtype="http://schema.org/AggregateRating">
-                <meta itemprop="itemReviewed" content="{{ $review->shop->name }}">
+                <meta itemprop="itemReviewed" content="{{ $review->post->name }}">
                 <div class="stars">
                     <svg class="icon" width="20px" height="20px">
                         <use xlink:href="/img/sprite.svg#heart"></use>

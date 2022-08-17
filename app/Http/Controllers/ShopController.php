@@ -18,8 +18,9 @@ class ShopController extends Controller
 
     public function reviews(Shop $shop, Request $request, ReviewFilter $filter)
     {
-        $reviews = Review::where('shop_id', $shop->id)
-            ->with('shop')
+        $reviews = Review::where('post_id', $shop->id)
+            ->whereMorphedTo('post', Shop::class)
+            ->with('post')
             ->latest('id')
             ->filter($filter)
             ->paginate(20)
@@ -39,7 +40,7 @@ class ShopController extends Controller
         $shop
             ->load(['coupons' => static fn($q) => $q->activity()->sorting()])
             ->loadCount('reviews')
-            ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('shop')]);
+            ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('post')]);
 
         return view('shops.show', compact('shop'));
     }
