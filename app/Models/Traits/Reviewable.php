@@ -25,7 +25,7 @@ trait Reviewable
      */
     public function reviews(): MorphMany
     {
-        return $this->morphMany(Review::class, 'post');
+        return $this->morphMany(Review::class, 'product');
     }
 
     /**
@@ -43,8 +43,8 @@ trait Reviewable
                 sum(rating >= 7 and rating < 9) cnt_4, 
                 sum(rating >= 9) cnt_5'
             )
-            ->where('post_id', $this->id)
-            ->where('post_type', __CLASS__)
+            ->where('product_id', $this->id)
+            ->where('product_type', static::class)
             ->where('activity', 1)
             ->first(1);
 

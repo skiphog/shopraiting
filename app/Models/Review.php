@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * App\Models\Review
  *
  * @property int             $id
- * @property int             $post_id
- * @property string          $post_type
+ * @property int             $product_id
+ * @property string          $product_type
  * @property float           $rating
  * @property int             $rating_reverse
  * @property string          $rating_format
@@ -29,8 +29,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property Carbon|null     $updated_at
  * @property int             $activity
  * @mixin Eloquent
- * @method Builder       filter($filter)
- * @property-read Shop|Brand $post
+ * @method Builder           filter($filter)
+ * @property-read Shop|Brand $product
  */
 class Review extends Model
 {
@@ -62,6 +62,7 @@ class Review extends Model
 
     /**
      * @return bool
+     * @noinspection PhpUnused
      */
     public function isNegative(): bool
     {
@@ -95,7 +96,7 @@ class Review extends Model
     /**
      * @return MorphTo
      */
-    public function post(): MorphTo
+    public function product(): MorphTo
     {
         return $this->morphTo();
     }

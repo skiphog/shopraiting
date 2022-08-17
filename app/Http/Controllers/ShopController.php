@@ -11,16 +11,28 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $shops = Shop::positioned()->get();
+        $shops = Shop::select(['id', 'name', 'slug'])
+            ->positioned()
+            ->get();
 
         return view('shops.index', compact('shops'));
     }
 
+    public function show(Shop $shop)
+    {
+        $shop
+            ->load(['coupons' => static fn($q) => $q->activity()->sorting()])
+            ->loadCount('reviews')
+            ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('product:id,slug,name')]);
+
+        return view('shops.show', compact('shop'));
+    }
+
     public function reviews(Shop $shop, Request $request, ReviewFilter $filter)
     {
-        $reviews = Review::where('post_id', $shop->id)
-            ->whereMorphedTo('post', Shop::class)
-            ->with('post')
+        $reviews = Review::where('product_id', $shop->id)
+            ->whereMorphedTo('product', Shop::class)
+            ->with('product:id,slug,name')
             ->latest('id')
             ->filter($filter)
             ->paginate(20)
@@ -33,15 +45,5 @@ class ShopController extends Controller
         $shop->loadCount('reviews');
 
         return view('shops.reviews', compact('shop', 'reviews'));
-    }
-
-    public function show(Shop $shop)
-    {
-        $shop
-            ->load(['coupons' => static fn($q) => $q->activity()->sorting()])
-            ->loadCount('reviews')
-            ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('post')]);
-
-        return view('shops.show', compact('shop'));
     }
 }

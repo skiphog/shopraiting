@@ -13,18 +13,14 @@ class IndexController extends Controller
     {
         $category = Category::where('id', 1)->first();
 
-        /*$shops = $category
+        $shops = $category
             ->shops()
-            ->positioned()
-            ->get();*/
-
-        $shops = Shop::withCount('reviews')
             ->positioned()
             ->get();
 
         $reviews = Review::latest('id')
-            ->whereMorphedTo('post', Shop::class)
-            ->with('post')
+            ->whereMorphedTo('product', Shop::class)
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 
@@ -32,16 +28,21 @@ class IndexController extends Controller
     }
 
     /**
-     * @noinspection ReturnTypeCanBeDeclaredInspection
+     * @param ReviewFilter $filter
+     *
+     * @return string
      */
-    public function recalls(ReviewFilter $filter)
+    public function recalls(ReviewFilter $filter): string
     {
-        $shops = Shop::getAllWithCache();
+        $shops = Shop::select(['id', 'slug', 'name'])
+            ->whereRelation('categories', 'id', 1)
+            ->positioned()
+            ->get();
 
         $reviews = Review::latest('id')
-            ->whereMorphedTo('post', Shop::class)
+            ->whereMorphedTo('product', Shop::class)
             ->filter($filter)
-            ->with('post')
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 
@@ -55,11 +56,15 @@ class IndexController extends Controller
      */
     public function shopRecalls(Shop $shop, ReviewFilter $filter)
     {
-        $shops = Shop::getAllWithCache();
+        $shops = Shop::select(['id', 'slug', 'name'])
+            ->whereRelation('categories', 'id', 1)
+            ->positioned()
+            ->get();
+
         $reviews = $shop->reviews()
             ->filter($filter)
             ->latest('id')
-            ->with('post')
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 

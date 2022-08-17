@@ -9,7 +9,7 @@ use App\Filters\ReviewFilter;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(): void
     {
     }
 
@@ -20,8 +20,8 @@ class CategoryController extends Controller
             ->positioned()
             ->get();
 
-        $reviews = Review::whereIn('post_id', $shops->pluck('id'))
-            ->whereMorphedTo('post', Shop::class)
+        $reviews = Review::whereIn('product_id', $shops->pluck('id'))
+            ->whereMorphedTo('product', Shop::class)
             ->with('post')
             ->take(2)
             ->get();

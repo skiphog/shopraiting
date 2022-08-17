@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->id();
 
             // Morph relation
-            $table->unsignedBigInteger('post_id');
-            $table->string('post_type', 50);
+            $table->unsignedBigInteger('product_id');
+            $table->string('product_type', 50);
 
             $table->unsignedFloat('rating', 4)->default(0.00);
 			$table->unsignedInteger('likes')->default(0);
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->boolean('activity')->default(false);
 
             //Indexes
-            $table->index(['post_id', 'post_type']);
+            $table->index(['product_id', 'product_type']);
             $table->index('activity');
             $table->index('rating');
         });

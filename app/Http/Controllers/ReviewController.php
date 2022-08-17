@@ -14,10 +14,10 @@ class ReviewController extends Controller
     public function index(Request $request, ReviewFilter $filter)
     {
         $data = [
-            'reviews'      => Review::latest('id')
-                ->whereMorphedTo('post', Shop::class)
+            'reviews' => Review::latest('id')
+                ->whereMorphedTo('product', Shop::class)
                 ->filter($filter)
-                ->with('post')
+                ->with('product:id,slug,name')
                 ->paginate(20)
                 ->withQueryString(),
             'current_slug' => ''
@@ -33,10 +33,10 @@ class ReviewController extends Controller
     public function shop(Shop $shop, Request $request, ReviewFilter $filter)
     {
         $data = [
-            'reviews'      => $shop->reviews()
+            'reviews' => $shop->reviews()
                 ->latest('id')
                 ->filter($filter)
-                ->with('post')
+                ->with('product:id,slug,name')
                 ->paginate(20)
                 ->withQueryString(),
             'current_slug' => $shop->slug
@@ -57,7 +57,7 @@ class ReviewController extends Controller
         $reviews = $shop->reviews()
             ->latest('id')
             ->filter($filter)
-            ->with('post')
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 
