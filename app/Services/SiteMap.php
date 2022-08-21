@@ -6,6 +6,7 @@ use DOMElement;
 use DOMDocument;
 use DOMException;
 use App\Models\Shop;
+use App\Models\Brand;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Question;
@@ -17,6 +18,7 @@ class SiteMap
     protected static array $static_url = [
         '',
         '/shops',
+        '/brands',
         '/reviews',
         '/articles',
         '/authors',
@@ -46,6 +48,7 @@ class SiteMap
         return array_merge(
             static::$static_url,
             $this->generateShops(),
+            $this->generateBrands(),
             $this->generateCategories(),
             $this->generateArticles(),
             $this->generateQuestions()
@@ -94,6 +97,20 @@ class SiteMap
 
         return $shops
             ->merge($shops->map(static fn($item) => "{$item}/reviews"))
+            ->all();
+    }
+
+    /**
+     * Сгенерировать Slug брендов
+     *
+     * @return array
+     */
+    protected function generateBrands(): array
+    {
+        return Brand::select('slug')
+            ->oldest('id')
+            ->pluck('slug')
+            ->transform(static fn($item) => "/brands/{$item}/reviews")
             ->all();
     }
 
