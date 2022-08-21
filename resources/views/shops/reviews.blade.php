@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div id="recall">@include('shops.recall', compact('reviews'))</div>
-                        @include('reviews.review_form', ['shop' => $shop])
+                        @include('reviews.review_shop_form', ['shop' => $shop])
                         <div class="banner js-banner">
                             <picture>
                                 <img src="{{ asset($shop->img) }}" alt="{{ $shop->name }}">

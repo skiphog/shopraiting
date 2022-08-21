@@ -25,6 +25,10 @@ class BrandController extends Controller
             ->paginate(20)
             ->withQueryString();
 
+        if ($request->ajax()) {
+            return view('shops.recall', compact('reviews'))->render();
+        }
+
         return view('brands.reviews', compact('brand', 'reviews'));
     }
 }

@@ -20,25 +20,27 @@
         <div class="inner">
             <div class="wrap">
                 @include('partials.breadcrumbs', ['data' => [['link' => '', 'title' => 'Список вопросов']]])
+                <div itemscope itemtype="https://schema.org/FAQPage">
                 <h1>Вопросы пользователей о секс шопах</h1>
 
-                <div class="content">
-                    <div class="main-content">
-                        <div class="question">
-                            @foreach ($questions as $question)
-                                <div class="question__box">
-                                    <a href="{{ route('questions.show', $question) }}" class="question__box-title">
-                                        {{ $question->message }}
-                                    </a>
-                                </div>
-                            @endforeach
+                    <div class="content">
+                        <div class="main-content">
+                            <div class="question" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                                @foreach ($questions as $question)
+                                    <div class="question__box">
+                                        <a href="{{ route('questions.show', $question) }}" class="question__box-title">
+                                            <span itemprop="name">{{ $question->message }}</span>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            {{ $questions->onEachSide(1)->links('partials.paginate') }}
+                            <div class="block">
+                                <a href="{{ route('questions.create') }}" class="block__action">Задать вопрос</a>
+                            </div>
                         </div>
-                        {{ $questions->onEachSide(1)->links('partials.paginate') }}
-                        <div class="block">
-                            <a href="{{ route('questions.create') }}" class="block__action">Задать вопрос</a>
-                        </div>
+                        @include('partials.slider')
                     </div>
-                    @include('partials.slider')
                 </div>
             </div>
         </div>

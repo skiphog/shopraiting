@@ -75,7 +75,7 @@
                                     <div class="nk-notification-content">
                                         <div class="nk-notification-text">
                                             <a href="{{ route('admin.reviews.edit', $review) }}">
-                                                Отзыв к «{{ $review->shop->name }}»
+                                                Отзыв к «{{ $review->product->name }}»
                                             </a>
                                         </div>
                                         <div class="nk-notification-time">{{ $review->created_at->diffForHumans() }}</div>

@@ -4,11 +4,14 @@ namespace App\Models\Traits;
 
 use App\Models\Review;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property-read Review[] $reviews
  * @property-read int|null $reviews_count
+ * @property-read string   $type
+ * @property-read string   $type_text
  */
 trait Reviewable
 {
@@ -58,5 +61,28 @@ trait Reviewable
         }
 
         return $counts;
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function type(): Attribute
+    {
+        return Attribute::make(
+        //get: fn() => strtolower((new ReflectionClass($this))->getShortName())
+            get: fn() => $this->table
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function typeText(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->type_text
+        );
     }
 }

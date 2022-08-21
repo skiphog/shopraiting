@@ -25,21 +25,21 @@
                     <div class="main-content">
                         <div class="list">
                             @foreach($articles as $article)
-                                <div class="list__box">
-                                    <a href="{{ route('articles.show', $article) }}" class="list__box-link">
+                                <div class="list__box" itemscope itemtype="https://schema.org/BlogPosting">
+                                    <a href="{{ route('articles.show', $article) }}" class="list__box-link" itemprop="url">
                                         <picture>
-                                            <img class="list__box-image" src="{{ asset($article->img) }}" alt="{{ $article->name }}">
+                                            <img class="list__box-image" src="{{ asset($article->img) }}" alt="{{ $article->name }}" itemprop="image">
                                         </picture>
                                     </a>
                                     <div class="list__box-main">
                                         <div class="list__box-info">
-                                            <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="list__box-item list__box-person">{{ $article->user->name }}</a>
-                                            <div class="list__box-item">{{ $article->created_at->format('d.m.Y') }}</div>
+                                            <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="list__box-item list__box-person"><span itemprop="author">{{ $article->user->name }}</span></a>
+                                            <div class="list__box-item" itemprop="dateCreated">{{ $article->created_at->format('d.m.Y') }}</div>
                                             <div class="list__box-item">{{ $article->view }} {{ trans_choice('dic.view', $article->view) }}</div>
                                             <div class="list__box-item">{{ $article->time_to_read }} {{ trans_choice('dic.minutes', $article->time_to_read) }}</div>
                                         </div>
-                                        <a href="{{ route('articles.show', $article) }}" class="list__box-title">{{ $article->name }}</a>
-                                        <div class="list__box-discription">
+                                        <a href="{{ route('articles.show', $article) }}" class="list__box-title"><span itemprop="headline">{{ $article->name }}</span></a>
+                                        <div class="list__box-discription" itemprop="articleBody">
                                             {{ $article->intro }}
                                         </div>
                                     </div>

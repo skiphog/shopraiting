@@ -7,7 +7,7 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\ReviewShopRequest;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -65,11 +65,11 @@ class ReviewController extends Controller
     }
 
     /**
-     * @param ReviewShopRequest $request
+     * @param ReviewRequest $request
      *
      * @return JsonResponse
      */
-    public function store(ReviewShopRequest $request): JsonResponse
+    public function store(ReviewRequest $request): JsonResponse
     {
         Review::create($request->safe()->all());
 

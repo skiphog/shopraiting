@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @mixin Eloquent
  * @method Builder|Brand positioned()
  * @property-read string $status_text
+ * @property-read string $type_text
  */
 class Brand extends Model
 {
@@ -47,6 +48,11 @@ class Brand extends Model
      * @var string
      */
     protected $table = 'brands';
+
+    /**
+     * @var string
+     */
+    protected string $type_text = 'Бренд';
 
     /**
      * @var array

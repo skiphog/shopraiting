@@ -54,7 +54,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read Coupon[]              $coupons
  * @property-read int|null              $coupons_count
  * @property-read Collection|Category[] $categories
- * @property-read int|null              $categories_count
+ * @property-read string                $type_text
  */
 class Shop extends Model
 {
@@ -74,6 +74,11 @@ class Shop extends Model
      * @var string
      */
     protected $table = 'shops';
+
+    /**
+     * @var string
+     */
+    protected string $type_text = 'Магазин';
 
     /**
      * @var array

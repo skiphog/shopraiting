@@ -35,15 +35,15 @@
                                 </a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('admin.categories.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-list-round"></em></span>
-                                    <span class="nk-menu-text">Категории</span>
+                                <a href="{{ route('admin.brands.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
+                                    <span class="nk-menu-text">Бренды</span>
                                 </a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('admin.reviews.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
-                                    <span class="nk-menu-text">Отзывы</span>
+                                <a href="{{ route('admin.categories.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-list-round"></em></span>
+                                    <span class="nk-menu-text">Категории</span>
                                 </a>
                             </li>
                         </ul>
@@ -67,6 +67,12 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nk-menu-item">
+                        <a href="{{ route('admin.reviews.index') }}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
+                            <span class="nk-menu-text">Отзывы</span>
+                        </a>
                     </li>
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">

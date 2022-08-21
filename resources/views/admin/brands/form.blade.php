@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \App\Models\Shop $shop
+ * @var \App\Models\Brand $brand
  */
 ?>
 @push('style')
@@ -14,8 +14,8 @@
     <nav>
         <ul class="breadcrumb breadcrumb-arrow">
             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Панель</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.shops.index') }}">Магазины</a></li>
-            <li class="breadcrumb-item active">{{ $shop->id ? 'Редактирование' : 'Добавление' }}</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.brands.index') }}">Бренды</a></li>
+            <li class="breadcrumb-item active">{{ $brand->id ? 'Редактирование' : 'Добавление' }}</li>
         </ul>
     </nav>
 
@@ -23,31 +23,26 @@
         <div class="nk-block-between">
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">
-                    {{ $shop->id ? $shop->name : 'Добавить магазин' }}
+                    {{ $brand->id ? $brand->name : 'Добавить бренд' }}
                 </h3>
             </div>
         </div>
     </div>
-    @if($shop->id)
-        <p class="lead">
-            <span>Купоны и акции: {{ $shop->coupons_count }}</span>
-            <span class="icon ni ni-chevrons-right"></span>
-            <a href="{{ route('admin.shops.coupons.edit', $shop) }}">Редактировать</a>
-        </p>
-    @endif
+
     <div class="nk-block">
         <div class="card card-bordered">
             <div class="card-inner">
                 <form class="crutch-validate is-alter"
-                      action="{{ $shop->id ? route('admin.shops.update', $shop) : route('admin.shops.store') }}" method="post">
+                      action="{{ $brand->id ? route('admin.brands.update', $brand) : route('admin.brands.store') }}"
+                      method="post">
                     <div class="row g-gs">
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="form-label" for="name">Название</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="name" name="name"
-                                           value="{{ $shop->name }}"
-                                           placeholder="Крутой магазин" required>
+                                            value="{{ $brand->name }}"
+                                            placeholder="Крутой бренд" required>
                                 </div>
                             </div>
                         </div>
@@ -57,8 +52,8 @@
                                 <div class="form-control-wrap">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="slug" name="slug"
-                                               value="{{ $shop->slug }}"
-                                               placeholder="ЧПУ" required>
+                                                value="{{ $brand->slug }}"
+                                                placeholder="ЧПУ" required>
                                         <div class="input-group-append">
                                             <button id="slug-generate" class="btn btn-outline-primary" type="button">
                                                 <span class="icon ni ni-cpu"></span>
@@ -75,8 +70,8 @@
                                     <select id="activity" class="form-control form-select select2-hidden-accessible"
                                             name="activity" data-placeholder="Выбрать" data-msg="Выберите статус"
                                             required>
-                                        @foreach(array_reverse(\App\Models\Shop::statusList(), true) as $key => $value)
-                                            <option value="{{ $key }}" @selected($key === $shop->activity)>
+                                        @foreach(array_reverse(\App\Models\Brand::statusList(), true) as $key => $value)
+                                            <option value="{{ $key }}" @selected($key === $brand->activity)>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
@@ -92,8 +87,8 @@
                                 <label class="form-label" for="link">Реальная ссылка</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="link" name="link"
-                                           value="{{ $shop->link }}"
-                                           placeholder="https://example.com" required>
+                                            value="{{ $brand->link }}"
+                                            placeholder="https://example.com" required>
                                 </div>
                             </div>
                         </div>
@@ -102,19 +97,18 @@
                                 <label class="form-label" for="pixel">Рекламная ссылка</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="pixel" name="pixel"
-                                           value="{{ $shop->pixel }}"
-                                           placeholder="https://example.com/partner">
+                                            value="{{ $brand->pixel }}"
+                                            placeholder="https://example.com/partner">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-2">
                             <div class="form-group">
-                                <label class="form-label" for="founding_year">Год основания</label>
+                                <label class="form-label" for="country">Страна</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control date-picker" id="founding_year"
-                                           name="founding_year"
-                                           value="{{ $shop->founding_year }}"
-                                           data-date-format="yyyy" data-date-min-view-mode="2" data-date-max-view-mode="2">
+                                    <input type="text" class="form-control" id="country" name="country"
+                                            value="{{ $brand->country }}"
+                                            placeholder="Россия">
                                 </div>
                             </div>
                         </div>
@@ -126,17 +120,15 @@
                                 <label class="form-label" for="description">Описание</label>
                                 <div class="form-control-wrap">
                                     <textarea style="min-height: 120px" class="form-control form-control-sm"
-                                              id="description"
-                                              name="description"
-                                              placeholder="Краткое описание">{{ $shop->description }}</textarea>
+                                            id="description"
+                                            name="description"
+                                            placeholder="Краткое описание">{{ $brand->description }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="advantage">Преимущества</label>
+                                <label class="form-label" for="rooster"></label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="advantage" name="advantage"
-                                           value="{{ $shop->advantage }}"
-                                           placeholder="Преимущества магазина">
+                                    <input type="text" class="form-control" id="rooster" readonly disabled>
                                 </div>
                             </div>
                         </div>
@@ -145,13 +137,13 @@
                                 <label class="form-label">Лого</label>
                                 <!--suppress HtmlFormInputWithoutLabel -->
                                 <input style="visibility:hidden" id="img" type="text" name="img"
-                                       value="{{ $shop->img }}" required
-                                       data-msg="Загрузите картинку">
+                                        value="{{ $brand->img }}" required
+                                        data-msg="Загрузите картинку">
                                 <div class="form-control crutch-dropzone dz-clickable">
                                     <div class="dz-message" data-dz-message>
-                                        @if($shop->id)
+                                        @if($brand->id)
                                             <div id="article-img">
-                                                <img src="{{ $shop->img }}" width="150" height="150" alt="{{ $shop->name }}">
+                                                <img src="{{ $brand->img }}" width="150" height="150" alt="{{ $brand->name }}">
                                             </div>
                                         @endif
                                         <div>
@@ -164,29 +156,15 @@
                             </div>
                         </div>
                     </div>
-					
+
                     <div class="row g-gs">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label" for="rating">Рейтинг</label>
                                 <div class="form-control-wrap">
                                     <input type="number" class="form-control" id="rating" name="rating"
-                                           value="{{ $shop->rating ?? 0 }}"
-                                           readonly disabled>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="cities_cnt">Количество городов</label>
-                                <div class="form-control-wrap">
-                                    <input type="number" class="form-control" id="cities_cnt" name="cities_cnt"
-                                           value="{{ $shop->cities_cnt }}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="delivery_cost">Цена доставки</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="delivery_cost" name="delivery_cost"
-                                           value="{{ $shop->delivery_cost }}">
+                                            value="{{ $brand->rating ?? 0 }}"
+                                            readonly disabled>
                                 </div>
                             </div>
                         </div>
@@ -195,21 +173,7 @@
                                 <label class="form-label" for="hack_rating">Купленный рейтинг</label>
                                 <div class="form-control-wrap">
                                     <input type="number" class="form-control" id="hack_rating" name="hack_rating"
-                                           value="{{ $shop->hack_rating ?? 0 }}" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="brands_cnt">Количество брендов</label>
-                                <div class="form-control-wrap">
-                                    <input type="number" class="form-control" id="brands_cnt" name="brands_cnt"
-                                           value="{{ $shop->brands_cnt }}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="delivery_time">Время доставки</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="delivery_time" name="delivery_time"
-                                           value="{{ $shop->delivery_time }}">
+                                            value="{{ $brand->hack_rating ?? 0 }}" required>
                                 </div>
                             </div>
                         </div>
@@ -218,39 +182,62 @@
                                 <label class="form-label" for="position">Позиция</label>
                                 <div class="form-control-wrap">
                                     <input type="number" class="form-control" id="position" name="position"
-                                           value="{{ $shop->position ?? 1 }}"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="products_cnt">Количество товаров</label>
-                                <div class="form-control-wrap">
-                                    <input type="number" class="form-control" id="products_cnt" name="products_cnt"
-                                           value="{{ $shop->products_cnt }}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="discounts">Скидка</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="discounts" name="discounts"
-                                           value="{{ $shop->discounts }}">
+                                            value="{{ $brand->position ?? 1 }}"
+                                            required>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row g-gs">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_h1">SEO H1</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_h1" name="seo_h1"
+                                            value="{{ $brand->seo_h1 }}"
+                                            placeholder="Крутой бренд">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_title">SEO Title</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_title" name="seo_title"
+                                            value="{{ $brand->seo_title }}"
+                                            placeholder="Крутой бренд">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-gs">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_description">SEO Description</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_description" name="seo_description"
+                                            value="{{ $brand->seo_description }}"
+                                            placeholder="Крутой бренд">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row g-gs">
                         <div class="col-12">
                             <div class="form-group">
                                 <label class="form-label" for="content">Контент</label>
                                 <div class="form-control-wrap">
                                     <textarea style="height: 400px"
-                                              class="form-control form-control-sm summernote-basic" id="content"
-                                              name="content" placeholder="Текст" required>{!! $shop->content !!}</textarea>
+                                            class="form-control form-control-sm summernote-basic" id="content"
+                                            name="content" placeholder="Текст" required>{!! $brand->content !!}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-lg btn-primary">
-                                    {{ $shop->id ? 'Сохранить' : 'Добавить' }}
+                                    {{ $brand->id ? 'Сохранить' : 'Добавить' }}
                                 </button>
                             </div>
                         </div>

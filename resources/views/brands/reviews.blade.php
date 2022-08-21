@@ -72,12 +72,12 @@
                             <div class="offer__main">
                                 <div class="offer__main-wrapper">
                                     <div class="offer__main-text">
-                                        {{ $brand->content }}
+                                        {!! $brand->content !!}
                                     </div>
                                 </div>
                             </div>
-                            @if($reviews->isNotEmpty())
-                                <div class="offer__rating">
+
+                            <div class="offer__rating">
                                 <div class="offer__rating-title">Оценки пользователей</div>
                                 @foreach ($brand->getCounts() as $key => $value)
                                     <div class="offer__rating-box">
@@ -99,11 +99,10 @@
                                     </div>
                                 @endforeach
                             </div>
-                            @endif
                         </div>
-                        @if($reviews->isNotEmpty())
-                            <div id="recall">@include('shops.recall', compact('reviews'))</div>
-                        @endif
+
+                        <div id="recall">@include('shops.recall', compact('reviews'))</div>
+                        @include('reviews.review_brand_form', compact('brand'))
                         <div class="banner js-banner">
                             <picture>
                                 <img src="{{ asset($brand->img) }}" alt="{{ $brand->name }}">
@@ -122,5 +121,31 @@
 @endsection
 
 @push('scripts')
+<!--suppress ES6ConvertVarToLetConst -->
+<script>
+  (function ($) {
+    var recall = $('#recall');
 
+    recall.on('click', '.js-review-type:not(.active)', function () {
+      var _l = $(this).data('link');
+      $.get(_l, function (data) {
+        recall.html(data);
+        window.history.pushState({}, '', _l);
+      });
+    });
+
+    $('#recall').on('click', '.js-review-like', function () {
+      var _this = $(this);
+      var review_id = +_this.data('review');
+      var likes = JSON.parse(window.localStorage.getItem('reviews_likes') || '[]');
+
+      if (!likes.length || !~likes.indexOf(review_id)) {
+        likes.push(review_id);
+        window.localStorage.setItem('reviews_likes', JSON.stringify(likes));
+        _this.attr('data-count', +_this.data('count') + 1);
+        $.post('/reviews/' + review_id + '/like');
+      }
+    });
+  })(jQuery);
+</script>
 @endpush

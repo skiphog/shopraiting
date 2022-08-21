@@ -20,7 +20,7 @@ class AuthComposer
             'user'    => auth()->user(),
             'reviews' => Review::where('activity', 0)
                 ->withoutGlobalScope('activity')
-                ->with(['shop' => static fn($q) => $q->select(['id', 'name'])->withoutGlobalScope('activity')])
+                ->with(['product' => static fn($q) => $q->select(['id', 'name'])->withoutGlobalScope('activity')])
                 ->oldest('id')
                 ->get(),
 

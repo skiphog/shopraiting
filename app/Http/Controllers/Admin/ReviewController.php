@@ -15,11 +15,11 @@ class ReviewController extends Controller
     {
         $mod_reviews = Review::where('activity', 0)
             ->withoutGlobalScope('activity')
-            ->with(['shop' => static fn($q) => $q->select(['id', 'name'])->withoutGlobalScope('activity')])
+            ->with(['product' => static fn($q) => $q->select(['id', 'name'])->withoutGlobalScope('activity')])
             ->latest('id')
             ->get();
 
-        $reviews = Review::with(['shop' => static fn($q) => $q->select(['id', 'name'])->withoutGlobalScope('activity')])
+        $reviews = Review::with(['product' => static fn($q) => $q->select(['id', 'name'])->withoutGlobalScope('activity')])
             ->latest('id')
             ->paginate(20);
 
@@ -30,7 +30,7 @@ class ReviewController extends Controller
     {
         $review = Review::withoutGlobalScope('activity')
             ->where('id', $review_id)
-            ->with(['shop' => static fn($q) => $q->withoutGlobalScope('activity')->withCount('reviews')])
+            ->with(['product' => static fn($q) => $q->withoutGlobalScope('activity')->withCount('reviews')])
             ->firstOrFail();
 
         return view('admin.reviews.edit', compact('review'));
@@ -70,7 +70,7 @@ class ReviewController extends Controller
         $reviews = Review::withoutGlobalScope('activity')
             ->where('author_name', 'like', "%{$request['token']}%")
             ->orWhere('content', 'like', "%{$request['token']}%")
-            ->orWhereHas('shop', static fn($q) => $q->where('name', 'like', "%{$request['token']}%"))
+            ->orWhereHas('product', static fn($q) => $q->where('name', 'like', "%{$request['token']}%"))
             ->take(30)
             ->get();
 

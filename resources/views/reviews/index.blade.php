@@ -32,7 +32,7 @@
                 <div class="content">
                     <div class="main-content">
                         <div id="content">@include('reviews.recall', compact('reviews', 'current_slug'))</div>
-                        @include('reviews.review_form', ['shop' => new \App\Models\Shop()])
+                        @include('reviews.review_shop_form', ['shop' => new \App\Models\Shop()])
                     </div>
                     @include('partials.slider')
                 </div>

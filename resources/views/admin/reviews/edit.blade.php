@@ -7,8 +7,8 @@
 ?>
 @extends('layouts.admin')
 
-@section('title', "Отзыв: «{$review->shop->name}»")
-@section('description', "Отзыв: «{$review->shop->name}»")
+@section('title', "Отзыв: «{$review->product->name}»")
+@section('description', "Отзыв: «{$review->product->name}»")
 
 @section('content')
     <nav>
@@ -22,7 +22,7 @@
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Отзыв о «{{ $review->shop->name }}»</h3>
+                <h3 class="nk-block-title page-title">Отзыв о «{{ $review->product->name }}»</h3>
             </div>
         </div>
     </div>
@@ -31,26 +31,27 @@
         <div class="row g-gs">
             <div class="col-xxl-3 col-lg-4">
                 <div class="card card-bordered product-card">
+                    <h5 class="card-header center">{{ $review->product->type_text }}</h5>
                     <div class="product-thumb">
-                        <a class="d-flex justify-center mt-3" href="{{ route('admin.shops.edit', $review->shop) }}">
-                            <img class="img-thumbnail" src="{{ $review->shop->img }}" width="170" alt="">
+                        <a class="d-flex justify-center mt-3" href="{{ route('admin.shops.edit', $review->product) }}">
+                            <img class="img-thumbnail" src="{{ $review->product->img }}" width="170" alt="">
                         </a>
                     </div>
                     <div class="card-inner text-center">
                         <h5 class="product-title">
-                            <a href="{{ route('admin.shops.edit', $review->shop) }}">
-                                {{ $review->shop->name }}
+                            <a href="{{ route('admin.shops.edit', $review->product) }}">
+                                {{ $review->product->name }}
                             </a>
                         </h5>
 
                         <div class="product-rating justify-content-center">
                             <ul class="rating">
                                 @foreach($stars = range(1,10) as $star)
-                                    @if($review->shop->rating_value >= $star)
+                                    @if($review->product->rating_value >= $star)
                                         <li><em class="icon ni ni-star-fill"></em></li>
-                                    @elseif($review->shop->rating_value >= ($star - 0.5))
+                                    @elseif($review->product->rating_value >= ($star - 0.5))
                                         <li><em class="icon ni ni-star-half-fill"></em></li>
-                                    @elseif($review->shop->rating_value >= ($star - 0.9))
+                                    @elseif($review->product->rating_value >= ($star - 0.9))
                                         <li><em class="icon ni ni-star-half"></em></li>
                                     @else
                                         <li><em class="icon ni ni-star text-soft"></em></li>
@@ -60,17 +61,17 @@
                         </div>
                         <div class="amount">
                             <h5>
-                                @if($review->shop->rating !== $review->shop->rating_value)
+                                @if($review->product->rating !== $review->product->rating_value)
                                     <span class="text-gray">
-                                        {{ number_format($review->shop->rating, 1, ',', ' ') }}
+                                        {{ number_format($review->product->rating, 1, ',', ' ') }}
                                     </span>
                                     <>
                                 @endif
-                                <span class="text-azure">{{ $review->shop->rating_value_format }}</span>
+                                <span class="text-azure">{{ $review->product->rating_value_format }}</span>
                             </h5>
                             <div>
-                                ({{ $review->shop->reviews_count }}
-                                {{ trans_choice('dic.review', $review->shop->reviews_count) }})
+                                ({{ $review->product->reviews_count }}
+                                {{ trans_choice('dic.review', $review->product->reviews_count) }})
                             </div>
                         </div>
                     </div>
