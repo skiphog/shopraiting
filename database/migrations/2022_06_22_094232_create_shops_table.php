@@ -19,6 +19,15 @@ return new class extends Migration {
             $table->string('img')->nullable();
             $table->string('link');
             $table->string('pixel');
+
+            $table->string('seo_h1');
+            $table->string('seo_title');
+            $table->string('seo_description');
+
+            $table->string('seo_h1_reviews');
+            $table->string('seo_title_reviews');
+            $table->string('seo_description_reviews');
+
             $table->string('advantage')->default('');
             $table->string('description', 500)->default('');
             $table->json('contents');

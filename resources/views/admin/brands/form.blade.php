@@ -108,7 +108,7 @@
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="country" name="country"
                                             value="{{ $brand->country }}"
-                                            placeholder="Россия">
+                                            placeholder="Россия" required>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                     <textarea style="min-height: 120px" class="form-control form-control-sm"
                                             id="description"
                                             name="description"
-                                            placeholder="Краткое описание">{{ $brand->description }}</textarea>
+                                            placeholder="Краткое описание" required>{{ $brand->description }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -196,7 +196,7 @@
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="seo_h1" name="seo_h1"
                                             value="{{ $brand->seo_h1 }}"
-                                            placeholder="Крутой бренд">
+                                            placeholder="Крутой бренд" required>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="seo_title" name="seo_title"
                                             value="{{ $brand->seo_title }}"
-                                            placeholder="Крутой бренд">
+                                            placeholder="Крутой бренд" required>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="seo_description" name="seo_description"
                                             value="{{ $brand->seo_description }}"
-                                            placeholder="Крутой бренд">
+                                            placeholder="Крутой бренд" required>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +259,7 @@
         const img = $('#img');
 
         const options = {
-          url: '{{ route('services.upload.shop') }}',
+          url: '{{ route('services.upload.base') }}',
           maxFiles: 1,
           thumbnailWidth: 150,
           thumbnailHeight: 150,

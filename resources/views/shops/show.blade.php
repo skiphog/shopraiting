@@ -7,8 +7,8 @@
 ?>
 @extends('layouts.app')
 
-@section('title', "Секс шоп «{$shop->name}» – честный обзор, отзывы, акции и скидки")
-@section('description', "Секс шоп «{$shop->name}» – информация о компании, ассортимент товаров, как получить скидку, варианты оплаты, способы доставки, контакты магазинов и отзывы!")
+@section('title', $shop->seo_title)
+@section('description', $shop->seo_description)
 
 @push('styles')
     <link rel="stylesheet" href="/css/sidebar.css">
@@ -25,7 +25,7 @@
         <div class="inner-back">
             <div class="wrap">
                 @include('partials.breadcrumbs', ['data' => [['link' => route('shops.index'), 'title' => 'Магазины'], ['link' => '', 'title' => $shop->name]]])
-                <h1>Секс шоп «{{ $shop->name }}» отзывы</h1>
+                <h1>{{ $shop->seo_h1 }}</h1>
                 <div class="content">
                     <aside class="sidebar">
                         <div class="sidebar__item overview__sidebar-item sticky-sidebar__item">

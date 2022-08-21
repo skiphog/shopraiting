@@ -42,31 +42,38 @@ class ShopRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'string', 'min:3', 'max:250'],
-            'slug'          => [
+            'name' => ['required', 'string', 'min:3', 'max:250'],
+            'slug' => [
                 'required',
                 'string',
                 'min:3',
                 'max:250',
                 Rule::unique('shops')->ignore($this->route('shop_id'))
             ],
-            'img'           => ['string', 'max:250'],
-            'link'          => ['required', 'string', 'max:250', 'url'],
-            'pixel'         => ['required', 'string', 'max:250', 'url'],
-            'advantage'     => ['string', 'max:250'],
-            'description'   => ['string', 'max:500'],
-            'contents'      => ['array'],
-            'content'       => ['required', 'string'],
-            'hack_rating'   => ['numeric', 'max:10'],
-            'position'      => ['integer'],
-            'cities_cnt'    => ['nullable', 'integer', 'min:1'],
-            'brands_cnt'    => ['nullable', 'integer', 'min:1'],
-            'products_cnt'  => ['nullable', 'integer', 'min:1'],
-            'delivery_cost' => ['nullable', 'string', 'max:250'],
-            'delivery_time' => ['nullable', 'string', 'max:250'],
-            'discounts'     => ['nullable', 'string', 'max:250'],
-            'founding_year' => ['nullable', 'string', 'date_format:Y'],
-            'activity'      => ['required', 'integer', Rule::in(Shop::$status)],
+
+            'img'                     => ['string', 'max:250'],
+            'link'                    => ['required', 'string', 'max:250', 'url'],
+            'pixel'                   => ['required', 'string', 'max:250', 'url'],
+            'seo_h1'                  => ['required', 'string', 'max:250'],
+            'seo_title'               => ['required', 'string', 'max:250'],
+            'seo_description'         => ['required', 'string', 'max:250'],
+            'seo_h1_reviews'          => ['required', 'string', 'max:250'],
+            'seo_title_reviews'       => ['required', 'string', 'max:250'],
+            'seo_description_reviews' => ['required', 'string', 'max:250'],
+            'advantage'               => ['string', 'max:250'],
+            'description'             => ['string', 'max:500'],
+            'contents'                => ['array'],
+            'content'                 => ['required', 'string'],
+            'hack_rating'             => ['numeric', 'max:10'],
+            'position'                => ['integer'],
+            'cities_cnt'              => ['nullable', 'integer', 'min:1'],
+            'brands_cnt'              => ['nullable', 'integer', 'min:1'],
+            'products_cnt'            => ['nullable', 'integer', 'min:1'],
+            'delivery_cost'           => ['nullable', 'string', 'max:250'],
+            'delivery_time'           => ['nullable', 'string', 'max:250'],
+            'discounts'               => ['nullable', 'string', 'max:250'],
+            'founding_year'           => ['nullable', 'string', 'date_format:Y'],
+            'activity'                => ['required', 'integer', Rule::in(Shop::$status)],
         ];
     }
 }

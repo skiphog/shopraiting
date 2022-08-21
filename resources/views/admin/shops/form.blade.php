@@ -103,7 +103,7 @@
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="pixel" name="pixel"
                                            value="{{ $shop->pixel }}"
-                                           placeholder="https://example.com/partner">
+                                           placeholder="https://example.com/partner" required>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +164,77 @@
                             </div>
                         </div>
                     </div>
-					
+
+                    <div class="row g-gs">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_h1">SEO H1</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_h1" name="seo_h1"
+                                            value="{{ $shop->seo_h1 }}"
+                                            placeholder="Крутой магазин" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_title">SEO Title</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_title" name="seo_title"
+                                            value="{{ $shop->seo_title }}"
+                                            placeholder="Крутой магазин" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-gs">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_description">SEO Description</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_description" name="seo_description"
+                                            value="{{ $shop->seo_description }}"
+                                            placeholder="Крутой магазин" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-gs">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_h1_reviews">SEO H1 на странице отзывов</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_h1_reviews" name="seo_h1_reviews"
+                                            value="{{ $shop->seo_h1_reviews }}"
+                                            placeholder="Крутые отзывы магазина" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_title_reviews">SEO Title на странице отзывов</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_title_reviews" name="seo_title_reviews"
+                                            value="{{ $shop->seo_title_reviews }}"
+                                            placeholder="Крутые отзывы магазина" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-gs">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="seo_description_reviews">SEO Description на странице отзывов</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="seo_description_reviews" name="seo_description_reviews"
+                                            value="{{ $shop->seo_description_reviews }}"
+                                            placeholder="Крутые отзывы магазина" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row g-gs">
                         <div class="col-md-4">
                             <div class="form-group">

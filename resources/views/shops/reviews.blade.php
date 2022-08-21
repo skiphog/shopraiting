@@ -8,8 +8,8 @@
 ?>
 @extends('layouts.app')
 
-@section('title', "Секс шоп «{$shop->name}» – Реальные отзывы покупателей")
-@section('description', "Мы собрали для вас только настоящие отзывы от реальных покупателей о секс шопе «{$shop->name}». Поэтому прежде чем делать покупку - изучите мнения клиентов!")
+@section('title', $shop->seo_title_reviews)
+@section('description', $shop->seo_description_reviews)
 
 @section('og_image')
     <meta property="og:image" content="{{ asset($shop->img) }}">
@@ -35,7 +35,7 @@
                     ['link' => route('shops.show', $shop), 'title' => $shop->name],
                     ['link' => '', 'title' => "Отзывы о {$shop->name}"]
                 ]])
-                <h1>Отзывы покупателей секс-шопа «{{ $shop->name }}»</h1>
+                <h1>{{ $shop->seo_h1_reviews }}</h1>
                 <div class="content">
                     <div class="main-content">
                         <div class="offer">

@@ -25,6 +25,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string|null                $img
  * @property string                     $link
  * @property string                     $pixel
+ * @property string                     $seo_h1
+ * @property string                     $seo_title
+ * @property string                     $seo_description
+ * @property string                     $seo_h1_reviews
+ * @property string                     $seo_title_reviews
+ * @property string                     $seo_description_reviews
  * @property string                     $advantage
  * @property string                     $description
  * @property mixed                      $contents

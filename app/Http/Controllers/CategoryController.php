@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
         $reviews = Review::whereIn('product_id', $shops->pluck('id'))
             ->whereMorphedTo('product', Shop::class)
-            ->with('post')
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 
@@ -39,10 +39,10 @@ class CategoryController extends Controller
             ->positioned()
             ->get();
 
-        $reviews = Review::whereIn('post_id', $shops->pluck('id'))
-            ->whereMorphedTo('post', Shop::class)
+        $reviews = Review::whereIn('product_id', $shops->pluck('id'))
+            ->whereMorphedTo('product', Shop::class)
             ->filter($filter)
-            ->with('shop')
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 
@@ -64,7 +64,7 @@ class CategoryController extends Controller
         $reviews = $shop->reviews()
             ->filter($filter)
             ->latest('id')
-            ->with('shop')
+            ->with('product:id,slug,name')
             ->take(2)
             ->get();
 
