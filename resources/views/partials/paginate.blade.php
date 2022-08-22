@@ -6,9 +6,9 @@
 
 ?>
 @if ($paginator->hasPages())
-    @if(request()->getQueryString())
+   {{-- @if(request()->getQueryString())
         @section('canonical', $paginator->path())
-    @endif
+    @endif--}}
     <div class="pagination">
         @foreach ($elements as $element)
             {{-- Array Of Links --}}

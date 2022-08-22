@@ -6,6 +6,9 @@
     RewriteEngine On
     RewriteBase /
 
+    RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+    RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -13,7 +16,17 @@
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    RewriteRule ^(.*)/$ https://sexshoprating.test-this.ru/$1 [R=301,L]
+
+    # Убираем лишние слеши
+    RewriteCond %{REQUEST_URI} ^(.*?)\/{2,}(.*?)$
+    RewriteRule . %1/%2 [L,R=301]
+    RewriteCond %{THE_REQUEST} //
+    RewriteRule .* https://sexshoprating.test-this.ru/$0 [R=301,L]
+
+    # Удалить index.php из URL.
+    #RewriteCond %{REQUEST_URI} ^(.*)/index\.php$
+    #RewriteRule ^(.*)$ https://sexshoprating.test-this.ru/%1 [R=301,L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
