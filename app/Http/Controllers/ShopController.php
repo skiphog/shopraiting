@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
+use Illuminate\Support\Facades\Cache;
 
 class ShopController extends Controller
 {
@@ -24,7 +26,9 @@ class ShopController extends Controller
             ->loadCount('reviews')
             ->load(['reviews' => static fn($q) => $q->take(2)->latest('id')->with('product:id,slug,name')]);
 
-        return view('shops.show', compact('shop'));
+        $banners = Cache::rememberForever('banners', static fn() => Banner::all());
+
+        return view('shops.show', compact('shop', 'banners'));
     }
 
     public function reviews(Shop $shop, Request $request, ReviewFilter $filter)
