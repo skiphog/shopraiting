@@ -33,6 +33,24 @@ class ServiceController extends Controller
         }
     }
 
+    public function uploadBanner(): JsonResponse
+    {
+        try {
+            $image = ImageUploader::from('file')
+                ->setMaxWidth(960)
+                ->bestFit(960, 800)
+                ->saveWithoutGeneralSave('upload');
+
+            return response()->json([
+                'path'   => $image->getPath(),
+                'width'  => $image->getWidth(),
+                'height' => $image->getHeight()
+            ]);
+        } catch (Throwable $e) {
+            return response()->json(['error' => $e->getMessage()], 422);
+        }
+    }
+
     public function uploadBase(): JsonResponse
     {
         try {

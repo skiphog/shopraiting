@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
@@ -51,6 +52,23 @@ Route::group(['prefix' => 'brands', 'as' => 'brands.', 'middleware' => []], stat
         ->name('update');
     Route::post('/{brand_id}/destroy', [BrandController::class, 'destroy'])
         ->whereNumber('brand_id')
+        ->name('destroy');
+});
+Route::group(['prefix' => 'banners', 'as' => 'banners.', 'middleware' => []], static function () {
+    Route::get('/', [BannerController::class, 'index'])
+        ->name('index');
+    Route::get('/create', [BannerController::class, 'create'])
+        ->name('create');
+    Route::post('/create', [BannerController::class, 'store'])
+        ->name('store');
+    Route::get('/{banner_id}/edit', [BannerController::class, 'edit'])
+        ->whereNumber('banner_id')
+        ->name('edit');
+    Route::post('/{banner_id}/edit', [BannerController::class, 'update'])
+        ->whereNumber('banner_id')
+        ->name('update');
+    Route::post('/{banner_id}/destroy', [BannerController::class, 'destroy'])
+        ->whereNumber('banner_id')
         ->name('destroy');
 });
 Route::group(['prefix' => 'categories', 'as' => 'categories.', 'middleware' => []], static function () {
@@ -140,6 +158,7 @@ Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => []], 
 Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
     Route::get('/shops', [ShopController::class, 'search'])->name('shops');
     Route::get('/brands', [BrandController::class, 'search'])->name('brands');
+    Route::get('/banners', [BannerController::class, 'search'])->name('banners');
     Route::get('/reviews', [ReviewController::class, 'search'])->name('review');
     Route::get('/articles', [ArticleController::class, 'search'])->name('articles');
     Route::get('/users', [UserController::class, 'search'])->name('users');

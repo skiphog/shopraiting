@@ -16,5 +16,7 @@ Route::group(['prefix' => 'services', 'as' => 'services.'], static function () {
             ->name('base');
         Route::post('/shop', [ServiceController::class, 'uploadShopLogo'])
             ->name('shop');
+        Route::post('/banner', [ServiceController::class, 'uploadBanner'])
+            ->name('banner');
     });
 });

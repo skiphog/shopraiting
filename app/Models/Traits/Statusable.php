@@ -44,6 +44,15 @@ trait Statusable
     }
 
     /**
+     * @return bool
+     * @noinspection PhpUnused
+     */
+    public function isActivity(): bool
+    {
+        return $this->activity === static::$status['active'];
+    }
+
+    /**
      * @return Attribute
      * @noinspection PhpUnused
      */
