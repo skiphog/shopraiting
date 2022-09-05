@@ -84,7 +84,7 @@
 
                         <div class="col-6">
                             <div class="form-group">
-                                <label class="form-label">Картинки</label>
+                                <label class="form-label">Изображение</label>
                                 <!--suppress HtmlFormInputWithoutLabel -->
                                 <input style="visibility:hidden" id="path" type="text" name="path"
                                         value="{{ $banner->path }}" required

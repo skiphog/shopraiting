@@ -26,7 +26,7 @@
                             <div class="nk-tb-col">
                                 <span>{{ $banner->link }}</span>
                             </div>
-                            <div class="nk-tb-col {{ $banner->isActivity() ? 'text-success' : 'text-danger' }}">
+                            <div class="nk-tb-col {{ $banner->isActivity() ? 'text-success' : 'text-danger' }} text-right">
                                 <span>{{ $banner->status_text }}</span>
                             </div>
                         </div>

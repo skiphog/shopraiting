@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
-    <meta name="description" content="@yield('description')">
+    <title>@yield('title')@yield('paginate')</title>
+    <meta name="description" content="@yield('description')@yield('paginate')">
     @hasSection('canonical')
         <link rel="canonical" href="@yield('canonical')">
     @endif
@@ -30,7 +30,7 @@
 @includeWhen(app()->isProduction(), 'layouts.metrics.google_tag_iframe')
 <header class="header">
     <div class="header__box">
-        <a class="header__logo" href="/">
+        <a class="header__logo" {!! !request()->routeIs('index') ? 'href="/"': '' !!}>
             <picture>
                 <source media="(min-width: 960px )" srcset="/img/logo.svg">
                 <img src="/img/logo.svg" alt="{{ config('app.name') }}">

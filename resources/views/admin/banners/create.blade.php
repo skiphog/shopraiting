@@ -7,7 +7,7 @@
 ?>
 @extends('layouts.admin')
 
-@section('title', 'Добавить Банер')
-@section('description', 'Добавить Банер')
+@section('title', 'Добавить баннер')
+@section('description', 'Добавить баннер')
 
 @include('admin.banners.form', compact('banner'))
