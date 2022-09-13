@@ -102,7 +102,9 @@ class Article extends Model
     protected function rating(): Attribute
     {
         return Attribute::make(
-            get: static fn($value, $attributes) => $attributes['star_sum'] / $attributes['star_count']
+            get: static function ($value, $attributes) {
+                return $attributes['star_sum'] / ($attributes['star_count'] ?: 1);
+            }
         );
     }
 
