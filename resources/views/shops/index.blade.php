@@ -25,7 +25,7 @@
                         <div class="popularity">
                             <h2>Сексшопы</h2>
                             <div class="popularity__box">
-                                @foreach ($shops->chunk(floor($shops->count() / 3)) as $chunk)
+                                @foreach ($shops->chunk(ceil($shops->count() / 3)) as $chunk)
                                     <div class="popularity__box-wrap">
                                         <div class="popularity__item">
                                             @foreach ($chunk as $shop)
