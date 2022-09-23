@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: /
+
+Sitemap: https://sexshoprating.ru/sitemap.xml
+Crawl-delay: 10
+Host: https://sexshoprating.ru

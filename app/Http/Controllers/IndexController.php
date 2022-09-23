@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use App\Models\Review;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Filters\ReviewFilter;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
@@ -24,7 +26,9 @@ class IndexController extends Controller
             ->take(2)
             ->get();
 
-        return view('index', compact('shops', 'reviews', 'category'));
+        $banners = Cache::rememberForever('banners', static fn() => Banner::all());
+
+        return view('index', compact('shops', 'reviews', 'category', 'banners'));
     }
 
     /**

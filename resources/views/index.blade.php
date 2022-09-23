@@ -4,6 +4,7 @@
  * @var \App\Models\Shop[]   $shops
  * @var \App\Models\Review[] $reviews
  * @var \App\Models\Category $category
+ * @var \App\Models\Banner[] $banners
  */
 
 ?>
@@ -24,14 +25,7 @@
 @section('content')
     <main class="main">
         <div class="wrap">
-            {{-- Banner => управление баннером тоже бы в админку --}}
-            <div class="banner-wrapper">
-                <a href="https://go.acstat.com/2302cd986ee84c90" target="_blank" rel="noopener noreferrer">
-                    <img src="/img/banner.jpg" width="875" height="240" alt="">
-                </a>
-            </div>
-            {{-- // Banner --}}
-
+            @include('partials.banners', compact('banners'))
             <h1>{{ $category->seo_h1 ?: $category->name }}</h1>
 
             @if(!empty($category->before_content))

@@ -25,16 +25,7 @@
     <main class="main">
         <div class="inner-back">
             <div class="wrap">
-                @if($banners->isNotEmpty())
-                    @foreach($banners as $banner)
-                        <div class="banner-wrapper">
-                            <a href="{{ url($banner->link) }}" target="_blank" rel="noopener noreferrer">
-                                <img src="{{ asset($banner->path) }}" alt="{{ $banner->name }}">
-                            </a>
-                        </div>
-                    @endforeach
-                @endif
-
+                @include('partials.banners', compact('banners'))
                 @include('partials.breadcrumbs', ['data' => [['link' => route('shops.index'), 'title' => 'Магазины'], ['link' => '', 'title' => $shop->name]]])
                 <h1>{{ $shop->seo_h1 }}</h1>
                 <div class="content">

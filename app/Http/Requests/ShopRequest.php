@@ -52,7 +52,7 @@ class ShopRequest extends FormRequest
             ],
 
             'img'                     => ['string', 'max:250'],
-            'link'                    => ['required', 'string', 'max:250', 'url'],
+            'link'                    => ['required', 'string', 'max:250'],
             'pixel'                   => ['required', 'string', 'max:250', 'url'],
             'seo_h1'                  => ['required', 'string', 'max:250'],
             'seo_title'               => ['required', 'string', 'max:250'],
