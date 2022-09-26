@@ -145,7 +145,7 @@
                                 @endif
                             </div>
                         </div>
-                        @include('shops.coupons', ['coupons' => $shop->coupons])
+                        @include('shops.coupons', ['shop' => $shop])
                         @include('partials.contents', ['contents' => $shop->contents])
                         <div class="page-article text">
                             {!! $shop->content !!}

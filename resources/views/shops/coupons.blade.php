@@ -1,9 +1,10 @@
 <?php
 
 /**
- * @var \App\Models\Coupon[] $coupons
+ * @var \App\Models\Shop $shop
  */
 
+$coupons = $shop->coupons;
 ?>
 
 @if($coupons->isNotEmpty())
@@ -75,7 +76,7 @@
                 </div>
             </div>
             <div class="coupons-and-promotions__modal-link-wrapper">
-                <a class="coupons-and-promotions__modal-link-button btn" href="#" target="_blank" rel="noopener noreferrer">Перейти на сайт</a>
+                <a class="coupons-and-promotions__modal-link-button btn" href="{{ url($shop->pixel) }}" target="_blank" rel="noopener noreferrer">Перейти на сайт</a>
             </div>
         </div>
     </div>
