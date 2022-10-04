@@ -36,7 +36,7 @@
                                         <!--width 40px height 40px-->
                                         <div class="reply__box-title">Ответ от администрации {{ config('app.name')  }}</div>
                                     </div>
-                                    <div class="reply__box-text" itemprop="text">{{ $question->answer }}</div>
+                                    <div class="reply__box-text" itemprop="text">{!! nl2br(e($question->answer)) !!}</div>
                                 </div>
                             </div>
                             <div class="block">

@@ -67,11 +67,11 @@
             <a class="footer__nav-link" href="{{ route('questions.index') }}">Вопросы</a>
             <a class="footer__nav-link" href="{{ route('authors') }}">Авторы</a>
             <a class="footer__nav-link" href="{{ route('about') }}">О нас</a>
-            @auth
+            {{--@auth
                 <a class="footer__nav-link" href="/cabinet">Кабинет</a>
             @else
                 <a class="footer__nav-link" href="/auth">Войти</a>
-            @endauth
+            @endauth--}}
         </nav>
 
         <div class="footer__text">
