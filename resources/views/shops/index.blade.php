@@ -13,6 +13,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="/css/popularity.css">
+    <link rel="stylesheet" href="/css/select2.css">
 @endpush
 
 @section('content')

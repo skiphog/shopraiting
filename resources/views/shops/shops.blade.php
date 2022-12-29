@@ -9,12 +9,12 @@
 <div class="text">
     <div class="popularity">
         <h2>Сексшопы {{ $cities->firstWhere('slug', $request_city = request('city'))?->name }}</h2>
-        <div style="display: flex; justify-content: space-between;">
-            <div>Всего {{ $cnt = $shops->count() }} {{ trans_choice('dic.shops', $cnt) }}</div>
-            <div style="display: flex;">
+        <div class="popularity__filter-block">
+            <div class="popularity__total">Всего {{ $cnt = $shops->count() }} {{ trans_choice('dic.shops', $cnt) }}</div>
+            <div class="popularity__filter">
                 <label for="city">Город</label>
-                <div style="margin-left: 10px;">
-                    <select name="city" id="city" style="outline: 0; border-radius: 4px;border: 1px solid #d6d6d6;">
+                <div class="popularity__divider">
+                    <select class="popularity__select js-popularity-select" name="city" id="city">
                         <option value="{{ route('shops.index') }}">Все</option>
                         @foreach($cities as $city)
                             <option value="{{ route('shops.index', ['city' => $city->slug]) }}"
@@ -26,7 +26,7 @@
         </div>
         @if($shops->isNotEmpty())
             <div class="popularity__box">
-                @foreach ($shops->chunk(ceil($shops->count() / 3)) as $chunk)
+                @foreach ($shops->chunk(ceil($cnt / 3)) as $chunk)
                     <div class="popularity__box-wrap">
                         <div class="popularity__item">
                             @foreach ($chunk as $shop)
