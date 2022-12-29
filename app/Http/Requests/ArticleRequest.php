@@ -43,6 +43,8 @@ class ArticleRequest extends FormRequest
                 Rule::unique('articles')->ignore($this->route('article_id'))
             ],
             'img'             => ['string', 'max:250'],
+            'img_alt'         => ['string', 'max:250'],
+            'img_title'       => ['string', 'max:250'],
             'intro'           => ['string', 'max:500'],
             'contents'        => ['array'],
             'before_content'  => ['string'],

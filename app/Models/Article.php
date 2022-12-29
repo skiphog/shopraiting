@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string      $name
  * @property string      $slug
  * @property string|null $img
+ * @property string|null $img_alt
+ * @property string|null $img_title
  * @property string      $intro
  * @property array       $contents
  * @property string      $before_content

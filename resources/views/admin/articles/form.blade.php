@@ -140,14 +140,30 @@ use App\Models\User;
                                            placeholder="" required>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-6">
                             <div class="form-group">
                                 <label class="form-label" for="seo_description">СЕО Description</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="seo_description" name="seo_description"
                                            value="{{ $article->seo_description }}"
                                            placeholder="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="img_alt">Alt</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="img_alt" name="img_alt"
+                                           value="{{ $article->img_alt }}"
+                                           placeholder="" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="img_title">Title</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="img_title" name="img_title"
+                                            value="{{ $article->img_title }}"
+                                            placeholder="" required>
                                 </div>
                             </div>
                         </div>

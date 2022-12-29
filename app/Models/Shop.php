@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Eloquent;
+use App\Filters\ShopFilter;
 use Illuminate\Support\Carbon;
 use App\Models\Traits\Ratings;
 use App\Models\Traits\Statusable;
@@ -53,7 +54,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Carbon|null                $updated_at
  * @property int                        $activity
  * @mixin Eloquent
- * @method Builder|Shop positioned()
+ * @method Builder|Shop                 positioned()
+ * @method Builder                      filter($filter)
  * @property-read string                $status_text
  * @property-read Review[]              $reviews
  * @property-read int|null              $reviews_count
@@ -127,6 +129,18 @@ class Shop extends Model
     }
 
     /**
+     * @param Builder    $builder
+     * @param ShopFilter $filter
+     *
+     * @return Builder
+     * @noinspection PhpUnused
+     */
+    public function scopeFilter(Builder $builder, ShopFilter $filter): Builder
+    {
+        return $filter->apply($builder);
+    }
+
+    /**
      * @return HasMany
      */
     public function coupons(): HasMany
@@ -140,6 +154,14 @@ class Shop extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_shop', 'shop_id', 'category_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function cities(): BelongsToMany
+    {
+        return $this->belongsToMany(City::class, 'city_shop', 'shop_id', 'city_id');
     }
 
     /**

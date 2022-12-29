@@ -28,7 +28,7 @@
                                 <div class="list__box" itemscope itemtype="https://schema.org/BlogPosting">
                                     <a href="{{ route('articles.show', $article) }}" class="list__box-link" itemprop="url">
                                         <picture>
-                                            <img class="list__box-image" src="{{ asset($article->img) }}" alt="{{ $article->name }}" itemprop="image">
+                                            <img class="list__box-image" src="{{ asset($article->img) }}" alt="{{ $article->img_alt }}" title="{{ $article->img_title }}" itemprop="image">
                                         </picture>
                                     </a>
                                     <div class="list__box-main">

@@ -42,7 +42,7 @@
                         <div class="main-content">
                             <div class="article" itemprop="articleBody">
                                 <picture>
-                                    <img class="article__header-image" src="{{ asset($article->img) }}" alt="art" itemprop="image">
+                                    <img class="article__header-image" src="{{ asset($article->img) }}" alt="{{ $article->img_alt }}" title="{{ $article->img_title }}" itemprop="image">
                                 </picture>
                                 <div class="article__discription">{!! $article->before_content !!}</div>
                                 @include('partials.contents', ['contents' => $article->contents])

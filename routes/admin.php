@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CityController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'shops', 'as' => 'shops.', 'middleware' => []], static function () {
@@ -83,6 +84,20 @@ Route::group(['prefix' => 'categories', 'as' => 'categories.', 'middleware' => [
     Route::post('/{category}/edit', [CategoryController::class, 'update'])
         ->name('update');
     Route::post('/{category}/destroy', [CategoryController::class, 'destroy'])
+        ->name('destroy');
+});
+Route::group(['prefix' => 'cities', 'as' => 'cities.', 'middleware' => []], static function () {
+    Route::get('/', [CityController::class, 'index'])
+        ->name('index');
+    Route::get('/create', [CityController::class, 'create'])
+        ->name('create');
+    Route::post('/create', [CityController::class, 'store'])
+        ->name('store');
+    Route::get('/{city}/edit', [CityController::class, 'edit'])
+        ->name('edit');
+    Route::post('/{city}/edit', [CityController::class, 'update'])
+        ->name('update');
+    Route::post('/{city}/destroy', [CityController::class, 'destroy'])
         ->name('destroy');
 });
 Route::group(['prefix' => 'reviews', 'as' => 'reviews.', 'middleware' => []], static function () {
@@ -165,4 +180,5 @@ Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
     Route::get('/comments', [CommentController::class, 'search'])->name('comments');
     Route::get('/questions', [QuestionController::class, 'search'])->name('questions');
     Route::get('/categories', [CategoryController::class, 'search'])->name('categories');
+    Route::get('/cities', [CityController::class, 'search'])->name('cities');
 });

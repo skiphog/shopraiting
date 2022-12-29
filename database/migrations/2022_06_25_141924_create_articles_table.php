@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('slug');
             $table->string('img')->nullable();
+            $table->string('img_alt')->nullable();
+            $table->string('img_title')->nullable();
 
             $table->string('intro', 500)->default('');
             $table->json('contents');

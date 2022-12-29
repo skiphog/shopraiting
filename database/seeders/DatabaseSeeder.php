@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             CategorySeeder::class,
             CouponSeeder::class,
+            CitySeeder::class,
         ]);
 
         //Storage::deleteDirectory('upload');

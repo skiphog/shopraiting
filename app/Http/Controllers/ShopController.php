@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\City;
 use App\Models\Banner;
+use App\Filters\ShopFilter;
 use Illuminate\Http\Request;
 use App\Filters\ReviewFilter;
 use Illuminate\Support\Facades\Cache;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index(Request $request, ShopFilter $filter)
     {
+        $cities = City::all();
+
         $shops = Shop::select(['id', 'name', 'slug'])
             ->positioned()
+            ->filter($filter)
             ->get();
 
-        return view('shops.index', compact('shops'));
+        if ($request->ajax()) {
+            return view('shops.shops', compact('cities', 'shops'))->render();
+        }
+
+        return view('shops.index', compact('cities', 'shops'));
     }
 
     public function show(Shop $shop)

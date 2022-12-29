@@ -36,7 +36,7 @@
                             </li>
                             <li class="nk-menu-item">
                                 <a href="{{ route('admin.brands.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-book"></em></span>
                                     <span class="nk-menu-text">Бренды</span>
                                 </a>
                             </li>
@@ -44,6 +44,12 @@
                                 <a href="{{ route('admin.categories.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-list-round"></em></span>
                                     <span class="nk-menu-text">Категории</span>
+                                </a>
+                            </li>
+                            <li class="nk-menu-item">
+                                <a href="{{ route('admin.cities.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
+                                    <span class="nk-menu-text">Города</span>
                                 </a>
                             </li>
                         </ul>

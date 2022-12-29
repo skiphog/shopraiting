@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @var \App\Models\City[] $cities
  * @var \App\Models\Shop[] $shops
  */
 
@@ -19,26 +20,13 @@
         <div class="inner">
             <div class="wrap">
                 @include('partials.breadcrumbs', ['data' => [['link' => '', 'title' => 'Магазины']]])
-                <h1>Список всех интернет-магазинов</h1>
-                <div class="text">
-                    @if($shops->isNotEmpty())
-                        <div class="popularity">
-                            <h2>Сексшопы</h2>
-                            <div class="popularity__box">
-                                @foreach ($shops->chunk(ceil($shops->count() / 3)) as $chunk)
-                                    <div class="popularity__box-wrap">
-                                        <div class="popularity__item">
-                                            @foreach ($chunk as $shop)
-                                                <a href="{{ route('shops.show', $shop) }}" class="popularity__item-link">{{ $shop->name }}</a>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                </div>
+                <h1>Список интернет-магазинов</h1>
+                <div id="content">@include('shops.shops', compact('cities', 'shops'))</div>
             </div>
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    <script src="/js/shops.js"></script>
+@endpush
