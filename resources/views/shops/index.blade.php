@@ -12,7 +12,7 @@
 @section('description', 'Список всех интернет-магазинов')
 
 @push('styles')
-    <link rel="stylesheet" href="/css/popularity.css">
+    <link rel="stylesheet" href="/css/popularity.css?v=1">
     <link rel="stylesheet" href="/css/select2.css">
 @endpush
 
