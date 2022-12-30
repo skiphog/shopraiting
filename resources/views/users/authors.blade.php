@@ -25,12 +25,12 @@
                     <div class="main-content">
                         <div class="writer">
                             @foreach($users as $user)
-                                <div class="writer__box" id="user-{{ $user->id }}">
+                                <div class="writer__box" id="user-{{ $user->id }}" itemprop="author" itemscope itemtype="https://schema.org/Person">
                                     <div class="writer__box-header">
-                                        <img src="{{ asset($user->avatar) }}" width="40" height="40" alt="person">
-                                        <div class="writer__box-name">{{ $user->name }}</div>
+                                        <img src="{{ asset($user->avatar) }}" width="40" height="40" alt="person" itemprop="image">
+                                        <div class="writer__box-name" itemprop="name">{{ $user->name }}</div>
                                     </div>
-                                    <div class="writer__box-text">{{ $user->description }}</div>
+                                    <div class="writer__box-text">{!! $user->description !!}</div>
                                     <div class="writer__box-articles">
                                         @foreach($user->articles as $article)
                                             <a href="{{ route('articles.show', $article) }}" class="writer__box-link">{{ $article->name }}</a>

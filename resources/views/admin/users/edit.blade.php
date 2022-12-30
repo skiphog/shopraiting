@@ -10,6 +10,10 @@
 @section('title', "Профиль {$user->name}")
 @section('description', "Профиль {$user->name}")
 
+@push('style')
+    <link rel="stylesheet" href="/dashboard/css/summernote.css">
+@endpush
+
 @section('content')
     <nav>
         <ul class="breadcrumb breadcrumb-arrow">
@@ -77,7 +81,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="description">Описание</label>
                                 <div class="form-control-wrap">
-                                    <textarea style="min-height: 120px" class="form-control form-control-sm"
+                                    <textarea style="height: 460px" class="form-control form-control-sm summernote-basic"
                                               id="description"
                                               name="description"
                                               placeholder="Краткое описание">{{ $user->description }}</textarea>
@@ -165,3 +169,8 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script src="/dashboard/js/summernote.js"></script>
+    <script src="/dashboard/js/editors.js"></script>
+@endpush

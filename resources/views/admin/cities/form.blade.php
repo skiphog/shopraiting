@@ -6,12 +6,6 @@
  */
 
 ?>
-@push('style')
-    <link rel="stylesheet" href="/dashboard/css/summernote.css">
-    <link rel="stylesheet" href="/dashboard/css/crutch-zone.css">
-    <link rel="stylesheet" href="/dashboard/css/crutch-summernote.css">
-@endpush
-
 @section('content')
     <nav>
         <ul class="breadcrumb breadcrumb-arrow">
@@ -99,8 +93,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script src="/dashboard/js/summernote.js"></script>
-    <script src="/dashboard/js/editors.js"></script>
-@endpush

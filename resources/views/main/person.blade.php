@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="person__main">
-        {{ $user->description }}
+        {!! $user->description !!}
     </div>
     <div class="person__footer">
         <a href="{{ route('authors') . "#user-{$user->id}" }}">{{ $user->name }}</a> ждёт ваших вопросов на

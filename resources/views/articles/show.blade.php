@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="author__main">
-                                    {{ $article->user->description }}
+                                    {!! $article->user->description !!}
                                 </div>
                                 <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="author__link">Читать все статьи</a>
                             </div>

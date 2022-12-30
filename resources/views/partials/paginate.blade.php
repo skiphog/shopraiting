@@ -10,7 +10,7 @@
         @section('paginate', ' | Страница ' . $paginator->currentPage())
     @endif--}}
     @section('paginate', ' | Страница ' . $paginator->currentPage())
-    @section('canonical',  request()->url() . '?page=' . $paginator->currentPage())
+    @section('canonical',  request()->url() . (1 !== $paginator->currentPage() ? '?page=' . $paginator->currentPage(): ''))
     <div class="pagination">
         @foreach ($elements as $element)
             {{-- Array Of Links --}}
@@ -20,7 +20,11 @@
                         @if ($page === $paginator->currentPage())
                             <a class="pagination__btn">{{ $page }}</a>
                         @else
-                            <a href="{{ $url }}" class="pagination__btn">{{ $page }}</a>
+                            @if(1 === $page)
+                                <a href="{{ str_replace('?page=1', '', $url) }}" class="pagination__btn">{{ $page }}</a>
+                            @else
+                                <a href="{{ $url }}" class="pagination__btn">{{ $page }}</a>
+                            @endif
                         @endif
                     </div>
                 @endforeach
