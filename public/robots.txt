@@ -1,12 +1,21 @@
 User-agent: *
 Disallow: /?gclid=
 Disallow: /?utm_source=
-Disallow: ?utm=shop
+Disallow: /?utm=shop
 Disallow: /?yclid=
 Disallow: /*_openstat*
 Disallow: /?etext=
 Disallow: /?fuck=you
-
 Sitemap: https://sexshoprating.ru/sitemap.xml
-Crawl-delay: 10
 Host: https://sexshoprating.ru
+
+User-agent: Yandex
+Disallow: /?gclid=
+Disallow: /?utm_source=
+Disallow: /?utm=shop
+Disallow: /?yclid=
+Disallow: /*_openstat*
+Disallow: /?etext=
+Disallow: /?fuck=you
+Clean-param: etext
+Sitemap: https://sexshoprating.ru/sitemap.xml

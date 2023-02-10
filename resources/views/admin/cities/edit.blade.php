@@ -2,7 +2,6 @@
 
 /**
  * @var \App\Models\City     $city
- * @var \App\Models\User[]   $users
  */
 
 ?>
@@ -11,4 +10,4 @@
 @section('title', "Редактировать: {$city->name}")
 @section('description', "Редактировать: {$city->name}")
 
-@include('admin.cities.form', compact('city', 'users'))
+@include('admin.cities.form', compact('city'))

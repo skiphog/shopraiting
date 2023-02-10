@@ -16,8 +16,16 @@ return new class extends Migration
         Schema::create('cities', static function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->string('postcode')->nullable();
+            $table->string('seo_h1');
+            $table->string('seo_title');
+            $table->string('seo_description');
+            $table->text('before_content')->nullable();
+            $table->text('content');
+
+            // Indexes
+            $table->unique('slug');
         });
     }
 

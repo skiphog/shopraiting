@@ -3,15 +3,15 @@
 /**
  * @var \App\Models\Shop[]   $shops
  * @var \App\Models\Review[] $reviews
- * @var \App\Models\Page     $page
+ * @var \App\Models\City     $city
  * @var \App\Models\Banner[] $banners
  */
 
 ?>
 @extends('layouts.app')
 
-@section('title', $page->seo_title)
-@section('description', $page->seo_description)
+@section('title', $city->seo_title)
+@section('description', $city->seo_description)
 
 @push('styles')
     <link rel="stylesheet" href="/css/select2.css">
@@ -26,11 +26,12 @@
     <main class="main">
         <div class="wrap">
             @include('partials.banners', compact('banners'))
-            <h1>{{ $page->seo_h1 ?: $page->name }}</h1>
+            @include('partials.breadcrumbs', ['data' => [['link' => route('cities.index'), 'title' => 'Города'], ['link' => '', 'title' => "Сексшопы в городе {$city->name}"]]])
+            <h1>{{ $city->seo_h1 ?: $city->name }}</h1>
 
-            @if(!empty($page->before_content))
+            @if(!empty($city->before_content))
                 <div class="text">
-                    <p>{{ $page->before_content }}</p>
+                    <p>{{ $city->before_content }}</p>
                 </div>
             @endif
 
@@ -104,13 +105,12 @@
             </div>
 
             <div class="recall" id="recall">
-                @include('main.recall', ['shops' => $shops, 'current_slug' => $page->slug, 'reviews' => $reviews])
+                @include('cities.recall', ['city' => $city, 'shops' => $shops, 'current_slug' => $city->slug, 'reviews' => $reviews])
             </div>
 
             @include('main.table', compact('shops'))
-            @include('main.person', ['user' => $page->user])
 
-            {!! $page->content !!}
+            {!! $city->content !!}
         </div>
     </main>
 @endsection

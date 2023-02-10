@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @var \App\Models\Category[] $categories
+ * @var \App\Models\Page[] $pages
  */
+
 ?>
 <div class="nk-block">
     <div class="card card-bordered card-stretch">
@@ -18,25 +19,25 @@
                         </div>
                     </div>
 
-                    @foreach($categories as $category)
+                    @foreach($pages as $page)
                         <div class="nk-tb-item">
                             <div class="nk-tb-col">
-                                <a href="{{ route('admin.categories.edit', $category) }}">
-                                    <span class="fw-medium">{{ $category->name }}</span>
+                                <a href="{{ route('admin.pages.edit', $page) }}">
+                                    <span class="fw-medium">{{ $page->name }}</span>
                                 </a>
                             </div>
                             <div class="nk-tb-col">
-                                <span>{{ $category->slug }}</span>
+                                <span>{{ $page->slug }}</span>
                             </div>
-                            <div class="nk-tb-col"><span>{{ $category->shops_count }}</span></div>
+                            <div class="nk-tb-col"><span>{{ $page->shops_count }}</span></div>
 
                             <div class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li class="nk-tb-action-hidden">
-                                        <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Редактировать"><em class="icon ni ni-edit-fill"></em></a>
+                                        <a href="{{ route('admin.pages.edit', $page) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Редактировать"><em class="icon ni ni-edit-fill"></em></a>
                                     </li>
                                     <li class="nk-tb-action-hidden">
-                                        <a href="{{ route('categories.show', $category) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Посмотреть на сайте" target="_blank"><em class="icon ni ni-eye-fill"></em></a>
+                                        <a href="{{--{{ route('pages.show', $page) }}--}}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Посмотреть на сайте" target="_blank"><em class="icon ni ni-eye-fill"></em></a>
                                     </li>
                                 </ul>
                             </div>

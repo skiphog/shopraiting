@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class PageRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -46,13 +46,13 @@ class CategoryRequest extends FormRequest
     {
         $rules = [];
 
-        if (1 !== (int)$this->route('category')?->id) {
+        if (1 !== (int)$this->route('page')?->id) {
             $rules['slug'] = [
                 'required',
                 'string',
                 'min:3',
                 'max:250',
-                Rule::unique('categories')->ignore($this->route('category'))
+                Rule::unique('pages')->ignore($this->route('page'))
             ];
         }
 

@@ -12,12 +12,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('categories', static function (Blueprint $table) {
+        Schema::create('pages', static function (Blueprint $table) {
             $table->id();
             $table->string('slug');
             $table->unsignedBigInteger('user_id');
 
             $table->string('name');
+
             $table->string('seo_h1');
             $table->string('seo_title');
             $table->string('seo_description');
@@ -30,15 +31,15 @@ return new class extends Migration {
                 ->on('users');
         });
 
-        Schema::create('category_shop', static function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id');
+        Schema::create('page_shop', static function (Blueprint $table) {
+            $table->unsignedBigInteger('page_id');
             $table->unsignedBigInteger('shop_id');
 
-            $table->primary(['category_id', 'shop_id']);
+            $table->primary(['page_id', 'shop_id']);
 
-            $table->foreign('category_id')
+            $table->foreign('page_id')
                 ->references('id')
-                ->on('categories');
+                ->on('pages');
 
             $table->foreign('shop_id')
                 ->references('id')
@@ -54,7 +55,7 @@ return new class extends Migration {
     public function down(): void
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('categories');
-        Schema::dropIfExists('category_shop');
+        Schema::dropIfExists('pages');
+        Schema::dropIfExists('page_shop');
     }
 };

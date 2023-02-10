@@ -2,17 +2,28 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\City
  *
- * @property int         $id
- * @property string      $name
- * @property string      $slug
- * @property int         $postcode
-*/
+ * @property int                    $id
+ * @property string                 $name
+ * @property string                 $slug
+ * @property string                 $postcode
+ * @property string                 $seo_h1
+ * @property string                 $seo_title
+ * @property string                 $seo_description
+ * @property string|null            $before_content
+ * @property string                 $content
+ *
+ * @property-read Collection|Shop[] $shops
+ * @property-read int|null          $shops_count
+ * @mixin Eloquent
+ */
 class City extends Model
 {
     /**

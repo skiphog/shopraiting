@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ReviewController;
@@ -11,8 +13,6 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\QuestionController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CityController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'shops', 'as' => 'shops.', 'middleware' => []], static function () {
@@ -72,18 +72,18 @@ Route::group(['prefix' => 'banners', 'as' => 'banners.', 'middleware' => []], st
         ->whereNumber('banner_id')
         ->name('destroy');
 });
-Route::group(['prefix' => 'categories', 'as' => 'categories.', 'middleware' => []], static function () {
-    Route::get('/', [CategoryController::class, 'index'])
+Route::group(['prefix' => 'pages', 'as' => 'pages.', 'middleware' => []], static function () {
+    Route::get('/', [PageController::class, 'index'])
         ->name('index');
-    Route::get('/create', [CategoryController::class, 'create'])
+    Route::get('/create', [PageController::class, 'create'])
         ->name('create');
-    Route::post('/create', [CategoryController::class, 'store'])
+    Route::post('/create', [PageController::class, 'store'])
         ->name('store');
-    Route::get('/{category}/edit', [CategoryController::class, 'edit'])
+    Route::get('/{page}/edit', [PageController::class, 'edit'])
         ->name('edit');
-    Route::post('/{category}/edit', [CategoryController::class, 'update'])
+    Route::post('/{page}/edit', [PageController::class, 'update'])
         ->name('update');
-    Route::post('/{category}/destroy', [CategoryController::class, 'destroy'])
+    Route::post('/{page}/destroy', [PageController::class, 'destroy'])
         ->name('destroy');
 });
 Route::group(['prefix' => 'cities', 'as' => 'cities.', 'middleware' => []], static function () {
@@ -179,6 +179,6 @@ Route::group(['prefix' => 'search', 'as' => 'search.'], static function () {
     Route::get('/users', [UserController::class, 'search'])->name('users');
     Route::get('/comments', [CommentController::class, 'search'])->name('comments');
     Route::get('/questions', [QuestionController::class, 'search'])->name('questions');
-    Route::get('/categories', [CategoryController::class, 'search'])->name('categories');
+    Route::get('/pages', [PageController::class, 'search'])->name('pages');
     Route::get('/cities', [CityController::class, 'search'])->name('cities');
 });

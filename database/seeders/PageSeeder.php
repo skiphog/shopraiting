@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 use JsonException;
-use App\Models\Category;
+use App\Models\Page;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CategorySeeder extends Seeder
+class PageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,30 +16,30 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::truncate();
-        Category::flushEventListeners();
+        Page::truncate();
+        Page::flushEventListeners();
 
         try {
-            $categories = json_decode(
+            $pages = json_decode(
                 file_get_contents(
-                    base_path('database/data/categories.json')
+                    base_path('database/data/pages.json')
                 ), true, 512, JSON_THROW_ON_ERROR
             );
         } catch (JsonException) {
-            $categories = [];
+            $pages = [];
         }
 
         try {
-            $category_shop = json_decode(
+            $page_shop = json_decode(
                 file_get_contents(
-                    base_path('database/data/category_shop.json')
+                    base_path('database/data/page_shop.json')
                 ), true, 512, JSON_THROW_ON_ERROR
             );
         } catch (JsonException) {
-            $category_shop = [];
+            $page_shop = [];
         }
 
-        DB::table('categories')->insert($categories);
-        DB::table('category_shop')->insert($category_shop);
+        DB::table('pages')->insert($pages);
+        DB::table('page_shop')->insert($page_shop);
     }
 }

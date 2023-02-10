@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Models\Review;
 use App\Models\Banner;
-use App\Models\Category;
+use App\Models\Page;
 use App\Filters\ReviewFilter;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,9 +13,9 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $category = Category::where('id', 1)->first();
+        $page = Page::where('id', 1)->first();
 
-        $shops = $category
+        $shops = $page
             ->shops()
             ->positioned()
             ->get();
@@ -28,7 +28,7 @@ class IndexController extends Controller
 
         $banners = Cache::rememberForever('banners', static fn() => Banner::all());
 
-        return view('index', compact('shops', 'reviews', 'category', 'banners'));
+        return view('index', compact('shops', 'reviews', 'page', 'banners'));
     }
 
     /**
@@ -39,7 +39,7 @@ class IndexController extends Controller
     public function recalls(ReviewFilter $filter): string
     {
         $shops = Shop::select(['id', 'slug', 'name'])
-            ->whereRelation('categories', 'id', 1)
+            ->whereRelation('pages', 'id', 1)
             ->positioned()
             ->get();
 
@@ -61,7 +61,7 @@ class IndexController extends Controller
     public function shopRecalls(Shop $shop, ReviewFilter $filter)
     {
         $shops = Shop::select(['id', 'slug', 'name'])
-            ->whereRelation('categories', 'id', 1)
+            ->whereRelation('pages', 'id', 1)
             ->positioned()
             ->get();
 

@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\City;
 use App\Models\Review;
 use App\Models\Banner;
-use App\Models\Category;
 use App\Filters\ReviewFilter;
 use Illuminate\Support\Facades\Cache;
 
-class CategoryController extends Controller
+class CityController extends Controller
 {
-    public function index(): void
+    public function index()
     {
+        $cities = City::all();
+
+        return view('cities.index', compact('cities'));
     }
 
-    public function show(Category $category)
+    public function show(City $city)
     {
-        $shops = $category->shops()
+        $shops = $city->shops()
             ->withCount('reviews')
             ->positioned()
             ->get();
@@ -30,15 +33,15 @@ class CategoryController extends Controller
 
         $banners = Cache::rememberForever('banners', static fn() => Banner::all());
 
-        return view('index', compact('shops', 'reviews', 'category', 'banners'));
+        return view('cities.show', compact('shops', 'reviews', 'city', 'banners'));
     }
 
     /**
      * @noinspection ReturnTypeCanBeDeclaredInspection
      */
-    public function recalls(Category $category, ReviewFilter $filter)
+    public function recalls(City $city, ReviewFilter $filter)
     {
-        $shops = $category->shops()
+        $shops = $city->shops()
             ->select(['id', 'slug', 'name'])
             ->positioned()
             ->get();
@@ -52,15 +55,15 @@ class CategoryController extends Controller
 
         $current_slug = '';
 
-        return view('categories.recall', compact('category', 'shops', 'reviews', 'current_slug'))->render();
+        return view('cities.recall', compact('city', 'shops', 'reviews', 'current_slug'))->render();
     }
 
     /**
      * @noinspection ReturnTypeCanBeDeclaredInspection
      */
-    public function shopRecalls(Category $category, Shop $shop, ReviewFilter $filter)
+    public function shopRecalls(City $city, Shop $shop, ReviewFilter $filter)
     {
-        $shops = $category->shops()
+        $shops = $city->shops()
             ->select(['id', 'slug', 'name'])
             ->positioned()
             ->get();
@@ -74,6 +77,6 @@ class CategoryController extends Controller
 
         $current_slug = $shop->slug;
 
-        return view('categories.recall', compact('category', 'shops', 'reviews', 'current_slug'))->render();
+        return view('cities.recall', compact('city', 'shops', 'reviews', 'current_slug'))->render();
     }
 }

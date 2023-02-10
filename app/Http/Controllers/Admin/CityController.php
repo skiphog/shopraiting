@@ -22,12 +22,8 @@ class CityController extends Controller
 
     public function create()
     {
-        $users = User::where('status', '=', 1)
-            ->where('role', '>', 1)
-            ->get();
-
         return view('admin.cities.create')
-            ->with(['city' => new City(), 'users' => $users]);
+            ->with(['city' => new City()]);
     }
 
     public function store(CityRequest $request): JsonResponse

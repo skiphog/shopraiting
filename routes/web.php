@@ -5,13 +5,13 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\CategoryController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::group(['prefix' => 'recalls', 'as' => 'index.', 'middleware' => 'ajax'], static function () {
@@ -52,12 +52,14 @@ Route::group(['prefix' => 'feedback', 'as' => 'questions.'], static function () 
     Route::get('/', [QuestionController::class, 'create'])->name('create');
     Route::post('/', [QuestionController::class, 'store'])->name('store');
 });
-Route::group(['prefix' => 'cities', 'as' => 'categories.'], static function () {
+Route::group(['prefix' => 'cities', 'as' => 'cities.'], static function () {
+    Route::get('/', [CityController::class, 'index'])->name('index');
+    Route::get('/{city:slug}', [CityController::class, 'show'])->name('show');
+
     Route::group(['prefix' => 'recalls', 'as' => 'recalls.', 'middleware' => 'ajax'], static function () {
-        Route::get('/{category:slug}', [CategoryController::class, 'recalls'])->name('recalls');
-        Route::get('/{category:slug}/{shop:slug}', [CategoryController::class, 'shopRecalls'])->name('shop-recalls');
+        Route::get('/{city:slug}', [CityController::class, 'recalls'])->name('recalls');
+        Route::get('/{city:slug}/{shop:slug}', [CityController::class, 'shopRecalls'])->name('shop-recalls');
     });
-    Route::get('/{category:slug}', [CategoryController::class, 'show'])->name('show');
 });
 Route::get('/authors', [UserController::class, 'authors'])->name('authors');
 

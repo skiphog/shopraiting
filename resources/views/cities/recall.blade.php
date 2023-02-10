@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @var \App\Models\Category $category
+ * @var \App\Models\City     $city
  * @var \App\Models\Shop[]   $shops
  * @var \App\Models\Review[] $reviews
  * @var string               $current_slug
  */
 
-if (request()->routeIs('categories.recalls.shop-recalls')) {
-    $rout_recall = route('categories.recalls.shop-recalls', ['category' => $category, 'shop' => $current_slug]);
+if (request()->routeIs('cities.recalls.shop-recalls')) {
+    $rout_recall = route('cities.recalls.shop-recalls', ['city' => $city, 'shop' => $current_slug]);
     $rout_all = route('shops.reviews', ['shop' => $current_slug]);
 } else {
-    $rout_recall = route('categories.recalls.recalls', $category);
+    $rout_recall = route('cities.recalls.recalls', $city);
     $rout_all = route('reviews.index');
 }
 ?>
@@ -19,9 +19,9 @@ if (request()->routeIs('categories.recalls.shop-recalls')) {
     <div class="recall__header">
         <!--suppress HtmlFormInputWithoutLabel -->
         <select class="recall__header-select">
-            <option value="{{ route('categories.recalls.recalls', $category) }}">Все сексшопы</option>
+            <option value="{{ route('cities.recalls.recalls', $city) }}">Все сексшопы</option>
             @foreach ($shops as $shop)
-                <option value="{{ route('categories.recalls.shop-recalls', ['category' => $category, 'shop' => $shop]) }}" {{ $current_slug === $shop->slug ? 'selected': '' }}>
+                <option value="{{ route('cities.recalls.shop-recalls', ['city' => $city, 'shop' => $shop]) }}" {{ $current_slug === $shop->slug ? 'selected': '' }}>
                     {{ $shop->name }}
                 </option>
             @endforeach

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * App\Models\Category
+ * App\Models\Page
  *
  * @property int                    $id
  * @property string                 $slug
@@ -25,12 +25,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read User              $user
  * @mixin Eloquent
  */
-class Category extends Model
+class Page extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'categories';
+    protected $table = 'pages';
 
     /**
      * @var bool
@@ -55,6 +55,6 @@ class Category extends Model
      */
     public function shops(): BelongsToMany
     {
-        return $this->belongsToMany(Shop::class, 'category_shop', 'category_id', 'shop_id');
+        return $this->belongsToMany(Shop::class, 'page_shop', 'page_id', 'shop_id');
     }
 }

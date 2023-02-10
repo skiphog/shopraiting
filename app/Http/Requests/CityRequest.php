@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,8 +17,6 @@ class CityRequest extends FormRequest
         if (null === $this['shops']) {
             $this['shops'] = [];
         }
-
-        $this['slug'] = Str::slug($this['name']);
     }
 
     /**
@@ -28,16 +25,21 @@ class CityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'     => ['required', 'string', 'max:250'],
-            'slug'     => [
+            'name'            => ['required', 'string', 'max:250'],
+            'slug'            => [
                 'required',
                 'string',
                 'min:3',
                 'max:250',
                 Rule::unique('cities')->ignore($this->route('city'))
             ],
-            'postcode' => ['string', 'max:13'],
-            'shops'    => ['array']
+            'seo_h1'          => ['required', 'string', 'max:250'],
+            'seo_title'       => ['required', 'string', 'max:250'],
+            'seo_description' => ['required', 'string', 'max:250'],
+            'before_content'  => ['nullable', 'string'],
+            'content'         => ['required', 'string'],
+            'postcode'        => ['nullable', 'string', 'max:13'],
+            'shops'           => ['array']
         ];
     }
 }

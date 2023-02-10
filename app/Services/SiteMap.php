@@ -6,9 +6,10 @@ use DOMElement;
 use DOMDocument;
 use DOMException;
 use App\Models\Shop;
+use App\Models\City;
 use App\Models\Brand;
 use App\Models\Article;
-use App\Models\Category;
+use App\Models\Page;
 use App\Models\Question;
 
 class SiteMap
@@ -19,6 +20,7 @@ class SiteMap
         '',
         '/shops',
         '/brands',
+        '/cities',
         '/reviews',
         '/articles',
         '/authors',
@@ -49,7 +51,8 @@ class SiteMap
             static::$static_url,
             $this->generateShops(),
             $this->generateBrands(),
-            $this->generateCategories(),
+            $this->generatePages(),
+            $this->generateCities(),
             $this->generateArticles(),
             $this->generateQuestions()
         );
@@ -115,14 +118,28 @@ class SiteMap
     }
 
     /**
-     * Сгенерировать Slug категорий
+     * Сгенерировать Slug страниц
      *
      * @return array
      */
-    protected function generateCategories(): array
+    protected function generatePages(): array
     {
-        return Category::select('slug')
+        return Page::select('slug')
             ->whereNot('id', 1)
+            ->oldest('id')
+            ->pluck('slug')
+            ->transform(static fn($item) => "/pages/{$item}")
+            ->all();
+    }
+
+    /**
+     * Сгенерировать Slug страниц
+     *
+     * @return array
+     */
+    protected function generateCities(): array
+    {
+        return City::select('slug')
             ->oldest('id')
             ->pluck('slug')
             ->transform(static fn($item) => "/cities/{$item}")
