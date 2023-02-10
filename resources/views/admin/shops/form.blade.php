@@ -188,13 +188,36 @@
                         </div>
                     </div>
                     <div class="row g-gs">
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label class="form-label" for="seo_description">SEO Description</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="seo_description" name="seo_description"
                                             value="{{ $shop->seo_description }}"
                                             placeholder="Крутой магазин" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="cities">Города</label>
+                                <div class="form-control-wrap">
+                                    <select class="form-select js-select2"
+                                            id="cities"
+                                            name="cities[]"
+                                            multiple="multiple"
+                                            data-search="on"
+                                            data-placeholder="Выберите города">
+                                        @php
+                                            $cities_ids = $shop->cities->pluck('id')->toArray();
+                                        @endphp
+                                        @foreach(\App\Models\City::all() as $city)
+                                            <option value="{{ $city->id }}"
+                                                    @selected(in_array($city->id, $cities_ids, true))>
+                                                {{ $city->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

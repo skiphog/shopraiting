@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Shop;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ShopRequest;
@@ -30,8 +31,10 @@ class ShopController extends Controller
 
     public function store(ShopRequest $request): JsonResponse
     {
-        $shop = Shop::create($request->safe()->all());
-        Shop::flushAllCache();
+        $shop = Shop::create($request->safe()->except('cities'));
+        $shop
+            ->cities()
+            ->sync($request->safe()->only('cities')['cities']);
 
         session()->flash('flash', ['message' => 'Магазин добавлен']);
 
@@ -60,7 +63,10 @@ class ShopController extends Controller
             ->where('id', $shop_id)
             ->firstOrFail();
 
-        $shop->update($request->safe()->all());
+        tap($shop, static fn(Shop $shop) => $shop->update($request->safe()->except('cities')))
+            ->cities()
+            ->sync($request->safe()->only('cities')['cities']);
+
         Shop::flushAllCache();
 
         session()->flash('flash', ['message' => 'Данные магазина обновлены']);

@@ -32,6 +32,10 @@ class ShopRequest extends FormRequest
         if (null === $this['description']) {
             $this['description'] = '';
         }
+
+        if (null === $this['cities']) {
+            $this['cities'] = '';
+        }
     }
 
     /**
@@ -74,6 +78,7 @@ class ShopRequest extends FormRequest
             'discounts'               => ['nullable', 'string', 'max:250'],
             'founding_year'           => ['nullable', 'string', 'date_format:Y'],
             'activity'                => ['required', 'integer', Rule::in(Shop::$status)],
+            'cities'                  => ['required', 'array'],
         ];
     }
 }
