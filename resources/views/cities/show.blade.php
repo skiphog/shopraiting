@@ -26,7 +26,7 @@
     <main class="main">
         <div class="wrap">
             @include('partials.banners', compact('banners'))
-            @include('partials.breadcrumbs', ['data' => [['link' => route('cities.index'), 'title' => 'Города'], ['link' => '', 'title' => "Сексшопы в городе {$city->name}"]]])
+            @include('partials.breadcrumbs', ['data' => [['link' => route('cities.index'), 'title' => 'Города'], ['link' => '', 'title' => "Сексшопы " . morphos\Russian\GeographicalNamesInflection::getCase($city->name, 'родительный')]]])
             <h1>{{ $city->seo_h1 ?: $city->name }}</h1>
 
             @if(!empty($city->before_content))

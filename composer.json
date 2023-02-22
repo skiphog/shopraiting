@@ -9,13 +9,14 @@
   "license": "MIT",
   "require": {
     "php": "^8.0.2",
-    "ext-gd": "*",
     "ext-dom": "*",
-    "ext-pdo": "*",
     "ext-fileinfo": "*",
+    "ext-gd": "*",
+    "ext-pdo": "*",
     "guzzlehttp/guzzle": "^7.4",
     "htmlmin/htmlmin": "^9.0",
-    "laravel/framework": "^9.25"
+    "laravel/framework": "^9.25",
+    "wapmorgan/morphos": "^3.2"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.7",
