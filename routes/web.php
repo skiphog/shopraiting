@@ -61,7 +61,11 @@ Route::group(['prefix' => 'cities', 'as' => 'cities.'], static function () {
         Route::get('/{city:slug}/{shop:slug}', [CityController::class, 'shopRecalls'])->name('shop-recalls');
     });
 });
-Route::get('/authors', [UserController::class, 'authors'])->name('authors');
+
+Route::group(['prefix' => 'authors', 'as' => 'authors.'], static function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/{user:id}', [UserController::class, 'show'])->name('show');
+});
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');

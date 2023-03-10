@@ -32,7 +32,11 @@
                     <h1 itemprop="headline">{{ $article->seo_h1 }}</h1>
                     <div class="article__header">
                         <img class="article__header-person" src="{{ asset($article->user->avatar) }}" width="40" height="40" alt="{{ $article->user->name }}">
-                        <div class="article__header-item" itemprop="author">{{ $article->user->name }}</div>
+                        <div class="article__header-item" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <a itemprop="url" href="{{ route('authors.show', $article->user) }}">
+                                <span itemprop="name">{{ $article->user->name }}</span>
+                            </a>
+                        </div>
                         <div class="article__header-item" itemprop="dateCreated">{{ $article->created_at->format('d.m.Y') }}</div>
                         <div class="article__header-item">{{ $article->view }} {{ trans_choice('dic.view', $article->view) }}</div>
                         <div class="article__header-item">{{ $article->time_to_read }} {{ trans_choice('dic.minutes', $article->time_to_read) }}</div>
@@ -63,7 +67,7 @@
                                 <div class="author__main">
                                     {!! $article->user->description !!}
                                 </div>
-                                <a href="{{ route('authors') . "#user-{$article->user->id}" }}" class="author__link">Читать все статьи</a>
+                                <a href="{{ route('authors.show', $article->user) }}" class="author__link">Читать все статьи</a>
                             </div>
                             <div class="repost"
                                     data-article="{{ $article->id }}"

@@ -16,14 +16,14 @@
         </picture>
         <div class="person__header-box">
             <div class="person__header-line">Об авторе рейтинга</div>
-            <a href="{{ route('authors') . "#user-{$user->id}" }}" class="person__header-name">{{ $user->name }}</a>
+            <a href="{{ route('authors.show', $user) }}" class="person__header-name">{{ $user->name }}</a>
         </div>
     </div>
     <div class="person__main">
         {!! $user->description !!}
     </div>
     <div class="person__footer">
-        <a href="{{ route('authors') . "#user-{$user->id}" }}">{{ $user->name }}</a> ждёт ваших вопросов на
+        <a href="{{ route('authors.show', $user) }}">{{ $user->name }}</a> ждёт ваших вопросов на
         <a href="mailto:{{ $user->email }}" class="person__footer-link">{{ $user->email }}</a>
     </div>
 </div>
