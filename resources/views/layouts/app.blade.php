@@ -21,6 +21,7 @@
     <meta name="yandex-verification" content="5e4b7507460c3529">
     <meta name="verify-admitad" content="1cb707051c">
     <meta name="verify-advertiseru" content="b0e06fc117">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @stack('styles')
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">

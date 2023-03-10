@@ -12,6 +12,8 @@
 
 @push('style')
     <link rel="stylesheet" href="/dashboard/css/summernote.css">
+    <link rel="stylesheet" href="/dashboard/css/codemirror.css">
+    <link rel="stylesheet" href="/dashboard/css/monokai.css">
 @endpush
 
 @section('content')
@@ -42,9 +44,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="name">Имя</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           value="{{ $user->name }}"
-                                           required>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
                                 </div>
                             </div>
                         </div>
@@ -52,9 +52,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="email">Email</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="email" name="email"
-                                           value="{{ $user->email }}"
-                                           required>
+                                    <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                                 </div>
                             </div>
                         </div>
@@ -171,6 +169,9 @@
 @endsection
 
 @push('script')
+    <script src="/dashboard/js/codemirror.js"></script>
+    <script src="/dashboard/js/xml.js"></script>
+    <script src="/dashboard/js/formatting.js"></script>
     <script src="/dashboard/js/summernote.js"></script>
-    <script src="/dashboard/js/editors.js"></script>
+    <script src="/dashboard/js/editors.js?v=100"></script>
 @endpush
