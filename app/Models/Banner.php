@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use App\Models\Traits\Statusable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $path
  * @property string $link
  * @property int    $activity
- *
- * @mixin Eloquent
  */
 class Banner extends Model
 {

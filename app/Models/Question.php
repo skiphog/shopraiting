@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Support\Carbon;
 use App\Models\Traits\Statusable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,8 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int         $activity
- *
- * @mixin Eloquent
  */
 class Question extends Model
 {

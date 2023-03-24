@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Carbon\Carbon;
 use App\Models\Traits\Ratings;
 use App\Models\Traits\Statusable;
@@ -35,7 +34,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int         $activity
- * @mixin Eloquent
+ *
  * @method Builder|Brand positioned()
  * @property-read string $status_text
  * @property-read string $type_text

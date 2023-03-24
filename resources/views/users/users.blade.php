@@ -19,7 +19,7 @@
                             @foreach ($chunk as $user)
                                 <div class="popularity__item-combiner">
                                     <img class="popularity__item-img" src="{{ $user->avatar }}" width="40" height="40" alt="person">
-                                    <a href="{{ route('authors.show', $user) }}" class="popularity__item-link">{{ $user->name }}</a>
+                                    <a href="{{ $user->getUrl() }}" class="popularity__item-link">{{ $user->name }}</a>
                                 </div>
                             @endforeach
                         </div>

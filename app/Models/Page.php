@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,10 +19,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string                 $seo_description
  * @property string|null            $before_content
  * @property string                 $content
+ *
  * @property-read Collection|Shop[] $shops
  * @property-read int|null          $shops_count
  * @property-read User              $user
- * @mixin Eloquent
  */
 class Page extends Model
 {

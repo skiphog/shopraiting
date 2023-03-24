@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use App\Filters\ShopFilter;
 use Illuminate\Support\Carbon;
 use App\Models\Traits\Ratings;
@@ -53,7 +52,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Carbon|null            $created_at
  * @property Carbon|null            $updated_at
  * @property int                    $activity
- * @mixin Eloquent
+ *
  * @method Builder|Shop             positioned()
  * @method Builder                  filter($filter)
  * @property-read string            $status_text

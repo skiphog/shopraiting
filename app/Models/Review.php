@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use App\Filters\ReviewFilter;
 use App\Events\ReviewUpdated;
 use Illuminate\Support\Carbon;
@@ -28,7 +27,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property Carbon|null     $created_at
  * @property Carbon|null     $updated_at
  * @property int             $activity
- * @mixin Eloquent
+ *
  * @method Builder           filter($filter)
  * @property-read Shop|Brand $product
  */

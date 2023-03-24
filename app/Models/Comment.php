@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Support\Carbon;
 use App\Models\Traits\Statusable;
 use Illuminate\Database\Eloquent\Model;
@@ -12,21 +11,21 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * App\Models\Comment
  *
- * @property int                 $id
- * @property int                 $post_id
- * @property string              $post_type
- * @property string              $name
- * @property string              $email
- * @property string              $avatar_color
- * @property string              $message
- * @property string|null         $answer
- * @property Carbon|null         $answered_at
- * @property Carbon|null         $created_at
- * @property Carbon|null         $updated_at
- * @property int                 $activity
- * @property-read Model|Eloquent $post
- * @property-read string         $first_letter_name
- * @mixin Eloquent
+ * @property int         $id
+ * @property int         $post_id
+ * @property string      $post_type
+ * @property string      $name
+ * @property string      $email
+ * @property string      $avatar_color
+ * @property string      $message
+ * @property string|null $answer
+ * @property Carbon|null $answered_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int         $activity
+ *
+ * @property-read Model  $post
+ * @property-read string $first_letter_name
  */
 class Comment extends Model
 {

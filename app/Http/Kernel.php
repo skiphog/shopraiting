@@ -52,7 +52,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = [
+    protected $middlewareAliases = [
         'auth'             => \App\Http\Middleware\Authenticate::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'moderator'        => \App\Http\Middleware\AbortIfNotModerator::class,

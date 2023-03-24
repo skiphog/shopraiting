@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use DateTimeInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -25,12 +24,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon      $start_at
  * @property Carbon      $end_at
  * @property Carbon|null $deleted_at
+ *
  * @property-read Shop   $shop
  * @method static Builder|Coupon activity()
  * @method static Builder|Coupon sorting()
  * @property-read string $type_value
  * @property-read string $button_content_trim
- * @mixin Eloquent
  */
 class Coupon extends Model
 {

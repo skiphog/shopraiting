@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,7 +24,7 @@ use Illuminate\Notifications\Notifiable;
  * @property Carbon|null    $email_verified_at
  * @property Carbon|null    $created_at
  * @property Carbon|null    $updated_at
- * @mixin Eloquent
+ *
  * @property-read Article[] $articles
  * @property-read int|null  $articles_count
  */
@@ -114,6 +113,14 @@ class User extends Authenticatable
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->id === 2 ? route('authors.marina-medvedeva') : route('authors.show', $this);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Support\Carbon;
 use App\Models\Traits\Statusable;
 use App\Models\Traits\Commentable;
@@ -34,7 +33,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int         $activity
- * @mixin Eloquent
+ *
  * @property-read User   $user
  * @property-read int    $rating
  * @property-read string $rating_format
