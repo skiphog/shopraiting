@@ -18,8 +18,8 @@
                     <p>Для входа используйте свой email и пароль.</p>
                 </div>
             </div>
-        </div><!-- .nk-block-head -->
-        <form action="{{ route('login.auth') }}" class="form-validate is-alter" method="post">
+        </div>
+        <form action="{{ route('login.store') }}" class="form-validate is-alter" method="post">
             @csrf
             <div class="form-group">
                 <label class="form-label" for="email">Email</label>
@@ -49,5 +49,8 @@
                 <button class="btn btn-lg btn-primary btn-block">Войти</button>
             </div>
         </form>
+        <div class="form-note-s2 pt-4">
+            Впервые у нас? <a href="{{ route('register') }}">Создать аккаунт</a>
+        </div>
     </div>
 @endsection

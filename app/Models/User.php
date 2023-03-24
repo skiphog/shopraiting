@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,7 +29,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read Article[] $articles
  * @property-read int|null  $articles_count
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
