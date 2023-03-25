@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Mail;
+use App\Services\OsPanelMailTransport;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Mail::extend('ospanel', static function () {
+            return new OsPanelMailTransport();
+        });
     }
 }

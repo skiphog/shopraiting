@@ -67,7 +67,7 @@
                     <tbody>
                     <tr>
                         <td style="text-align:center;padding:20px;background-color:#ffffff;border-bottom: 1px solid #f5f6fa;">
-                            <a href="{{ route('index') }}"><img style="height: 40px" src="{{ asset('/dashboard/images/logo.png') }}" alt="logo"></a>
+                            <a href="{{ route('index') }}"><img style="height: 40px" src="{{ asset('/dashboard/images/logo-dark.png') }}" alt="logo"></a>
                         </td>
                     </tr>
                     </tbody>
