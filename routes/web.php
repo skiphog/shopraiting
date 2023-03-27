@@ -1,9 +1,6 @@
 <?php
 
-use App\Models\User;
-use App\Models\Banner;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
@@ -64,24 +61,9 @@ Route::group(['prefix' => 'cities', 'as' => 'cities.'], static function () {
         Route::get('/{city:slug}/{shop:slug}', [CityController::class, 'shopRecalls'])->name('shop-recalls');
     });
 });
-
 Route::group(['prefix' => 'authors', 'as' => 'authors.'], static function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
-    Route::get('/{user:id}', [UserController::class, 'show'])
-        ->whereNumber('user')
-        ->name('show');
-
-    // КРАЧИНА ОГУРЕЧИЩЕ
-    Route::get('/marina-medvedeva', static function () {
-        $user = User::where('id', 2)
-            ->with(['articles' => static fn($q) => $q->select(['id', 'user_id', 'slug', 'name'])->latest('id')])
-            ->first();
-
-        $banners = Cache::rememberForever('banners', static fn() => Banner::all());
-
-        return view('users.show', compact('user', 'banners'));
-    })
-        ->name('marina-medvedeva');
+    Route::get('/{user:slug}', [UserController::class, 'show'])->name('show');
 });
 
 Route::get('/about', [PageController::class, 'about'])->name('about');

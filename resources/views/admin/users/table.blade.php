@@ -12,13 +12,22 @@
                 <div class="nk-tb-list nk-tb-ulist">
                     <div class="nk-tb-item nk-tb-head">
                         <div class="nk-tb-col tb-col-xxl"><span class="sub-text">id</span></div>
+                        <div class="nk-tb-col"><span class="sub-text">Статус</span></div>
                         <div class="nk-tb-col"><span class="sub-text">Пользователь</span></div>
                         <div class="nk-tb-col tb-col-md"><span class="sub-text">Email</span></div>
+                        <div class="nk-tb-col tb-col-md"><span class="sub-text">Slug</span></div>
                         <div class="nk-tb-col tb-col-mb text-end"><span class="sub-text">Роль</span></div>
                     </div>
                     @foreach($users as $user)
                         <div class="nk-tb-item">
                             <div class="nk-tb-col tb-col-xxl"><span>{{ $user->id }}</span></div>
+                            <div class="nk-tb-col tb-col-xxl">
+                                @if($user->markEmailAsVerified())
+                                    <span class="badge text-success bg-success-dim">Подтверждён</span>
+                                @else
+                                    <span class="badge text-warning bg-warning-dim">Ожидает</span>
+                                @endif
+                            </div>
                             <div class="nk-tb-col">
                                 <a href="{{ route('admin.users.edit', $user) }}">
                                     <div class="user-card">
@@ -32,6 +41,7 @@
                                 </a>
                             </div>
                             <div class="nk-tb-col tb-col-md"><span>{{ $user->email }}</span></div>
+                            <div class="nk-tb-col tb-col-md"><span>{{ $user->slug }}</span></div>
                             <div class="nk-tb-col tb-col-mb"><span>{{ $user->role_name }}</span></div>
                         </div>
                     @endforeach

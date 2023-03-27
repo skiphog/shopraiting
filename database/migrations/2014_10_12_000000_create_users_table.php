@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('users', static function (Blueprint $table) {
             $table->id();
             $table->string('email');
+            $table->string('slug');
             $table->string('password');
             $table->string('name');
             $table->string('avatar', 300)->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration {
 
             //Indexes
             $table->unique('email');
+            $table->unique('slug');
             $table->index('status');
             $table->index('role');
         });

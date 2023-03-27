@@ -13,12 +13,17 @@ class UserRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this['slug'] = str($this['slug'] ?? '')->slug()->toString();
+    }
+
     /**
      * @noinspection PhpArrayShapeAttributeCanBeAddedInspection
      */
     public function rules(): array
     {
-        $rules_role = ['required', 'integer', Rule::in(array_keys(User::$roles))];
+        $rules_role = ['required', 'integer', Rule::in(User::ROLES)];
 
         if (1 === (int)$this->route('user')?->id) {
             $rules_role[] = 'min:4';
@@ -31,6 +36,7 @@ class UserRequest extends FormRequest
                 'max:250',
                 Rule::unique('users')->ignore($this->route('user'))
             ],
+            'slug'        => ['required', 'string', 'max:250', Rule::unique('users')->ignore($this->route('user'))],
             'name'        => ['required', 'string', 'max:250'],
             'description' => ['nullable', 'string'],
             'role'        => $rules_role,

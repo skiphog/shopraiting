@@ -33,7 +33,7 @@
                     <div class="article__header">
                         <img class="article__header-person" src="{{ asset($article->user->avatar) }}" width="40" height="40" alt="{{ $article->user->name }}">
                         <div class="article__header-item" itemprop="author" itemscope itemtype="https://schema.org/Person">
-                            <a itemprop="url" href="{{ $article->user->getUrl() }}">
+                            <a itemprop="url" href="{{ route('authors.show', $article->user) }}">
                                 <span itemprop="name">{{ $article->user->name }}</span>
                             </a>
                         </div>
@@ -67,7 +67,7 @@
                                 <div class="author__main">
                                     {!! $article->user->description !!}
                                 </div>
-                                <a href="{{ $article->user->getUrl() }}" class="author__link">Читать все статьи</a>
+                                <a href="{{ route('authors.show', $article->user) }}" class="author__link">Читать все статьи</a>
                             </div>
                             <div class="repost"
                                     data-article="{{ $article->id }}"

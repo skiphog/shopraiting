@@ -3,17 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * App\Models\User
  *
  * @property int            $id
  * @property string         $email
+ * @property string         $slug
  * @property string         $password
  * @property string         $name
  * @property string         $avatar
@@ -34,6 +36,16 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     /**
+     * Static roles
+     */
+    public const ROLES = [
+        'USER'      => 1,
+        'AUTHOR'    => 2,
+        'MODERATOR' => 3,
+        'ADMIN'     => 4
+    ];
+
+    /**
      * @var string
      */
     protected $table = 'users';
@@ -43,6 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'email',
+        'slug',
         'password',
         'name',
         'avatar',
@@ -75,21 +88,26 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * @var string[]
+     * Типы ролей
+     *
+     * @return string[]
      */
-    public static array $roles = [
-        1 => 'Пользователь',
-        2 => 'Автор',
-        3 => 'Модератор',
-        4 => 'Администратор'
-    ];
+    public static function rolesList(): array
+    {
+        return [
+            static::ROLES['USER']      => 'Пользователь',
+            static::ROLES['AUTHOR']    => 'Автор',
+            static::ROLES['MODERATOR'] => 'Модератор',
+            static::ROLES['ADMIN']     => 'Администратор',
+        ];
+    }
 
     /**
      * @return bool
      */
     public function isAdmin(): bool
     {
-        return $this->role > 3;
+        return $this->role > static::ROLES['MODERATOR'];
     }
 
     /**
@@ -97,7 +115,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isModerator(): bool
     {
-        return $this->role > 2;
+        return $this->role > static::ROLES['AUTHOR'];
     }
 
     /**
@@ -105,7 +123,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAuthor(): bool
     {
-        return $this->role > 1;
+        return $this->role > static::ROLES['USER'];
     }
 
     /**
@@ -117,11 +135,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @return string
+     * @param Builder $query
+     *
+     * @return Builder
+     * @noinspection PhpUnused
      */
-    public function getUrl(): string
+    public function scopeAuthors(Builder $query): Builder
     {
-        return $this->id === 2 ? route('authors.marina-medvedeva') : route('authors.show', $this);
+        return $query->where('role', static::ROLES['AUTHOR']);
     }
 
     /**
@@ -142,7 +163,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function roleName(): Attribute
     {
         return Attribute::make(
-            get: fn() => static::$roles[$this->role] ?? null,
+            get: fn() => static::rolesList()[$this->role] ?? null,
         );
     }
 }

@@ -40,7 +40,7 @@
                       action="{{ route('admin.users.update', $user) }}"
                       method="post">
                     <div class="row g-gs">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="form-label" for="name">Имя</label>
                                 <div class="form-control-wrap">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="form-label" for="email">Email</label>
                                 <div class="form-control-wrap">
@@ -56,14 +56,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-label" for="slug">Slug</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="slug" name="slug" value="{{ $user->slug }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="form-label" for="role">Роль</label>
                                 <div class="form-control-wrap">
                                     <select id="role" class="form-control form-select select2-hidden-accessible"
                                             name="role" data-placeholder="Выбрать" data-msg="Выберите роль"
                                             required>
-                                        @foreach(\App\Models\User::$roles as $key => $value)
+                                        @foreach(\App\Models\User::rolesList() as $key => $value)
                                             <option value="{{ $key }}" @selected($key === $user->role)>
                                                 {{ $value }}
                                             </option>

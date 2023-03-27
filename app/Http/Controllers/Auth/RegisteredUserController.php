@@ -19,6 +19,11 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function store(Request $request): JsonResponse
     {
         $request->validate([
@@ -31,7 +36,9 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name'     => $request['name'],
             'email'    => $request['email'],
+            'slug'     => $this->generateSlug($request['name']),
             'password' => Hash::make($request['password']),
+            'role'     => User::ROLES['AUTHOR']
         ]);
 
         event(new Registered($user));
@@ -39,5 +46,21 @@ class RegisteredUserController extends Controller
         Auth::login($user, true);
 
         return response()->json(['redirect' => url(RouteServiceProvider::CABINET)]);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    private function generateSlug(string $string): string
+    {
+        $slug = str($string)->slug()->toString();
+
+        for ($i = 1; User::where('slug', $slug)->exists(); $i++) {
+            $slug .= $i;
+        }
+
+        return $slug;
     }
 }
