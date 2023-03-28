@@ -11,7 +11,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::latest('id')
-            ->with('user:id,name')
+            ->with('user:id,name,slug')
             ->paginate(5);
 
         return view('articles.index', compact('articles'));
