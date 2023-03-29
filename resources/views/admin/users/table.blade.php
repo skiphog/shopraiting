@@ -22,7 +22,7 @@
                         <div class="nk-tb-item">
                             <div class="nk-tb-col tb-col-xxl"><span>{{ $user->id }}</span></div>
                             <div class="nk-tb-col tb-col-xxl">
-                                @if($user->markEmailAsVerified())
+                                @if($user->hasVerifiedEmail())
                                     <span class="badge text-success bg-success-dim">Подтверждён</span>
                                 @else
                                     <span class="badge text-warning bg-warning-dim">Ожидает</span>
