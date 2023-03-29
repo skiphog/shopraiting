@@ -2,7 +2,6 @@
 
 /**
  * @var \App\Models\Article[] $articles
- * @var \App\Models\User      $user
  */
 
 ?>
@@ -32,20 +31,22 @@
                     <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                     <div class="toggle-expand-content" data-content="pageMenu">
                         <ul class="nk-block-tools g-3">
-                            <li>
-                                <div class="form-control-wrap">
-                                    <div class="form-icon form-icon-right"><em class="icon ni ni-search"></em>
+                            @if($articles->isNotEmpty())
+                                <li>
+                                    <div class="form-control-wrap">
+                                        <div class="form-icon form-icon-right"><em class="icon ni ni-search"></em>
+                                        </div>
+                                        <!--suppress HtmlFormInputWithoutLabel -->
+                                        <input
+                                                class="form-control panel-search"
+                                                data-search-target="#search-reviews"
+                                                data-search-url="{{ route('cabinet.search.articles') }}"
+                                                type="text"
+                                                placeholder="Поиск"
+                                        >
                                     </div>
-                                    <!--suppress HtmlFormInputWithoutLabel -->
-                                    <input
-                                            class="form-control panel-search"
-                                            data-search-target="#search-reviews"
-                                            data-search-url="{{ route('cabinet.search.articles') }}"
-                                            type="text"
-                                            placeholder="Поиск"
-                                    >
-                                </div>
-                            </li>
+                                </li>
+                            @endif
                             <li class="nk-block-tools-opt">
                                 <a href="{{ route('cabinet.articles.create') }}" class="btn btn-primary">
                                     <em class="icon ni ni-plus"></em><span>Добавить статью</span>
@@ -59,14 +60,16 @@
     </div>
 
     <div id="search-reviews">
-        @include('cabinet.articles.table', ['articles' => $articles])
-        <div class="card-inner">
-            <div class="nk-block-between-md g-3">
-                <div class="g">
-                    {{ $articles->onEachSide(2)->links('cabinet.partials.paginate') }}
+        @if($articles->isNotEmpty())
+            @include('cabinet.articles.table', ['articles' => $articles])
+            <div class="card-inner">
+                <div class="nk-block-between-md g-3">
+                    <div class="g">
+                        {{ $articles->onEachSide(2)->links('cabinet.partials.paginate') }}
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection
 

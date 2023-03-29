@@ -1,12 +1,12 @@
 <?php
 
 /**
+ * @var User    $user
  * @var Article $article
- * @var User $user
  */
 
-use App\Models\Article;
 use App\Models\User;
+use App\Models\Article;
 
 ?>
 @push('style')
@@ -38,7 +38,7 @@ use App\Models\User;
         <div class="card card-bordered">
             <div class="card-inner">
                 <form class="crutch-validate is-alter"
-                      action="{{ $article->id ? route('cabinet.articles.update', $article) : route('cabinet.articles.create') }}"
+                      action="{{ $article->id ? route('cabinet.articles.update', $article->id) : route('cabinet.articles.create') }}"
                       method="post">
                     <div class="row g-gs">
                         <div class="col-md-5">
@@ -100,14 +100,8 @@ use App\Models\User;
                             <div class="form-group">
                                 <label class="form-label" for="user_id">Автор статьи</label>
                                 <div class="form-control-wrap">
-                                    <!--suppress HtmlFormInputWithoutLabel -->
-                                    <select id="user_id" class="form-control form-select select2-hidden-accessible"
-                                            name="user_id" data-placeholder="Выбрать" data-msg="Пользователь"
-                                            required>
-                                        <option value="{{ $user->id }}" @selected($user->id === $article->user_id) selected="selected">
-                                            {{ $user->name }}
-                                        </option>
-                                    </select>
+                                    <input type="text" class="form-control" id="user_id"
+                                            value="{{ $user->name }}" disabled readonly>
                                 </div>
                             </div>
                         </div>

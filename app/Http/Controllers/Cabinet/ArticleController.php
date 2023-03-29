@@ -2,83 +2,90 @@
 
 namespace App\Http\Controllers\Cabinet;
 
-use App\Models\User;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\Cabinet\ArticleRequest;
+use Illuminate\Contracts\View\View as ViewTemplate;
 
 class ArticleController extends Controller
 {
-    public function index()
+    /**
+     * @return ViewTemplate
+     */
+    public function index(): ViewTemplate
     {
-        $user = auth()->user();
-        $articles = $user->articles()
+        $articles = Article::where('user_id', auth()->id())
+            ->withoutGlobalScope('activity')
+            ->latest()
             ->paginate(10);
 
-        return view('cabinet.articles.index', compact('user','articles'));
+        return view('cabinet.articles.index', compact('articles'));
     }
 
-    public function create()
+    /**
+     * @return ViewTemplate
+     */
+    public function create(): ViewTemplate
     {
-        $user = auth()->user();
-
         return view('cabinet.articles.create')
-            ->with(['article' => new Article(), 'user' => $user]);
+            ->with(['article' => new Article(), 'user' => auth()->user()]);
     }
 
+    /**
+     * @param ArticleRequest $request
+     *
+     * @return JsonResponse
+     */
     public function store(ArticleRequest $request): JsonResponse
     {
-        $data = [
-            'img_alt'         => '',
-            'img_title'       => '',
-            'seo_h1'          => $request['title'],
-            'seo_title'       => $request['title'],
-            'seo_description' => $request['title']
-        ];
-
-        $article = Article::create(array_merge($request->safe()->all(), $data));
+        $article = $request->user()
+            ->articles()
+            ->create($request->validated());
 
         session()->flash('flash', ['message' => 'Статья добавлена']);
 
-        return response()->json(['redirect' => route('cabinet.articles.edit', $article)]);
+        return response()->json(['redirect' => route('cabinet.articles.edit', $article['id'])]);
     }
 
-    public function edit(int $article_id)
+    /**
+     * @param Article $article
+     *
+     * @return ViewTemplate
+     */
+    public function edit(Article $article): ViewTemplate
     {
-        $article = Article::withoutGlobalScope('activity')
-            ->where('id', $article_id)
-            ->firstOrFail();
-
-        $user = auth()->user();
-
-        return view('cabinet.articles.edit', compact('article', 'user'));
+        return view('cabinet.articles.edit')
+            ->with('article', $article)
+            ->with('user', auth()->user());
     }
 
-    public function update(int $article_id, ArticleRequest $request): JsonResponse
+    /**
+     * @param Article        $article
+     * @param ArticleRequest $request
+     *
+     * @return JsonResponse
+     */
+    public function update(Article $article, ArticleRequest $request): JsonResponse
     {
-        $article = Article::withoutGlobalScope('activity')
-            ->where('id', $article_id)
-            ->firstOrFail();
-
-        $article->update($request->safe()->all());
+        $article->update($request->validated());
 
         session()->flash('flash', ['message' => 'Данные статьи обновлены']);
 
-        return response()->json(['redirect' => route('cabinet.articles.edit', $article)]);
+        return response()->json(['redirect' => route('cabinet.articles.edit', $article->id)]);
     }
 
-    public function destroy(int $article_id)
-    {
-    }
-
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
     public function search(Request $request): string
     {
-        $articles = auth()->user()->articles()
+        $articles = $request->user()->articles()
             ->where('name', 'like', "%{$request['token']}%")
-            ->orWhereHas('user', static fn($q) => $q->where('name', 'like', "%{$request['token']}%"))
             ->take(30)
             ->get();
 

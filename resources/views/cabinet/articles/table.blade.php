@@ -13,21 +13,17 @@
                     <div class="nk-tb-item nk-tb-head">
                         <div class="nk-tb-col"><span class="sub-text">Статья</span></div>
                         <div class="nk-tb-col"><span class="sub-text"><em class="icon ni ni-eye"></em></span></div>
-                        <div class="nk-tb-col"><span class="sub-text">Автор</span></div>
                         <div class="nk-tb-col"><span class="sub-text">Статус</span></div>
                         <div class="nk-tb-col tb-col-md"><span class="sub-text">Дата</span></div>
                     </div>
 
                     @foreach($articles as $article)
-                        <a class="nk-tb-item" href="{{ route('cabinet.articles.edit', $article) }}">
+                        <a class="nk-tb-item" href="{{ route('cabinet.articles.edit', $article->id) }}">
                             <div class="nk-tb-col">
                                 {{ $article->name }}
                             </div>
                             <div class="nk-tb-col">
                                 {{ $article->view }}
-                            </div>
-                            <div class="nk-tb-col">
-                                {{ $article->user->name }}
                             </div>
                             <div class="nk-tb-col">
                                 {{ $article->status_text }}

@@ -16,7 +16,7 @@ class ArticleRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         if (is_string($this['content'])) {
-            $this['content'] = _content($this['content']);
+            $this['content'] = _content(clean($this['content'], 'youtube'));
             $this['contents'] = _contents($this['content']);
             $this['time_to_read'] = _timeToRead($this['content']);
         }
@@ -24,6 +24,8 @@ class ArticleRequest extends FormRequest
         if (null === $this['intro']) {
             $this['intro'] = '';
         }
+
+        $this['before_content'] = clean($this['before_content'] ?? '', 'youtube');
 
         if (null === $this['before_content']) {
             $this['before_content'] = '';

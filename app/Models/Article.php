@@ -73,6 +73,17 @@ class Article extends Model
         });
     }
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        if ('all' === $field) {
+            return $this
+                ->withoutGlobalScope('activity')
+                ->findOrFail($value);
+        }
+
+        return parent::resolveRouteBinding($value, $field);
+    }
+
     /**
      * Добавить оценку
      */

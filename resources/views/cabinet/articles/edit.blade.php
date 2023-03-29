@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @var \App\Models\Article $article
  * @var \App\Models\User $user
+ * @var \App\Models\Article $article
  */
 
 ?>
