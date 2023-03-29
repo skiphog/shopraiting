@@ -40,7 +40,7 @@
                                     <input
                                             class="form-control panel-search"
                                             data-search-target="#search-articles"
-                                            data-search-url="{{ route('admin.search.articles') }}"
+                                            data-search-url="{{ route('cabinet.search.articles') }}"
                                             type="text"
                                             placeholder="Поиск"
                                     >

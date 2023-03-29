@@ -7,7 +7,7 @@ use App\Models\Comment;
 use App\Models\Question;
 use Illuminate\View\View;
 
-class AuthComposer
+class AdminAuthComposer
 {
     /**
      * @param View $view

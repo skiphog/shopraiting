@@ -23,7 +23,13 @@
                         @yield('content')
 
                         <div class="nk-block nk-auth-footer">
-
+                            <div class="nk-block-between">
+                                <ul class="nav nav-sm">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('privacy') }}" target="_blank">Пользовательское соглашение</a>
+                                    </li>
+                                </ul>
+                            </div>
                             <div class="mt-3">
                                 <p>&copy; {{ date('Y') }} {{ config('app.name') }}.</p>
                             </div>

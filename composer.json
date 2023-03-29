@@ -16,6 +16,7 @@
     "guzzlehttp/guzzle": "^7.5",
     "htmlmin/htmlmin": "dev-master#347d577",
     "laravel/framework": "^10.0",
+    "mews/purifier": "^3.4",
     "wapmorgan/morphos": "^3.2"
   },
   "require-dev": {

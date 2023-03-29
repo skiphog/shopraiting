@@ -1,30 +1,29 @@
 <?php
 
 /**
- * @var \App\Models\Article[] $articles
- * @var \App\Models\User      $user
+ * @var \App\Models\Review[] $reviews
  */
 
 ?>
 @extends('layouts.cabinet')
 
-@section('title', 'Мои статьи')
-@section('description', 'Мои статьи')
+@section('title', __('My reviews'))
+@section('description', __('My reviews'))
 
 @section('content')
     <nav>
         <ul class="breadcrumb breadcrumb-arrow">
-            <li class="breadcrumb-item"><a href="{{ route('cabinet.index') }}">Кабинет</a></li>
-            <li class="breadcrumb-item active">Статьи</li>
+            <li class="breadcrumb-item"><a href="{{ route('cabinet.index') }}">{{ __('Cabinet') }}</a></li>
+            <li class="breadcrumb-item active">{{ __('Reviews') }}</li>
         </ul>
     </nav>
 
     <div class="nk-block-head nk-block-head-sm">
         <div class="nk-block-between">
             <div class="nk-block-head-content">
-                <h3 class="nk-block-title page-title">Мои статьи</h3>
+                <h3 class="nk-block-title page-title">{{ __('My reviews') }}</h3>
                 <div class="nk-block-des text-soft">
-                    <p>Всего {{ $articles->total() }} {{ trans_choice('dic.articles', $articles->total()) }}</p>
+                    <p>{{ __('Total') }} {{ $reviews->total() }} {{ trans_choice('dic.review', $reviews->total()) }}</p>
                 </div>
             </div>
             <div class="nk-block-head-content">
@@ -40,16 +39,11 @@
                                     <input
                                             class="form-control panel-search"
                                             data-search-target="#search-reviews"
-                                            data-search-url="{{ route('cabinet.search.articles') }}"
+                                            data-search-url="{{ route('cabinet.search.review') }}"
                                             type="text"
-                                            placeholder="Поиск"
+                                            placeholder="{{ __('Search') }}"
                                     >
                                 </div>
-                            </li>
-                            <li class="nk-block-tools-opt">
-                                <a href="{{ route('cabinet.articles.create') }}" class="btn btn-primary">
-                                    <em class="icon ni ni-plus"></em><span>Добавить статью</span>
-                                </a>
                             </li>
                         </ul>
                     </div>
@@ -59,11 +53,11 @@
     </div>
 
     <div id="search-reviews">
-        @include('cabinet.articles.table', ['articles' => $articles])
+        @include('cabinet.reviews.table', ['reviews' => $reviews])
         <div class="card-inner">
             <div class="nk-block-between-md g-3">
                 <div class="g">
-                    {{ $articles->onEachSide(2)->links('cabinet.partials.paginate') }}
+                    {{ $reviews->onEachSide(2)->links('panel.partials.paginate') }}
                 </div>
             </div>
         </div>
@@ -71,5 +65,5 @@
 @endsection
 
 @push('script')
-    <script src="/dashboard/js/search.js"></script>
+    <script src="/js/panel/search.js"></script>
 @endpush

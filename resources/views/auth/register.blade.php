@@ -7,8 +7,8 @@
     <div class="nk-block nk-block-middle nk-auth-body">
         <div class="brand-logo pb-5">
             <a href="{{ route('index') }}" class="logo-link">
-                <img class="logo-light logo-img logo-img-lg" src="/dashboard/images/logo.png" alt="logo">
-                <img class="logo-dark logo-img logo-img-lg" src="/dashboard/images/logo-dark.png" alt="logo-dark">
+                <img class="logo-dark logo-img logo-img-lg" src="/dashboard/images/logo.svg" alt="logo-dark">
+                <span class="header__logo-name _white">Sexshop</span><span class="header__logo-name _dark-blue">Rating</span>
             </a>
         </div>
         <div class="nk-block-head">
@@ -59,15 +59,11 @@
             </div>
             <div class="form-group">
                 <div class="custom-control custom-control-xs custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="tos" name="tos" required>
+                    <input type="checkbox" class="custom-control-input" id="tos" name="tos" required checked>
                     <label class="custom-control-label" for="tos">
                         Я согласен с
-                        <a tabindex="-1" href="#">
+                        <a tabindex="-1" href="{{ route('privacy') }}">
                             пользовательским соглашением
-                        </a>
-                        и
-                        <a tabindex="-1" href="#">
-                            политикой конфиденциальности
                         </a>
                         {{ config('app.name') }}.
                     </label>

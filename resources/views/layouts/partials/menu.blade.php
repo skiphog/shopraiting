@@ -33,4 +33,10 @@ use App\Models\Shop;
 
     <a href="/#showcase" class="nav__link-btn">Лучшие сексшопы</a>
     <a href="mailto:{{ config('mail.from.address') }}" class="nav__link-btn nav__link-btn--mail" target="_blank" rel="noopener noreferrer">{{ config('mail.from.address') }}</a>
+
+        @if(auth()->user())
+            <a href="{{ route('cabinet.index') }}" class="nav__link-btn nav__link-btn--login">Кабинет</a>
+        @else
+            <a href="{{ route('login') }}" class="nav__link-btn nav__link-btn--login">Вход</a>
+        @endif
 </nav>

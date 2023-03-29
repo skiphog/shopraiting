@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -16,6 +17,11 @@ class ProfileRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this['slug'] = str($this['slug'] ?? '')->slug()->toString();
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,6 +31,8 @@ class ProfileRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:100'],
+            'slug' => ['required', 'string', 'max:250', Rule::unique('users')->ignore($this->user())],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

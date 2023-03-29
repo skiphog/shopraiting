@@ -48,6 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @var string
      */
+    public static string $default_avatar = '/images/users/net-avatara.jpg';
+
+    /**
+     * @var string
+     */
     protected $table = 'users';
 
     /**
@@ -146,13 +151,21 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * @return bool
+     */
+    public function isDefaultAvatar(): bool
+    {
+        return $this->avatar === static::$default_avatar;
+    }
+
+    /**
      * @return Attribute
      * @noinspection PhpUnused
      */
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: static fn($value) => $value ?: '/images/users/no-avatar.png',
+            get: static fn($value) => $value ?: static::$default_avatar,
         );
     }
 

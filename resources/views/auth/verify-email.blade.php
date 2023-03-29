@@ -7,8 +7,8 @@
     <div class="nk-block nk-block-middle nk-auth-body">
         <div class="brand-logo pb-5">
             <a href="{{ route('index') }}" class="logo-link">
-                <img class="logo-light logo-img logo-img-lg" src="/dashboard/images/logo.png" alt="logo">
-                <img class="logo-dark logo-img logo-img-lg" src="/dashboard/images/logo-dark.png" alt="logo-dark">
+                <img class="logo-dark logo-img logo-img-lg" src="/dashboard/images/logo.svg" alt="logo-dark">
+                <span class="header__logo-name _white">Sexshop</span><span class="header__logo-name _dark-blue">Rating</span>
             </a>
         </div>
         <div class="nk-block-head">
