@@ -24,7 +24,7 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @stack('styles')
     <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?ver=1.0.1">
     @includeWhen(app()->isProduction(), 'layouts.metrics.google_tag_manager')
 </head>
 <body>

@@ -27,8 +27,25 @@
                         <div class="writer">
                             <div class="writer__box" id="user-{{ $user->id }}" itemprop="author" itemscope itemtype="https://schema.org/Person">
                                 <div class="writer__box-header">
-                                    <img src="{{ asset($user->avatar) }}" width="40" height="40" alt="person" itemprop="image">
-                                    <div class="writer__box-name" itemprop="name">{{ $user->name }}</div>
+                                    <div class="writer__main-combiner">
+                                        <img src="{{ asset($user->avatar) }}" width="40" height="40" alt="person" itemprop="image">
+                                        <div class="writer__box-name" itemprop="name">{{ $user->name }}</div>
+                                    </div>
+                                    <hr class="writer__divider">
+                                    <div class="writer__sub-combiner">
+                                        <div class="writer__role">
+                                            <p>Роль</p>
+                                            <p>{{ $user->role_name }}</p>
+                                        </div>
+                                        <div class="writer__articles-count">
+                                            <p>Статей</p>
+                                            <p>{{ $user->articles->count() }}</p>
+                                        </div>
+                                        <div class="writer__created-at">
+                                            <p>Регистрация</p>
+                                            <p>{{ $user->created_at->format('d.m.Y') }}</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 @if(!empty($user->description))
                                     <div class="writer__box-text">{!! $user->description !!}</div>

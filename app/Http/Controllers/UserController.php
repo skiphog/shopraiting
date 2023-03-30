@@ -10,7 +10,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::authors()->get();
+        $users = User::authors()
+            ->whereHas('articles')
+            ->get();
 
         return view('users.index', compact('users'));
     }
