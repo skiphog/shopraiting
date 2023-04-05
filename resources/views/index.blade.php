@@ -15,7 +15,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="/css/select2.css">
-    <link rel="stylesheet" href="/css/showcase.css">
+    <link rel="stylesheet" href="/css/showcase.css?v=1">
     <link rel="stylesheet" href="/css/text.css">
     <link rel="stylesheet" href="/css/recall.css">
     <link rel="stylesheet" href="/css/case.css">
@@ -37,7 +37,7 @@
             <div id="showcase" class="showcase">
                 <div class="showcase__carts">
                     @foreach($shops as $key => $shop)
-                        <div class="cart {{ ++$key > \App\Models\Shop::MAX_MAIN_SHOW ? 'hide' : '' }}">
+                        <div class="cart {{ ++$key > \App\Models\Shop::MAX_MAIN_SHOW ? 'hide' : '' }} {{ $shop->important }}">
                             <div class="cart__header">
                                 <a href="{{ route('shops.show', $shop) }}" class="cart__header-img">
                                     <picture>

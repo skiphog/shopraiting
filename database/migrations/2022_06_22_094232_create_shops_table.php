@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->enum('important', ['normal', 'partner', 'best'])->default('normal');
             $table->string('img')->nullable();
             $table->string('link');
             $table->string('pixel');

@@ -79,6 +79,7 @@ class ShopRequest extends FormRequest
             'founding_year'           => ['nullable', 'string', 'date_format:Y'],
             'activity'                => ['required', 'integer', Rule::in(Shop::$status)],
             'cities'                  => ['required', 'array'],
+            'important'               => ['required', 'string', Rule::in(Shop::IMPORTANT)],
         ];
     }
 }

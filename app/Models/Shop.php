@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int                    $id
  * @property string                 $name
  * @property string                 $slug
+ * @property string                 $important
  * @property string|null            $img
  * @property string                 $link
  * @property string                 $pixel
@@ -63,10 +64,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read Collection|Page[] $pages
  * @property-read Collection|City[] $cities
  * @property-read string            $type_text
+ * @property-read string            $important_value
  */
 class Shop extends Model
 {
     use Reviewable, Statusable, Positioned, Ratings;
+
+    /**
+     * Вип-статус
+     */
+    public const IMPORTANT = [
+        'NORMAL'  => 'normal',
+        'PARTNER' => 'partner',
+        'BEST'    => 'best'
+    ];
 
     /**
      * Сколько магазинов показывать на главной странице
@@ -99,6 +110,18 @@ class Shop extends Model
     protected $casts = [
         'contents' => 'array'
     ];
+
+    /**
+     * @return string[]
+     */
+    public static function importantList(): array
+    {
+        return [
+            static::IMPORTANT['NORMAL']  => 'Обычный',
+            static::IMPORTANT['PARTNER'] => 'Партнёр портала',
+            static::IMPORTANT['BEST']    => 'Лучший магазин',
+        ];
+    }
 
     /**
      * Удалить весь кеш, связанный с магазинами
@@ -181,6 +204,17 @@ class Shop extends Model
     {
         return Attribute::make(
             get: fn() => number_format((float)$this->products_cnt, 0, '', ' ')
+        );
+    }
+
+    /**
+     * @return Attribute
+     * @noinspection PhpUnused
+     */
+    protected function importantValue(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value, $attributes) => static::typesList()[$attributes['important']] ?? ''
         );
     }
 }

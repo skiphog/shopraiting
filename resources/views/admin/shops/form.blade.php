@@ -41,7 +41,7 @@
                 <form class="crutch-validate is-alter"
                       action="{{ $shop->id ? route('admin.shops.update', $shop) : route('admin.shops.store') }}" method="post">
                     <div class="row g-gs">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="name">Название</label>
                                 <div class="form-control-wrap">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-lg-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="slug">Slug</label>
                                 <div class="form-control-wrap">
@@ -68,7 +68,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-lg-2">
+                    </div>
+
+                    <div class="row g-gs">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label" for="activity">Статус</label>
                                 <div class="form-control-wrap">
@@ -84,10 +87,37 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label" for="important">Вип-статус</label>
+                                <div class="form-control-wrap">
+                                    <select id="important" class="form-control form-select select2-hidden-accessible"
+                                            name="important" data-placeholder="Выбрать" data-msg="Выберите вип"
+                                            required>
+                                        @foreach(\App\Models\Shop::importantList() as $key => $value)
+                                            <option value="{{ $key }}" @selected($key === $shop->important)>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label" for="founding_year">Год основания</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control date-picker" id="founding_year"
+                                            name="founding_year"
+                                            value="{{ $shop->founding_year }}"
+                                            data-date-format="yyyy" data-date-min-view-mode="2" data-date-max-view-mode="2">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row g-gs">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="link">Реальная ссылка</label>
                                 <div class="form-control-wrap">
@@ -97,24 +127,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-lg-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="pixel">Рекламная ссылка</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" id="pixel" name="pixel"
                                            value="{{ $shop->pixel }}"
                                            placeholder="https://example.com/partner" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-lg-2">
-                            <div class="form-group">
-                                <label class="form-label" for="founding_year">Год основания</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" class="form-control date-picker" id="founding_year"
-                                           name="founding_year"
-                                           value="{{ $shop->founding_year }}"
-                                           data-date-format="yyyy" data-date-min-view-mode="2" data-date-max-view-mode="2">
                                 </div>
                             </div>
                         </div>
