@@ -70,6 +70,18 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="position">Позиция</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control" id="position" name="position"
+                                                    value="{{ $banner->position ?? 10 }}" placeholder="Позиция" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-gs">
+                                <div class="col-12">
                                     <div class="d-flex h-100 align-items-end justify-between">
                                         @if($banner->id)
                                             <button type="submit" class="btn btn-primary">Сохранить</button>

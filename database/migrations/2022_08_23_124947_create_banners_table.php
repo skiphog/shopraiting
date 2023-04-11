@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->string('path');
             $table->string('link');
             $table->boolean('activity')->default(true);
+            $table->unsignedTinyInteger('position')->default(10);
+
+            $table->index('position');
         });
     }
 

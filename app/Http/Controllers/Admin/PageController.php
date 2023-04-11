@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Page;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,8 @@ class PageController extends Controller
             ->shops()
             ->sync($request->safe()->only('shops')['shops']);
 
+        Shop::flushAllCache();
+
         session()->flash('flash', ['message' => 'Страница добавлена']);
 
         return response()->json(['redirect' => route('admin.pages.edit', $page)]);
@@ -56,6 +59,8 @@ class PageController extends Controller
         tap($page, static fn(Page $page) => $page->update($request->safe()->except('shops')))
             ->shops()
             ->sync($request->safe()->only('shops')['shops']);
+
+        Shop::flushAllCache();
 
         session()->flash('flash', ['message' => 'Страница обновлена']);
 

@@ -26,7 +26,7 @@ class IndexController extends Controller
             ->take(2)
             ->get();
 
-        $banners = Cache::rememberForever('banners', static fn() => Banner::all());
+        $banners = Cache::rememberForever('banners', static fn() => Banner::positioned()->get());
 
         return view('index', compact('shops', 'reviews', 'page', 'banners'));
     }

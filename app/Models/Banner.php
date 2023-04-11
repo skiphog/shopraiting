@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Statusable;
+use App\Models\Traits\Positioned;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,10 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $path
  * @property string $link
  * @property int    $activity
+ * @property int    $position
  */
 class Banner extends Model
 {
-    use Statusable;
+    use Statusable, Positioned;
 
     /**
      * @var string

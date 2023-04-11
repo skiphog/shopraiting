@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Shop;
-use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ShopRequest;
@@ -35,6 +34,8 @@ class ShopController extends Controller
         $shop
             ->cities()
             ->sync($request->safe()->only('cities')['cities']);
+
+        Shop::flushAllCache();
 
         session()->flash('flash', ['message' => 'Магазин добавлен']);
 

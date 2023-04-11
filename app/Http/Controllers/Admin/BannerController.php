@@ -16,6 +16,7 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::withoutGlobalScope('activity')
+            ->positioned()
             ->paginate(20);
 
         return view('admin.banners.index', compact('banners'));

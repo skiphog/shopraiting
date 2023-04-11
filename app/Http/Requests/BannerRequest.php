@@ -20,6 +20,7 @@ class BannerRequest extends FormRequest
             'path'     => ['required', 'string'],
             'link'     => ['required', 'string', 'url'],
             'activity' => ['required', 'integer', Rule::in(Banner::$status)],
+            'position' => ['required', 'integer', 'max:255'],
         ];
     }
 }
