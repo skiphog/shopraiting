@@ -78,10 +78,6 @@ return [
                 'log',
             ],
         ],
-
-        'ospanel' => [
-            'transport' => 'ospanel',
-        ],
     ],
 
     /*
